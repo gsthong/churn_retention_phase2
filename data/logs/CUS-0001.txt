@@ -1,0 +1,3 @@
+[2026-07-14 08:22] (technical_issue) Ứng dụng cứ bị văng ra giữa chừng, phiền thật sự.
+[2026-07-13 18:22] (feature_confusion) Mò mãi không ra chỗ đổi gói cước trong app, giao diện khó hiểu.
+[2026-07-18 22:22] (technical_issue) Mạng dạo này lag quá, tao load phim không nổi.

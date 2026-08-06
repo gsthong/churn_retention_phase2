@@ -1,0 +1,3 @@
+[Channel: zalo] [Action: email_only]
+
+Chào Trần Linh, đội ngũ chăm sóc khách hàng nhận thấy bạn gần đây gặp vấn đề liên quan đến thắc mắc hoặc không hài lòng về hóa đơn/phí. Chúng tôi thực sự xin lỗi vì trải nghiệm chưa tốt này. Để cảm ơn bạn đã đồng hành, chúng tôi gửi tặng bạn một vài lưu ý hữu ích để cải thiện trải nghiệm sử dụng. Nếu cần hỗ trợ thêm, đừng ngần ngại phản hồi lại tin nhắn này nhé.

@@ -1,0 +1,2 @@
+[2026-08-02 05:36] (billing_complaint) Cho hỏi khoản phụ phí này là phí gì, không rõ ràng chút nào.
+[2026-07-31 10:36] (price_sensitive_but_positive) Nhìn chung hài lòng, chỉ là dạo này chi tiêu eo hẹp nên đang cân nhắc cắt giảm.

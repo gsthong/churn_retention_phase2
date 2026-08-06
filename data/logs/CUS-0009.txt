@@ -1,0 +1,3 @@
+[2026-07-19 12:22] (price_sensitive_but_positive) Dịch vụ dùng cũng ổn đó, nhưng giá hơi cao so với thu nhập hiện tại.
+[2026-07-31 21:22] (feature_confusion) Không biết cách bật tính năng mới này thế nào, hướng dẫn rối quá.
+[2026-07-28 15:22] (feature_confusion) Tính năng mới ra mà không thấy hướng dẫn sử dụng rõ ràng, hơi khó dùng.

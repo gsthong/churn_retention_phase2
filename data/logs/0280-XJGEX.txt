@@ -1,0 +1,2 @@
+[2026-07-22 18:36] (feature_confusion) Mò mãi không ra chỗ đổi gói cước trong app, giao diện khó hiểu.
+[2026-07-07 23:36] (silence) Không có hoạt động đăng nhập nào trong 21 ngày gần nhất.
