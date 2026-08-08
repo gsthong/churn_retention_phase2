@@ -1,18 +1,7 @@
-"""
-config.py
----------
-Cấu hình trung tâm cho toàn bộ Phase 2 (Multi-Agent Retention Layer).
-Mọi "luật chơi" business (guardrail ngân sách, catalog hành động, model routing)
-đều nằm ở đây để dễ chỉnh sửa và để giám khảo thấy rõ hệ thống có ràng buộc rõ ràng,
-không phải AI muốn làm gì thì làm.
-"""
-
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
-# ---------------------------------------------------------------------------
-# Đường dẫn
-# ---------------------------------------------------------------------------
 ROOT_DIR = Path(__file__).resolve().parent
 DATA_DIR = ROOT_DIR / "data"
 LOG_DIR = DATA_DIR / "logs"
@@ -26,41 +15,26 @@ OUTCOMES_CSV = OUTPUT_DIR / "outcomes.csv"
 for d in (DATA_DIR, LOG_DIR, OUTPUT_DIR, MESSAGES_DIR):
     d.mkdir(parents=True, exist_ok=True)
 
-# ---------------------------------------------------------------------------
-# LLM / model routing
-# ---------------------------------------------------------------------------
-# Dùng model rẻ + nhanh cho tác vụ trích xuất đơn giản (Retriever),
-# dùng model mạnh hơn cho tác vụ ra quyết định chiến lược (Negotiator)
-# và tác vụ sinh nội dung cá nhân hóa (Execution).
-# => đây cũng là một điểm cộng khi thuyết trình: "tối ưu chi phí bằng model routing".
-RETRIEVER_MODEL = "claude-haiku-4-5-20251001"
-NEGOTIATOR_MODEL = "claude-sonnet-5"
-EXECUTION_MODEL = "claude-sonnet-5"
+# Using OpenAI Codex (gpt-3.5-turbo/gpt-4)
+RETRIEVER_MODEL = "gpt-3.5-turbo"
+NEGOTIATOR_MODEL = "gpt-4o"
+EXECUTION_MODEL = "gpt-4o"
 
-from dotenv import load_dotenv
+load_dotenv()
 
-load_dotenv()  # Load variables from .env if it exists
-
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 SENDGRID_FROM_EMAIL = os.environ.get("SENDGRID_FROM_EMAIL")
 ZALO_OA_TOKEN = os.environ.get("ZALO_OA_TOKEN")
 
-# Nếu không có API key, toàn bộ hệ thống tự động chạy ở MOCK MODE
-# (rule-based, không tốn tiền, không cần mạng) để demo vẫn chạy được.
-USE_MOCK = ANTHROPIC_API_KEY is None
+# fallback to mock mode if no key provided
+USE_MOCK = OPENAI_API_KEY is None
 
-# ---------------------------------------------------------------------------
-# Holdout group (nhóm đối chứng) - dùng để đo ROI thực tế của hệ thống
-# ---------------------------------------------------------------------------
-HOLDOUT_RATIO = 0.10  # 10% khách hàng nguy cơ cao sẽ KHÔNG được agent chăm sóc
+# holdout group to measure real roi
+HOLDOUT_RATIO = 0.10
 RANDOM_SEED = 42
 
-# ---------------------------------------------------------------------------
-# Guardrail ngân sách ("vòng kim cô") theo tier khách hàng
-# Negotiator Agent BẮT BUỘC phải tôn trọng các giới hạn này.
-# Dù LLM có "sáng tạo" đề xuất gì, code vẫn sẽ clip lại đúng guardrail.
-# ---------------------------------------------------------------------------
+# tier guardrails
 GUARDRAILS = {
     "VIP": {
         "max_discount_pct": 30,
@@ -79,20 +53,18 @@ GUARDRAILS = {
     },
 }
 
-# Định nghĩa tier theo phân vị LTV (percentile), tính lúc generate data
 TIER_PERCENTILES = {
-    "VIP": 0.80,       # top 20% LTV
-    "Standard": 0.30,  # giữa 50% LTV
-    "Basic": 0.0,      # 30% LTV thấp nhất
+    "VIP": 0.80,
+    "Standard": 0.30,
+    "Basic": 0.0,
 }
 
-# Giá trị quy đổi ước tính cho mỗi loại hành động (dùng để tính chi phí ROI)
+# rough cost estimation for actions
 ACTION_COST_ESTIMATE = {
-    # cost = % chi phí tính trên monthly_fee của khách, hoặc giá trị cố định
     "discount": lambda monthly_fee, discount_pct, free_months: monthly_fee * (discount_pct / 100),
     "free_upgrade": lambda monthly_fee, discount_pct, free_months: monthly_fee * free_months,
-    "priority_support": lambda monthly_fee, discount_pct, free_months: 20000,  # chi phí vận hành ước tính (VND)
-    "email_only": lambda monthly_fee, discount_pct, free_months: 500,  # gần như 0đ
+    "priority_support": lambda monthly_fee, discount_pct, free_months: 20000, 
+    "email_only": lambda monthly_fee, discount_pct, free_months: 500,
     "feature_education": lambda monthly_fee, discount_pct, free_months: 500,
     "no_action": lambda monthly_fee, discount_pct, free_months: 0,
 }

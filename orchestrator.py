@@ -1,19 +1,5 @@
-"""
-orchestrator.py
------------------
-Điều phối toàn bộ Multi-Agent Action Layer (Phase 2).
-
-Luồng chạy:
-1. Đọc danh sách khách hàng nguy cơ cao (đầu ra giả lập của Phase 1).
-2. Chia ngẫu nhiên: HOLDOUT_RATIO (mặc định 10%) -> nhóm đối chứng, KHÔNG chăm sóc.
-   Phần còn lại -> nhóm điều trị (treatment), chạy pipeline 3 agent:
-   Data Retriever -> Negotiator -> Execution.
-3. Ghi log toàn bộ hành động ra outputs/actions_log.csv để phục vụ đánh giá ROI.
-"""
-
 import sys
 from pathlib import Path
-
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
@@ -26,7 +12,6 @@ from agents.execution_agent import execute
 
 
 def split_holdout(df: pd.DataFrame, holdout_ratio: float = HOLDOUT_RATIO, seed: int = RANDOM_SEED) -> pd.DataFrame:
-    """Gán cột `group` = 'holdout' hoặc 'treatment' ngẫu nhiên cho từng khách hàng."""
     rng = np.random.default_rng(seed)
     n = len(df)
     n_holdout = max(1, int(round(n * holdout_ratio)))
@@ -40,7 +25,6 @@ def split_holdout(df: pd.DataFrame, holdout_ratio: float = HOLDOUT_RATIO, seed: 
 
 
 def run_pipeline_for_customer(row: pd.Series) -> dict:
-    """Chạy pipeline 3 agent cho 1 khách hàng thuộc nhóm treatment."""
     customer_id = row["customer_id"]
 
     profile = retrieve(customer_id)
@@ -67,7 +51,7 @@ def run_pipeline_for_customer(row: pd.Series) -> dict:
         "free_months": decision.free_months,
         "reasoning": decision.reasoning,
         "channel": result.channel,
-        "agent_source": decision.source,  # "llm" hoặc "mock", để biết action này do LLM hay rule-based quyết định
+        "agent_source": decision.source,
     }
 
 
@@ -84,7 +68,7 @@ def run_holdout_record(row: pd.Series) -> dict:
         "action_type": "no_action",
         "discount_pct": 0,
         "free_months": 0,
-        "reasoning": "Nhóm đối chứng (holdout) - cố tình không can thiệp để đo ROI thực tế.",
+        "reasoning": "Holdout group",
         "channel": "none",
         "agent_source": "n/a",
     }
@@ -94,7 +78,7 @@ def run_all(customers_df: pd.DataFrame) -> pd.DataFrame:
     df = split_holdout(customers_df)
 
     records = []
-    for _, row in tqdm(df.iterrows(), total=len(df), desc="Chạy Multi-Agent Retention pipeline"):
+    for _, row in tqdm(df.iterrows(), total=len(df), desc="Running pipeline"):
         if row["group"] == "holdout":
             records.append(run_holdout_record(row))
         else:
@@ -108,6 +92,6 @@ def run_all(customers_df: pd.DataFrame) -> pd.DataFrame:
 if __name__ == "__main__":
     customers_df = pd.read_csv(CUSTOMERS_CSV)
     result_df = run_all(customers_df)
-    print(f"\nHoàn tất. Đã ghi {len(result_df)} bản ghi hành động -> {ACTIONS_LOG_CSV}")
+    print(f"\nDone. Wrote {len(result_df)} actions to {ACTIONS_LOG_CSV}")
     print(result_df["group"].value_counts())
     print(result_df.loc[result_df["group"] == "treatment", "action_type"].value_counts())

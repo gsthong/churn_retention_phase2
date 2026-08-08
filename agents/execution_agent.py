@@ -1,15 +1,3 @@
-"""
-execution_agent.py
---------------------
-Đặc vụ thực thi (Execution Agent).
-
-Nhận quyết định từ Negotiator Agent + tín hiệu từ Data Retriever Agent, sinh ra
-một tin nhắn (email/Zalo) cá nhân hóa, đánh đúng vào pain point của khách hàng.
-
-Trong demo này, "gửi đi" được mô phỏng bằng cách ghi message ra file trong
-outputs/messages/. Khi triển khai thật, đây là nơi gọi API gửi email/Zalo/SMS.
-"""
-
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -46,7 +34,7 @@ class ExecutionResult:
     customer_id: str
     channel: str
     message: str
-    source: str  # "llm" hoặc "mock"
+    source: str
 
 
 def _mock_message(customer_name: str, profile: RetrievedProfile, decision: NegotiationDecision) -> str:
@@ -78,7 +66,7 @@ def _send_email_via_sendgrid(to_email: str, subject: str, content: str) -> bool:
         sg.send(message)
         return True
     except Exception as e:
-        print(f"[WARN] Lỗi gửi SendGrid email: {e}")
+        print(f"[WARN] SendGrid error: {e}")
         return False
 
 
@@ -100,7 +88,7 @@ def _send_zalo_message(phone: str, content: str) -> bool:
         response.raise_for_status()
         return True
     except Exception as e:
-        print(f"[WARN] Lỗi gửi Zalo message: {e}")
+        print(f"[WARN] Zalo API error: {e}")
         return False
 
 
@@ -126,7 +114,6 @@ def execute(customer_id: str, customer_name: str, profile: RetrievedProfile, dec
 
     channel = "email" if decision.action_type in ("discount", "free_upgrade", "priority_support") else "zalo"
 
-    # Cố gắng gửi qua API thật
     sent_successfully = False
     if channel == "email":
         dummy_email = f"{customer_id.lower().replace('-', '')}@example.com"
@@ -139,7 +126,6 @@ def execute(customer_id: str, customer_name: str, profile: RetrievedProfile, dec
         dummy_phone = "84999999999"
         sent_successfully = _send_zalo_message(dummy_phone, message)
 
-    # Nếu gửi qua API thất bại (hoặc không cấu hình API key), fallback ghi ra file
     if not sent_successfully:
         out_path = MESSAGES_DIR / f"{customer_id}.txt"
         out_path.write_text(

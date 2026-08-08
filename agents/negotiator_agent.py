@@ -1,17 +1,3 @@
-"""
-negotiator_agent.py
---------------------
-Đặc vụ đàm phán chiến lược (Strategic Critic / Negotiator Agent).
-
-Đây là "bộ não" ra quyết định: dựa vào LTV, churn risk score, tier và tín hiệu
-từ Data Retriever Agent, quyết định hành động giữ chân nào phù hợp nhất.
-
-QUAN TRỌNG - Guardrail ("vòng kim cô"): dù LLM đề xuất gì, hàm _enforce_guardrail()
-LUÔN LUÔN chạy sau cùng để ép giá trị về đúng giới hạn ngân sách cho phép theo tier
-(config.GUARDRAILS). Đây chính là câu trả lời cho câu hỏi phản biện kinh điển:
-"Làm sao đảm bảo Agent không giảm giá điên cuồng làm lỗ công ty?"
-"""
-
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -21,25 +7,21 @@ from config import GUARDRAILS, NEGOTIATOR_MODEL
 from agents.llm_client import complete_json
 from agents.data_retriever_agent import RetrievedProfile
 
-SYSTEM_PROMPT = """Bạn là Strategic Negotiator Agent trong hệ thống giữ chân khách hàng.
-Bạn nhận thông tin về 1 khách hàng có nguy cơ rời bỏ cao và phải đề xuất MỘT hành động
-giữ chân tối ưu, cân bằng giữa hiệu quả giữ chân và chi phí bỏ ra cho công ty.
+SYSTEM_PROMPT = """Bạn là Strategic Negotiator Agent.
+Dựa trên thông tin khách hàng, đề xuất MỘT hành động giữ chân.
 
-RÀNG BUỘC BẮT BUỘC (guardrail ngân sách theo tier), bạn KHÔNG được vượt quá:
+RÀNG BUỘC BẮT BUỘC:
 {guardrail_text}
 
-action_type phải là một trong các giá trị được phép cho tier đó (allowed_actions).
-
-Trả lời DUY NHẤT bằng JSON hợp lệ, không thêm chữ nào khác, theo đúng schema:
+Trả lời DUY NHẤT bằng JSON:
 {{
-  "action_type": "<discount | free_upgrade | priority_support | email_only | feature_education>",
-  "discount_pct": <số nguyên 0-100, 0 nếu không áp dụng>,
-  "free_months": <số nguyên >=0, 0 nếu không áp dụng>,
-  "reasoning": "<1-2 câu giải thích ngắn gọn tại sao chọn hành động này>"
+  "action_type": "<action_type>",
+  "discount_pct": <số nguyên 0-100>,
+  "free_months": <số nguyên >=0>,
+  "reasoning": "<1-2 câu giải thích>"
 }}
 """
 
-# Rule-based fallback: cây quyết định đơn giản dựa trên tier + risk score + sentiment
 def _rule_based_decision(tier: str, risk_score: float, sentiment: str) -> dict:
     g = GUARDRAILS[tier]
 
@@ -48,40 +30,37 @@ def _rule_based_decision(tier: str, risk_score: float, sentiment: str) -> dict:
             "action_type": "discount" if "discount" in g["allowed_actions"] else "priority_support",
             "discount_pct": g["max_discount_pct"],
             "free_months": g["max_free_months"],
-            "reasoning": "Khách VIP, rủi ro rất cao -> dùng hết ngân sách ưu đãi cho phép để giữ chân.",
+            "reasoning": "High risk VIP, max discount.",
         }
     if tier == "VIP":
         return {
             "action_type": "discount",
             "discount_pct": g["max_discount_pct"] // 2,
             "free_months": 0,
-            "reasoning": "Khách VIP nhưng rủi ro ở mức trung bình -> ưu đãi vừa phải, tiết kiệm ngân sách.",
+            "reasoning": "Medium risk VIP, partial discount.",
         }
     if tier == "Standard" and sentiment in ("frustrated", "price_sensitive"):
         return {
             "action_type": "discount",
             "discount_pct": g["max_discount_pct"],
             "free_months": 0,
-            "reasoning": "Khách Standard đang bực bội/nhạy cảm giá -> giảm giá tối đa trong hạn mức cho phép.",
+            "reasoning": "Standard tier, frustrated/price sensitive.",
         }
     if tier == "Standard":
         return {
             "action_type": "feature_education",
             "discount_pct": 0,
             "free_months": 0,
-            "reasoning": "Khách Standard, chưa có tín hiệu quá tiêu cực -> ưu tiên hướng dẫn tính năng, tiết kiệm chi phí.",
+            "reasoning": "Standard tier, neutral.",
         }
-    # Basic tier
     return {
         "action_type": "email_only" if "email_only" in g["allowed_actions"] else g["allowed_actions"][0],
         "discount_pct": 0,
         "free_months": 0,
-        "reasoning": "Khách Basic, LTV thấp -> chỉ nhắc nhở/giáo dục tính năng, không tốn chi phí giảm giá.",
+        "reasoning": "Basic tier, low LTV.",
     }
 
-
 def _enforce_guardrail(decision: dict, tier: str) -> dict:
-    """Ép cứng mọi quyết định về đúng guardrail ngân sách của tier, bất kể LLM đề xuất gì."""
     g = GUARDRAILS[tier]
 
     action_type = decision.get("action_type", "email_only")
@@ -101,7 +80,6 @@ def _enforce_guardrail(decision: dict, tier: str) -> dict:
         "reasoning": decision.get("reasoning", ""),
     }
 
-
 @dataclass
 class NegotiationDecision:
     customer_id: str
@@ -109,27 +87,26 @@ class NegotiationDecision:
     discount_pct: int
     free_months: int
     reasoning: str
-    source: str  # "llm" hoặc "mock"
-
+    source: str
 
 def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, profile: RetrievedProfile) -> NegotiationDecision:
     g = GUARDRAILS[tier]
     guardrail_text = (
         f"- Tier: {tier}\n"
-        f"- Giảm giá tối đa: {g['max_discount_pct']}%\n"
-        f"- Số tháng miễn phí tối đa: {g['max_free_months']}\n"
-        f"- Hành động được phép: {', '.join(g['allowed_actions'])}"
+        f"- Max discount: {g['max_discount_pct']}%\n"
+        f"- Max free months: {g['max_free_months']}\n"
+        f"- Allowed actions: {', '.join(g['allowed_actions'])}"
     )
 
     system_prompt = SYSTEM_PROMPT.format(guardrail_text=guardrail_text)
     user_prompt = (
-        f"Khách hàng: {customer_id}\n"
+        f"Customer: {customer_id}\n"
         f"Tier: {tier}\n"
-        f"LTV ước tính: {ltv:,.0f} VND\n"
-        f"Churn risk score: {risk_score}\n"
-        f"Sentiment (từ Data Retriever Agent): {profile.sentiment}\n"
+        f"LTV: {ltv:,.0f}\n"
+        f"Risk score: {risk_score}\n"
+        f"Sentiment: {profile.sentiment}\n"
         f"Pain points: {', '.join(profile.pain_points)}\n"
-        f"Tóm tắt tình trạng: {profile.summary}\n"
+        f"Summary: {profile.summary}\n"
     )
 
     parsed = complete_json(NEGOTIATOR_MODEL, system_prompt, user_prompt, max_tokens=400)
