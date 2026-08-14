@@ -1,5 +1,6 @@
 import json
 import sys
+import asyncio
 from pathlib import Path
 from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_exception_type
 
@@ -9,8 +10,8 @@ from config import USE_MOCK, OPENAI_API_KEY
 _client = None
 if not USE_MOCK:
     try:
-        from openai import OpenAI, APIConnectionError, RateLimitError, APIStatusError
-        _client = OpenAI(api_key=OPENAI_API_KEY)
+        from openai import AsyncOpenAI, APIConnectionError, RateLimitError, APIStatusError
+        _client = AsyncOpenAI(api_key=OPENAI_API_KEY)
         RETRY_EXCEPTIONS = (APIConnectionError, RateLimitError, APIStatusError)
     except ImportError:
         print("[WARN] Missing openai package. Falling back to mock mode.")
@@ -28,8 +29,8 @@ def is_live() -> bool:
     stop=stop_after_attempt(3),
     reraise=True
 )
-def _call_api_with_retry(model: str, system: str, user_prompt: str, max_tokens: int) -> str:
-    response = _client.chat.completions.create(
+async def _call_api_with_retry(model: str, system: str, user_prompt: str, max_tokens: int) -> str:
+    response = await _client.chat.completions.create(
         model=model,
         messages=[
             {"role": "system", "content": system},
@@ -39,18 +40,19 @@ def _call_api_with_retry(model: str, system: str, user_prompt: str, max_tokens: 
     )
     return response.choices[0].message.content
 
-def complete(model: str, system: str, user_prompt: str, max_tokens: int = 1024) -> str | None:
+async def complete(model: str, system: str, user_prompt: str, max_tokens: int = 1024) -> str | None:
     if _client is None:
+        await asyncio.sleep(0.01) # Mock async latency
         return None
 
     try:
-        return _call_api_with_retry(model, system, user_prompt, max_tokens)
+        return await _call_api_with_retry(model, system, user_prompt, max_tokens)
     except Exception as e:
         print(f"[WARN] OpenAI API error: {e}. Using rule-based fallback.")
         return None
 
-def complete_json(model: str, system: str, user_prompt: str, max_tokens: int = 1024) -> dict | None:
-    text = complete(model, system, user_prompt, max_tokens=max_tokens)
+async def complete_json(model: str, system: str, user_prompt: str, max_tokens: int = 1024) -> dict | None:
+    text = await complete(model, system, user_prompt, max_tokens=max_tokens)
     if text is None:
         return None
     cleaned = text.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()

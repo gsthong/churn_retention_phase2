@@ -9,6 +9,8 @@ from config import CUSTOMERS_CSV, ACTIONS_LOG_CSV, HOLDOUT_RATIO, RANDOM_SEED
 from agents.data_retriever_agent import retrieve
 from agents.negotiator_agent import negotiate
 from agents.execution_agent import execute
+from app.db.database import init_db, SessionLocal
+from app.db.crud import create_action_log
 
 
 def split_holdout(df: pd.DataFrame, holdout_ratio: float = HOLDOUT_RATIO, seed: int = RANDOM_SEED) -> pd.DataFrame:
@@ -24,35 +26,39 @@ def split_holdout(df: pd.DataFrame, holdout_ratio: float = HOLDOUT_RATIO, seed: 
     return df
 
 
-def run_pipeline_for_customer(row: pd.Series) -> dict:
-    customer_id = row["customer_id"]
+import asyncio
 
-    profile = retrieve(customer_id)
-    decision = negotiate(
-        customer_id=customer_id,
-        tier=row["tier"],
-        ltv=row["ltv"],
-        risk_score=row["churn_risk_score"],
-        profile=profile,
-    )
-    result = execute(customer_id, row["name"], profile, decision)
+async def run_pipeline_for_customer(row: pd.Series, semaphore: asyncio.Semaphore) -> dict:
+    async with semaphore:
+        customer_id = row["customer_id"]
 
-    return {
-        "customer_id": customer_id,
-        "group": "treatment",
-        "tier": row["tier"],
-        "ltv": row["ltv"],
-        "churn_risk_score": row["churn_risk_score"],
-        "monthly_fee": row["monthly_fee"],
-        "sentiment": profile.sentiment,
-        "pain_points": "; ".join(profile.pain_points),
-        "action_type": decision.action_type,
-        "discount_pct": decision.discount_pct,
-        "free_months": decision.free_months,
-        "reasoning": decision.reasoning,
-        "channel": result.channel,
-        "agent_source": decision.source,
-    }
+        profile = await retrieve(customer_id)
+        decision = await negotiate(
+            customer_id=customer_id,
+            tier=row["tier"],
+            ltv=row["ltv"],
+            risk_score=row["churn_risk_score"],
+            profile=profile,
+        )
+        result = await execute(customer_id, row["name"], profile, decision)
+
+        return {
+            "customer_id": customer_id,
+            "group": "treatment",
+            "tier": row["tier"],
+            "ltv": row["ltv"],
+            "churn_risk_score": row["churn_risk_score"],
+            "monthly_fee": row["monthly_fee"],
+            "sentiment": profile.sentiment,
+            "pain_points": "; ".join(profile.pain_points),
+            "action_type": decision.action_type,
+            "discount_pct": decision.discount_pct,
+            "free_months": decision.free_months,
+            "reasoning": decision.reasoning,
+            "channel": result.channel,
+            "message_sent": result.message,
+            "agent_source": decision.source,
+        }
 
 
 def run_holdout_record(row: pd.Series) -> dict:
@@ -70,23 +76,48 @@ def run_holdout_record(row: pd.Series) -> dict:
         "free_months": 0,
         "reasoning": "Holdout group",
         "channel": "none",
+        "message_sent": "",
         "agent_source": "n/a",
     }
 
 
-def run_all(customers_df: pd.DataFrame) -> pd.DataFrame:
+async def _run_all_async(customers_df: pd.DataFrame) -> pd.DataFrame:
     df = split_holdout(customers_df)
 
+    # Use a semaphore to limit concurrent LLM API calls (e.g., 20 max concurrent)
+    semaphore = asyncio.Semaphore(20)
+    
+    tasks = []
     records = []
-    for _, row in tqdm(df.iterrows(), total=len(df), desc="Running pipeline"):
+    
+    for _, row in df.iterrows():
         if row["group"] == "holdout":
             records.append(run_holdout_record(row))
         else:
-            records.append(run_pipeline_for_customer(row))
+            tasks.append(run_pipeline_for_customer(row, semaphore))
+
+    # Await all treatment pipelines concurrently
+    treatment_records = []
+    if tasks:
+        # Use tqdm to show progress (though async tqdm is slightly different, we'll just gather)
+        treatment_records = await asyncio.gather(*tasks)
+    
+    records.extend(treatment_records)
+
+    # Khởi tạo DB và lưu trữ log (Agent Memory)
+    init_db()
+    db = SessionLocal()
+    for rec in records:
+        if rec["group"] != "holdout":
+            create_action_log(db, rec)
+    db.close()
 
     result_df = pd.DataFrame(records)
     result_df.to_csv(ACTIONS_LOG_CSV, index=False, encoding="utf-8-sig")
     return result_df
+
+def run_all(customers_df: pd.DataFrame) -> pd.DataFrame:
+    return asyncio.run(_run_all_async(customers_df))
 
 
 if __name__ == "__main__":

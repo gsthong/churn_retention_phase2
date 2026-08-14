@@ -89,7 +89,7 @@ class NegotiationDecision:
     reasoning: str
     source: str
 
-def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, profile: RetrievedProfile) -> NegotiationDecision:
+async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, profile: RetrievedProfile) -> NegotiationDecision:
     g = GUARDRAILS[tier]
     guardrail_text = (
         f"- Tier: {tier}\n"
@@ -109,7 +109,7 @@ def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, profil
         f"Summary: {profile.summary}\n"
     )
 
-    parsed = complete_json(NEGOTIATOR_MODEL, system_prompt, user_prompt, max_tokens=400)
+    parsed = await complete_json(NEGOTIATOR_MODEL, system_prompt, user_prompt, max_tokens=400)
 
     if parsed and "action_type" in parsed:
         decision = _enforce_guardrail(parsed, tier)

@@ -79,7 +79,7 @@ def _rule_based_extract(customer_id: str, raw_log: str) -> RetrievedProfile:
         source="mock",
     )
 
-def retrieve(customer_id: str) -> RetrievedProfile:
+async def retrieve(customer_id: str) -> RetrievedProfile:
     raw_log = _read_log(customer_id)
     if not raw_log:
         return RetrievedProfile(
@@ -91,7 +91,7 @@ def retrieve(customer_id: str) -> RetrievedProfile:
         )
 
     user_prompt = f"Log: {customer_id}:\n\n{raw_log}"
-    parsed = complete_json(RETRIEVER_MODEL, SYSTEM_PROMPT, user_prompt, max_tokens=300)
+    parsed = await complete_json(RETRIEVER_MODEL, SYSTEM_PROMPT, user_prompt, max_tokens=300)
 
     if parsed and "pain_points" in parsed:
         return RetrievedProfile(

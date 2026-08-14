@@ -1,4 +1,5 @@
 import sys
+import asyncio
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -93,7 +94,7 @@ def _send_zalo_message(phone: str, content: str) -> bool:
 
 
 
-def execute(customer_id: str, customer_name: str, profile: RetrievedProfile, decision: NegotiationDecision) -> ExecutionResult:
+async def execute(customer_id: str, customer_name: str, profile: RetrievedProfile, decision: NegotiationDecision) -> ExecutionResult:
     if decision.action_type == "no_action":
         return ExecutionResult(customer_id=customer_id, channel="none", message="", source="n/a")
 
@@ -106,7 +107,7 @@ def execute(customer_id: str, customer_name: str, profile: RetrievedProfile, dec
         f"Lý do nội bộ: {decision.reasoning}\n"
     )
 
-    text = complete(EXECUTION_MODEL, SYSTEM_PROMPT, user_prompt, max_tokens=300)
+    text = await complete(EXECUTION_MODEL, SYSTEM_PROMPT, user_prompt, max_tokens=300)
     if text:
         message, source = text.strip(), "llm"
     else:
@@ -117,14 +118,18 @@ def execute(customer_id: str, customer_name: str, profile: RetrievedProfile, dec
     sent_successfully = False
     if channel == "email":
         dummy_email = f"{customer_id.lower().replace('-', '')}@example.com"
-        sent_successfully = _send_email_via_sendgrid(
+        sent_successfully = await asyncio.to_thread(
+            _send_email_via_sendgrid,
             to_email=dummy_email, 
             subject="Cập nhật ưu đãi từ dịch vụ CSKH", 
             content=message
         )
     else:
         dummy_phone = "84999999999"
-        sent_successfully = _send_zalo_message(dummy_phone, message)
+        sent_successfully = await asyncio.to_thread(
+            _send_zalo_message,
+            dummy_phone, message
+        )
 
     if not sent_successfully:
         out_path = MESSAGES_DIR / f"{customer_id}.txt"
