@@ -39,6 +39,8 @@ async def run_pipeline_for_customer(row: pd.Series, semaphore: asyncio.Semaphore
             ltv=row["ltv"],
             risk_score=row["churn_risk_score"],
             profile=profile,
+            ltv_pct=row.get("ltv_pct", 0.5),
+            tenure_pct=row.get("tenure_pct", 0.5),
         )
         result = await execute(customer_id, row["name"], profile, decision)
 

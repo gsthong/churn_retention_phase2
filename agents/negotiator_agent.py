@@ -7,8 +7,9 @@ from config import GUARDRAILS, NEGOTIATOR_MODEL
 from agents.llm_client import complete_json
 from agents.data_retriever_agent import RetrievedProfile
 
-SYSTEM_PROMPT = """Bạn là Strategic Negotiator Agent.
-Dựa trên thông tin khách hàng, đề xuất MỘT hành động giữ chân.
+SYSTEM_PROMPT = """Bạn là Strategic Negotiator Agent (hoặc AI Action Layer).
+Dựa trên thông tin khách hàng, rủi ro, và LTV, đề xuất MỘT hành động giữ chân theo triết lý "Phantom Sale" và "CAC vs CRC arbitraging".
+Mục tiêu là chốt sale giả lập để giữ lại doanh thu (LTV), đồng thời đảm bảo chi phí giữ chân (CRC) cực kỳ thấp để tối ưu Net Revenue Retained (NRR).
 
 RÀNG BUỘC BẮT BUỘC:
 {guardrail_text}
@@ -18,46 +19,61 @@ Trả lời DUY NHẤT bằng JSON:
   "action_type": "<action_type>",
   "discount_pct": <số nguyên 0-100>,
   "free_months": <số nguyên >=0>,
-  "reasoning": "<1-2 câu giải thích>"
+  "reasoning": "<1-2 câu giải thích tại sao chọn action này theo triết lý CAC/CRC>"
 }}
 """
 
 def _rule_based_decision(tier: str, risk_score: float, sentiment: str) -> dict:
     g = GUARDRAILS[tier]
 
-    if tier == "VIP" and risk_score >= 0.8:
+    if tier == "True_Friends_Elite":
         return {
-            "action_type": "discount" if "discount" in g["allowed_actions"] else "priority_support",
-            "discount_pct": g["max_discount_pct"],
-            "free_months": g["max_free_months"],
-            "reasoning": "High risk VIP, max discount.",
+            "action_type": "vip_training" if "vip_training" in g["allowed_actions"] else "discount",
+            "discount_pct": g["max_discount_pct"] if risk_score >= 0.8 else g["max_discount_pct"] // 2,
+            "free_months": g["max_free_months"] if risk_score >= 0.8 else 1,
+            "reasoning": "Strategic review & VIP training (White-glove) cho High LTV.",
         }
-    if tier == "VIP":
+    if tier == "True_Friends_Standard":
         return {
-            "action_type": "discount",
-            "discount_pct": g["max_discount_pct"] // 2,
-            "free_months": 0,
-            "reasoning": "Medium risk VIP, partial discount.",
-        }
-    if tier == "Standard" and sentiment in ("frustrated", "price_sensitive"):
-        return {
-            "action_type": "discount",
+            "action_type": "vip_training" if "vip_training" in g["allowed_actions"] else "discount",
             "discount_pct": g["max_discount_pct"],
             "free_months": 0,
-            "reasoning": "Standard tier, frustrated/price sensitive.",
+            "reasoning": "Strategic review & VIP training (White-glove) cho High LTV.",
         }
-    if tier == "Standard":
+    if tier == "Butterflies_Whales":
         return {
-            "action_type": "feature_education",
+            "action_type": "loyalty_upgrade" if "loyalty_upgrade" in g["allowed_actions"] else "discount",
+            "discount_pct": 15 if "loyalty_upgrade" in g["allowed_actions"] else g["max_discount_pct"],
+            "free_months": 0,
+            "reasoning": "Commercial Play: Lock in capital with annual upgrade.",
+        }
+    if tier == "Butterflies_Standard":
+        return {
+            "action_type": "loyalty_upgrade" if "loyalty_upgrade" in g["allowed_actions"] else "discount",
+            "discount_pct": 15 if "loyalty_upgrade" in g["allowed_actions"] else g["max_discount_pct"],
+            "free_months": 0,
+            "reasoning": "Commercial Play: Lock in capital with annual upgrade.",
+        }
+    if tier == "Barnacles_Heavy":
+        return {
+            "action_type": "pause_subscription" if "pause_subscription" in g["allowed_actions"] else "no_action",
             "discount_pct": 0,
             "free_months": 0,
-            "reasoning": "Standard tier, neutral.",
+            "reasoning": "Draining resources. Offering Pause to keep in CRM without cost.",
         }
+    if tier == "Barnacles_Standard":
+        return {
+            "action_type": "pause_subscription" if "pause_subscription" in g["allowed_actions"] else "feature_newsletter",
+            "discount_pct": 0,
+            "free_months": 0,
+            "reasoning": "Low LTV. Offering Pause to retain safely.",
+        }
+    # Strangers
     return {
-        "action_type": "email_only" if "email_only" in g["allowed_actions"] else g["allowed_actions"][0],
+        "action_type": "feature_newsletter" if "feature_newsletter" in g["allowed_actions"] else g["allowed_actions"][0],
         "discount_pct": 0,
         "free_months": 0,
-        "reasoning": "Basic tier, low LTV.",
+        "reasoning": "Zero-cost save: Automated feature nudge.",
     }
 
 def _enforce_guardrail(decision: dict, tier: str) -> dict:
@@ -89,7 +105,7 @@ class NegotiationDecision:
     reasoning: str
     source: str
 
-async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, profile: RetrievedProfile) -> NegotiationDecision:
+async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, profile: RetrievedProfile, ltv_pct: float = None, tenure_pct: float = None) -> NegotiationDecision:
     g = GUARDRAILS[tier]
     guardrail_text = (
         f"- Tier: {tier}\n"
@@ -99,17 +115,27 @@ async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, 
     )
 
     system_prompt = SYSTEM_PROMPT.format(guardrail_text=guardrail_text)
+    
+    # Format percentiles for the prompt (e.g. 0.85 -> 85th percentile)
+    ltv_rank_str = f"{int(ltv_pct * 100)}th percentile" if ltv_pct is not None else "Unknown"
+    tenure_rank_str = f"{int(tenure_pct * 100)}th percentile" if tenure_pct is not None else "Unknown"
+
     user_prompt = (
         f"Customer: {customer_id}\n"
         f"Tier: {tier}\n"
-        f"LTV: {ltv:,.0f}\n"
+        f"LTV: {ltv:,.0f} (Rank: {ltv_rank_str})\n"
+        f"Tenure Rank: {tenure_rank_str}\n"
         f"Risk score: {risk_score}\n"
         f"Sentiment: {profile.sentiment}\n"
         f"Pain points: {', '.join(profile.pain_points)}\n"
         f"Summary: {profile.summary}\n"
     )
 
-    parsed = await complete_json(NEGOTIATOR_MODEL, system_prompt, user_prompt, max_tokens=400)
+    # Resource Allocation Routing: LLM only for High-Value (White-Glove)
+    if tier in ["True_Friends_Elite", "True_Friends_Standard"]:
+        parsed = await complete_json(NEGOTIATOR_MODEL, system_prompt, user_prompt, max_tokens=400)
+    else:
+        parsed = None # Bypass LLM for Automated Nudge workflows
 
     if parsed and "action_type" in parsed:
         decision = _enforce_guardrail(parsed, tier)

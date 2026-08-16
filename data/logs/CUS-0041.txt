@@ -1,0 +1,2 @@
+[2026-08-08 07:08] (price_sensitive_but_positive) Dịch vụ dùng cũng ổn đó, nhưng giá hơi cao so với thu nhập hiện tại.
+[2026-07-23 17:08] (technical_issue) Mạng dạo này lag quá, tao load phim không nổi.

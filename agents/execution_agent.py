@@ -22,11 +22,13 @@ Yêu cầu:
 """
 
 ACTION_DESCRIPTION_VI = {
-    "discount": "một ưu đãi giảm giá {discount_pct}% cho kỳ thanh toán tới",
-    "free_upgrade": "{free_months} tháng nâng cấp gói VIP miễn phí",
-    "priority_support": "quyền hỗ trợ ưu tiên 1-1 từ đội ngũ chăm sóc khách hàng",
-    "email_only": "một vài lưu ý hữu ích để cải thiện trải nghiệm sử dụng",
-    "feature_education": "hướng dẫn sử dụng tính năng mới",
+    "discount": "giảm giá {discount_pct}% phí gia hạn trong {free_months} tháng",
+    "vip_training": "đánh giá chiến lược và tặng 3 giờ đào tạo VIP miễn phí để giải quyết triệt để vấn đề",
+    "loyalty_upgrade": "ưu đãi Loyalty Upgrade: giảm 15% khi chuyển sang gói thường niên",
+    "email_only": "gửi email thông báo tính năng mới",
+    "feature_newsletter": "bản tin giới thiệu các tính năng mới giúp tối ưu hiệu suất làm việc",
+    "no_action": "không làm gì cả",
+    "pause_subscription": "chức năng Pause: tạm ngưng dịch vụ thay vì hủy để bảo lưu dữ liệu",
 }
 
 
@@ -113,7 +115,7 @@ async def execute(customer_id: str, customer_name: str, profile: RetrievedProfil
     else:
         message, source = _mock_message(customer_name, profile, decision), "mock"
 
-    channel = "email" if decision.action_type in ("discount", "free_upgrade", "priority_support") else "zalo"
+    channel = "phone_call" if decision.action_type in ("vip_training", "discount") else "email"
 
     sent_successfully = False
     if channel == "email":

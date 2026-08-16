@@ -1,0 +1,2 @@
+[2026-08-09 04:08] (feature_confusion) Không biết cách bật tính năng mới này thế nào, hướng dẫn rối quá.
+[2026-07-29 20:08] (silence) Không có hoạt động đăng nhập nào trong 21 ngày gần nhất.

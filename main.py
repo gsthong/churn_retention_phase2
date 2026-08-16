@@ -35,14 +35,19 @@ def main():
         customers_df = pd.read_csv(CUSTOMERS_CSV)
         
         if "tier" not in customers_df.columns:
-            from config import TIER_PERCENTILES
-            vip_cut = customers_df["ltv"].quantile(TIER_PERCENTILES["VIP"])
-            std_cut = customers_df["ltv"].quantile(TIER_PERCENTILES["Standard"])
-            def _tier(ltv: float) -> str:
-                if ltv >= vip_cut: return "VIP"
-                if ltv >= std_cut: return "Standard"
-                return "Basic"
-            customers_df["tier"] = customers_df["ltv"].apply(_tier)
+            from config import assign_advanced_segment
+            
+            customers_df['ltv_pct'] = customers_df['ltv'].rank(pct=True)
+            if "tenure_months" in customers_df.columns:
+                customers_df['tenure_pct'] = customers_df['tenure_months'].rank(pct=True)
+            else:
+                customers_df['tenure_pct'] = 0.5 # Default middle rank if not present
+
+            customers_df["tier"] = customers_df.apply(lambda row: assign_advanced_segment(
+                row["ltv_pct"], 
+                row["tenure_pct"],
+                row.get("is_tribe_leader", False)
+            ), axis=1)
             customers_df.to_csv(CUSTOMERS_CSV, index=False, encoding="utf-8-sig")
         
         print("[1/4] Generating simulated interaction logs...")

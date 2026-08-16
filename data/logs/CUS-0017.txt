@@ -1,0 +1,3 @@
+[2026-08-12 12:20] (price_sensitive_but_positive) Dịch vụ dùng cũng ổn đó, nhưng giá hơi cao so với thu nhập hiện tại.
+[2026-07-30 07:20] (silence) Không có hoạt động đăng nhập nào trong 21 ngày gần nhất.
+[2026-07-28 13:20] (billing_complaint) Sao tháng này tự nhiên bị trừ tiền nhiều hơn mọi khi vậy?

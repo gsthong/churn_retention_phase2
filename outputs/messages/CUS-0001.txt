@@ -1,3 +1,3 @@
-[Channel: zalo] [Action: email_only]
+[Channel: email] [Action: feature_newsletter]
 
-Chào Nguyễn Bảo Hương, đội ngũ chăm sóc khách hàng nhận thấy bạn gần đây gặp vấn đề liên quan đến khó sử dụng. Chúng tôi thực sự xin lỗi vì trải nghiệm chưa tốt này. Để cảm ơn bạn đã đồng hành, chúng tôi gửi tặng bạn một vài lưu ý hữu ích để cải thiện trải nghiệm sử dụng. Nếu cần hỗ trợ thêm, đừng ngần ngại phản hồi lại tin nhắn này nhé.
+Chào Nguyễn Bảo Hương, đội ngũ chăm sóc khách hàng nhận thấy bạn gần đây gặp vấn đề liên quan đến khó sử dụng. Chúng tôi thực sự xin lỗi vì trải nghiệm chưa tốt này. Để cảm ơn bạn đã đồng hành, chúng tôi gửi tặng bạn bản tin giới thiệu các tính năng mới giúp tối ưu hiệu suất làm việc. Nếu cần hỗ trợ thêm, đừng ngần ngại phản hồi lại tin nhắn này nhé.

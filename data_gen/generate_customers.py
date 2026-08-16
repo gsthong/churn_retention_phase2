@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from config import CUSTOMERS_CSV, TIER_PERCENTILES, RANDOM_SEED
+from config import CUSTOMERS_CSV, RANDOM_SEED
 
 SURNAMES = ["Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh", "Phan", "Vũ", "Võ", "Đặng", "Bùi", "Đỗ"]
 MIDDLE_MALE = ["Văn", "Hữu", "Đức", "Minh", "Quốc", "Thành"]
@@ -63,6 +63,13 @@ def generate_customers(n: int = 200, seed: int = RANDOM_SEED) -> pd.DataFrame:
         expected_remaining_months = float(np_rng.uniform(3, 24))
         ltv = round(total_charges + monthly_fee * expected_remaining_months, -3)
 
+        # Network influence score (Tribe Leader if > 0.8)
+        network_influence_score = round(float(np_rng.uniform(0.0, 1.0)), 3)
+        # Bóp méo phân phối để chỉ có khoảng 5% là tribe leader
+        if rng.random() > 0.05:
+            network_influence_score = min(network_influence_score, 0.79)
+        is_tribe_leader = network_influence_score > 0.8
+
         rows.append(
             {
                 "customer_id": customer_id,
@@ -74,23 +81,22 @@ def generate_customers(n: int = 200, seed: int = RANDOM_SEED) -> pd.DataFrame:
                 "total_charges": total_charges,
                 "churn_risk_score": churn_risk_score,
                 "ltv": ltv,
+                "network_influence_score": network_influence_score,
+                "is_tribe_leader": is_tribe_leader,
             }
         )
 
     df = pd.DataFrame(rows)
 
-    # Gán tier theo phân vị LTV (percentile) - dùng để tra guardrail ngân sách
-    vip_cut = df["ltv"].quantile(TIER_PERCENTILES["VIP"])
-    std_cut = df["ltv"].quantile(TIER_PERCENTILES["Standard"])
+    from config import assign_advanced_segment
+    
+    df['ltv_pct'] = df['ltv'].rank(pct=True)
+    df['tenure_pct'] = df['tenure_months'].rank(pct=True)
 
-    def _tier(ltv: float) -> str:
-        if ltv >= vip_cut:
-            return "VIP"
-        if ltv >= std_cut:
-            return "Standard"
-        return "Basic"
-
-    df["tier"] = df["ltv"].apply(_tier)
+    df["tier"] = df.apply(lambda row: assign_advanced_segment(
+        row["ltv_pct"], row["tenure_pct"], row["is_tribe_leader"]
+    ), axis=1)
+    
     return df
 
 

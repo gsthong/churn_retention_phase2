@@ -1,11 +1,21 @@
-﻿customer_id,name,tenure_months,contract_type,payment_method,monthly_fee,total_charges,churn_risk_score,ltv,tier
-CUS-0001,Nguyễn Bảo Hương,7,Month-to-month,Mailed check,318000.0,2274000.0,0.85,3857000.0,Basic
-CUS-0002,Bùi Bảo Ngân,55,Month-to-month,Credit card,587000.0,32357000.0,0.888,35697000.0,VIP
-CUS-0003,Trần Hữu Dũng,60,Month-to-month,Electronic check,284000.0,17642000.0,0.827,23401000.0,Standard
-CUS-0004,Đỗ Bảo Vy,32,Month-to-month,Mailed check,321000.0,9198000.0,0.788,10591000.0,Standard
-CUS-0005,Hoàng Văn Cường,61,One year,Bank transfer,415000.0,25356000.0,0.702,35061000.0,Standard
-CUS-0006,Phạm Đức Bình,59,Month-to-month,Electronic check,546000.0,32397000.0,0.634,39386000.0,VIP
-CUS-0007,Huỳnh Quốc Hải,36,One year,Credit card,176000.0,6251000.0,0.87,10355000.0,Basic
-CUS-0008,Phan Thị Ngân,4,Month-to-month,Bank transfer,262000.0,968000.0,0.752,2796000.0,Basic
-CUS-0009,Đỗ Thị Anh,33,One year,Bank transfer,337000.0,9958000.0,0.838,14063000.0,Standard
-CUS-0010,Phạm Thị Linh,10,Month-to-month,Bank transfer,515000.0,5099000.0,0.684,15645000.0,Standard
+﻿customer_id,name,tenure_months,contract_type,payment_method,monthly_fee,total_charges,churn_risk_score,ltv,network_influence_score,is_tribe_leader,ltv_pct,tenure_pct,tier
+CUS-0001,Nguyễn Bảo Hương,7,Month-to-month,Mailed check,318000.0,2274000.0,0.85,3857000.0,0.79,False,0.1,0.125,Strangers
+CUS-0002,Võ Thị Phương,55,Month-to-month,Electronic check,480000.0,26590000.0,0.605,32570000.0,0.371,False,0.95,0.675,True_Friends_Standard
+CUS-0003,Đặng Văn Phong,13,Month-to-month,Credit card,421000.0,5553000.0,0.741,8825000.0,0.555,False,0.25,0.25,Strangers
+CUS-0004,Nguyễn Ngọc Vy,66,Month-to-month,Bank transfer,131000.0,8780000.0,0.822,11258000.0,0.355,False,0.4,0.9,Barnacles_Standard
+CUS-0005,Huỳnh Thị Chi,5,Month-to-month,Bank transfer,546000.0,2745000.0,0.634,9734000.0,0.044,False,0.3,0.05,Strangers
+CUS-0006,Nguyễn Bảo Mai,69,Month-to-month,Credit card,176000.0,11981000.0,0.87,16085000.0,0.326,False,0.5,0.975,True_Friends_Standard
+CUS-0007,Bùi Quốc Khôi,65,Month-to-month,Electronic check,334000.0,19276000.0,0.606,23615000.0,0.227,False,0.8,0.85,True_Friends_Elite
+CUS-0008,Hoàng Văn Dũng,27,Two year,Credit card,434000.0,10985000.0,0.908,18669000.0,0.312,False,0.6,0.4,Butterflies_Standard
+CUS-0009,Huỳnh Ngọc Lan,55,Month-to-month,Bank transfer,501000.0,25557000.0,0.674,34241000.0,0.14,False,1.0,0.675,True_Friends_Standard
+CUS-0010,Trần Kim Trang,60,Month-to-month,Mailed check,199000.0,10167000.0,0.888,13542000.0,0.705,False,0.45,0.8,Barnacles_Standard
+CUS-0011,Bùi Thành Phong,20,Month-to-month,Bank transfer,328000.0,6322000.0,0.61,8095000.0,0.668,False,0.2,0.3,Strangers
+CUS-0012,Phạm Thị Lan,56,Month-to-month,Electronic check,335000.0,18067000.0,0.879,23537000.0,0.554,False,0.7,0.75,True_Friends_Standard
+CUS-0013,Đỗ Thu Hà,7,One year,Credit card,251000.0,1504000.0,0.738,3388000.0,0.409,False,0.05,0.125,Strangers
+CUS-0014,Lê Thu Dung,40,Month-to-month,Bank transfer,526000.0,18868000.0,0.575,23554000.0,0.294,False,0.75,0.5,True_Friends_Standard
+CUS-0015,Đặng Minh Khôi,31,Month-to-month,Mailed check,378000.0,11797000.0,0.836,16157000.0,0.79,False,0.55,0.45,Butterflies_Standard
+CUS-0016,Nguyễn Văn Cường,47,One year,Credit card,182000.0,7310000.0,0.589,10617000.0,0.462,False,0.35,0.55,Barnacles_Standard
+CUS-0017,Đặng Minh Phong,51,Month-to-month,Electronic check,350000.0,15716000.0,0.849,20045000.0,0.381,False,0.65,0.6,True_Friends_Standard
+CUS-0018,Võ Đức Sơn,12,Month-to-month,Bank transfer,250000.0,2928000.0,0.706,4138000.0,0.118,False,0.15,0.2,Strangers
+CUS-0019,Đỗ Thành Hải,25,Two year,Mailed check,553000.0,13686000.0,0.664,26600000.0,0.779,False,0.85,0.35,Butterflies_Whales
+CUS-0020,Bùi Đức Sơn,69,Month-to-month,Mailed check,457000.0,29637000.0,0.667,31933000.0,0.79,False,0.9,0.975,True_Friends_Elite

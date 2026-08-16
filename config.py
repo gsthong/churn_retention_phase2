@@ -34,37 +34,76 @@ USE_MOCK = OPENAI_API_KEY is None
 HOLDOUT_RATIO = 0.10
 RANDOM_SEED = 42
 
-# tier guardrails
+# tier guardrails based on advanced business segments
 GUARDRAILS = {
-    "VIP": {
-        "max_discount_pct": 30,
-        "max_free_months": 1,
-        "allowed_actions": ["discount", "free_upgrade", "priority_support", "email_only"],
+    "True_Friends_Elite": {
+        "max_discount_pct": 40,
+        "max_free_months": 2,
+        "allowed_actions": ["vip_training", "discount"],
     },
-    "Standard": {
+    "True_Friends_Standard": {
+        "max_discount_pct": 25,
+        "max_free_months": 1,
+        "allowed_actions": ["vip_training", "discount"],
+    },
+    "Butterflies_Whales": {
+        "max_discount_pct": 30,
+        "max_free_months": 0,
+        "allowed_actions": ["loyalty_upgrade", "discount"],
+    },
+    "Butterflies_Standard": {
         "max_discount_pct": 15,
         "max_free_months": 0,
-        "allowed_actions": ["discount", "email_only", "feature_education"],
+        "allowed_actions": ["loyalty_upgrade", "discount"],
     },
-    "Basic": {
+    "Barnacles_Heavy": {
+        "max_discount_pct": 0,
+        "max_free_months": 0,
+        "allowed_actions": ["pause_subscription", "no_action"],
+    },
+    "Barnacles_Standard": {
         "max_discount_pct": 5,
         "max_free_months": 0,
-        "allowed_actions": ["email_only", "feature_education"],
+        "allowed_actions": ["pause_subscription", "feature_newsletter"],
+    },
+    "Strangers": {
+        "max_discount_pct": 5,
+        "max_free_months": 0,
+        "allowed_actions": ["feature_newsletter", "email_only"],
     },
 }
 
-TIER_PERCENTILES = {
-    "VIP": 0.80,
-    "Standard": 0.30,
-    "Basic": 0.0,
-}
+def assign_advanced_segment(ltv_pct: float, tenure_pct: float, is_tribe_leader: bool = False) -> str:
+    """
+    Map Data -> Business Strategy based on LTV Percentile, Tenure Percentile, and Tribe Leader status.
+    """
+    if is_tribe_leader:
+        return "True_Friends_Elite"
+        
+    if ltv_pct >= 0.8 and tenure_pct >= 0.8:
+        return "True_Friends_Elite"
+    if ltv_pct >= 0.5 and tenure_pct >= 0.5:
+        return "True_Friends_Standard"
+        
+    if ltv_pct >= 0.8 and tenure_pct < 0.5:
+        return "Butterflies_Whales"
+    if ltv_pct >= 0.5 and tenure_pct < 0.5:
+        return "Butterflies_Standard"
+        
+    if ltv_pct < 0.2 and tenure_pct >= 0.8:
+        return "Barnacles_Heavy"
+    if ltv_pct < 0.5 and tenure_pct >= 0.5:
+        return "Barnacles_Standard"
+        
+    return "Strangers"
 
 # rough cost estimation for actions
 ACTION_COST_ESTIMATE = {
     "discount": lambda monthly_fee, discount_pct, free_months: monthly_fee * (discount_pct / 100),
-    "free_upgrade": lambda monthly_fee, discount_pct, free_months: monthly_fee * free_months,
-    "priority_support": lambda monthly_fee, discount_pct, free_months: 20000, 
+    "vip_training": lambda monthly_fee, discount_pct, free_months: 20000, 
+    "loyalty_upgrade": lambda monthly_fee, discount_pct, free_months: monthly_fee * 12 * (discount_pct / 100),
+    "feature_newsletter": lambda monthly_fee, discount_pct, free_months: 0,
+    "pause_subscription": lambda monthly_fee, discount_pct, free_months: 0,
     "email_only": lambda monthly_fee, discount_pct, free_months: 500,
-    "feature_education": lambda monthly_fee, discount_pct, free_months: 500,
     "no_action": lambda monthly_fee, discount_pct, free_months: 0,
 }

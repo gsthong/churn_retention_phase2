@@ -1,0 +1,3 @@
+[Channel: email] [Action: loyalty_upgrade]
+
+Chào Đặng Minh Khôi, đội ngũ chăm sóc khách hàng nhận thấy bạn gần đây gặp vấn đề liên quan đến khó sử dụng. Chúng tôi thực sự xin lỗi vì trải nghiệm chưa tốt này. Để cảm ơn bạn đã đồng hành, chúng tôi gửi tặng bạn ưu đãi Loyalty Upgrade: giảm 15% khi chuyển sang gói thường niên. Nếu cần hỗ trợ thêm, đừng ngần ngại phản hồi lại tin nhắn này nhé.
