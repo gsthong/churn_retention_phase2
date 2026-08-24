@@ -1,0 +1,38 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# SQLite Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Node & Frontend
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.vite/
+frontend/.vite/
+
+# Generated Logs & Synthetic Files (Clean git changes)
+data/logs/
+data/logs/*.txt
+data/logs_index.csv
+outputs/messages/
+outputs/messages/*.txt
+
+# OS files
+.DS_Store
+Thumbs.db

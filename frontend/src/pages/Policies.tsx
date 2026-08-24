@@ -1,132 +1,260 @@
-import React, { useState } from 'react';
-import { ShieldAlert, Save, RefreshCcw, Check, Zap, ArrowRight, ShieldCheck } from 'lucide-react';
+import { useState } from 'react';
+import { 
+  ShieldCheck, 
+  Sliders, 
+  Lock
+} from 'lucide-react';
 
-const segmentConfigs = [
-  { id: 'true_friends_elite', name: 'True Friends Elite', desc: 'Top 5% LTV, Highly Loyal', riskThreshold: 10 },
-  { id: 'true_friends', name: 'True Friends', desc: 'High LTV, High Loyalty', riskThreshold: 15 },
-  { id: 'butterflies_whales', name: 'Butterflies Whales', desc: 'Top 5% LTV, Flight Risk', riskThreshold: 40 },
-  { id: 'butterflies', name: 'Butterflies', desc: 'High LTV, Low Loyalty', riskThreshold: 40 },
-  { id: 'barnacles_heavy', name: 'Barnacles Heavy', desc: 'Low LTV, High Cost to Serve', riskThreshold: 60 },
-  { id: 'barnacles', name: 'Barnacles', desc: 'Low LTV, High Loyalty', riskThreshold: 60 },
-  { id: 'strangers', name: 'Strangers', desc: 'Low LTV, Low Loyalty', riskThreshold: 100 },
-];
-
-const availableActions = [
-  { id: 'discount', label: 'Discount Offer', cost: 'High', type: 'financial' },
-  { id: 'free_upgrade', label: 'Free Upgrade', cost: 'Medium', type: 'financial' },
-  { id: 'priority_support', label: 'Priority Support', cost: 'Low', type: 'service' },
-  { id: 'annual_upgrade', label: 'Annual Upgrade Push', cost: 'Negative (Cash flow)', type: 'strategic' },
-  { id: 'pause_subscription', label: 'Pause Subscription', cost: 'Zero', type: 'retention' },
-  { id: 'feature_education', label: 'Feature Education', cost: 'Zero', type: 'engagement' },
-  { id: 'email_only', label: 'Email Only', cost: 'Zero', type: 'engagement' },
-  { id: 'no_action', label: 'No Action (Fire Client)', cost: 'Zero', type: 'terminal' },
+const segmentGuardrails = [
+  {
+    id: 'True_Friends_Elite',
+    name: 'True Friends Elite',
+    desc: 'Khách hàng VIP cốt lõi: Top 20% LTV & Top 20% Tenure (hoặc Tribe Leader)',
+    maxDiscount: 40,
+    maxFreeMonths: 2,
+    allowedActions: ['vip_training', 'discount'],
+    strategy: 'White-glove Service: Đào tạo VIP chuyên sâu, tặng tối đa 2 tháng miễn phí để bảo vệ nguồn doanh thu dài hạn.'
+  },
+  {
+    id: 'True_Friends_Standard',
+    name: 'True Friends Standard',
+    desc: 'Khách hàng trung thành: Top 50% LTV & Top 50% Tenure',
+    maxDiscount: 25,
+    maxFreeMonths: 1,
+    allowedActions: ['vip_training', 'discount'],
+    strategy: 'Giảm giá tối đa 25% hoặc tặng 1 tháng để tháo gỡ điểm nghẽn trải nghiệm mà không làm xói mòn biên lợi nhuận.'
+  },
+  {
+    id: 'Butterflies_Whales',
+    name: 'Butterflies Whales',
+    desc: 'Khách chi tiêu cao nhưng thời gian gắn bó ngắn (< 50% Tenure)',
+    maxDiscount: 30,
+    maxFreeMonths: 0,
+    allowedActions: ['loyalty_upgrade', 'discount'],
+    strategy: 'Commercial Play: Khuyến khích chuyển sang gói thường niên với ưu đãi tối đa 30% để khóa dòng tiền trả trước.'
+  },
+  {
+    id: 'Butterflies_Standard',
+    name: 'Butterflies Standard',
+    desc: 'Khách hàng doanh thu trung bình, dễ bị lôi kéo bởi đối thủ',
+    maxDiscount: 15,
+    maxFreeMonths: 0,
+    allowedActions: ['loyalty_upgrade', 'discount'],
+    strategy: 'Ưu đãi chuyển đổi hợp đồng năm 15%, không cấp tháng miễn phí.'
+  },
+  {
+    id: 'Barnacles_Heavy',
+    name: 'Barnacles Heavy',
+    desc: 'Khách hàng LTV rất thấp (< 20%), thời gian dài nhưng chi phí phục vụ cao',
+    maxDiscount: 0,
+    maxFreeMonths: 0,
+    allowedActions: ['pause_subscription', 'no_action'],
+    strategy: 'Zero Margin Leakage: Tuyệt đối không giảm giá, chỉ cho phép Pause dịch vụ để không bù lỗ chi phí CSKH.'
+  },
+  {
+    id: 'Barnacles_Standard',
+    name: 'Barnacles Standard',
+    desc: 'Khách hàng LTV thấp, thời gian trung bình',
+    maxDiscount: 5,
+    maxFreeMonths: 0,
+    allowedActions: ['pause_subscription', 'feature_newsletter'],
+    strategy: 'Chăm sóc thụ động với chi phí 0đ (Pause hoặc gửi Newsletter).'
+  },
+  {
+    id: 'Strangers',
+    name: 'Strangers',
+    desc: 'Khách hàng mới, giá trị thấp và độ gắn bó thấp',
+    maxDiscount: 5,
+    maxFreeMonths: 0,
+    allowedActions: ['feature_newsletter', 'email_only'],
+    strategy: 'Automated Nudge: Gửi email tự động hướng dẫn tính năng mới với chi phí gần bằng 0.'
+  }
 ];
 
 export function Policies() {
-  const [selectedSegment, setSelectedSegment] = useState(segmentConfigs[1]);
+  const [selectedSeg, setSelectedSeg] = useState(segmentGuardrails[0]);
+  
+  // Interactive Simulator State
+  const [simLtvPct, setSimLtvPct] = useState(85);
+  const [simTenurePct, setSimTenurePct] = useState(85);
+  const [isTribeLeader, setIsTribeLeader] = useState(false);
+
+  const calculateSegment = () => {
+    if (isTribeLeader) return segmentGuardrails[0];
+    if (simLtvPct >= 80 && simTenurePct >= 80) return segmentGuardrails[0];
+    if (simLtvPct >= 50 && simTenurePct >= 50) return segmentGuardrails[1];
+    if (simLtvPct >= 80 && simTenurePct < 50) return segmentGuardrails[2];
+    if (simLtvPct >= 50 && simTenurePct < 50) return segmentGuardrails[3];
+    if (simLtvPct < 20 && simTenurePct >= 80) return segmentGuardrails[4];
+    if (simLtvPct < 50 && simTenurePct >= 50) return segmentGuardrails[5];
+    return segmentGuardrails[6];
+  };
+
+  const simResult = calculateSegment();
 
   return (
-    <div className="flex flex-col h-full bg-slate-50">
-      <div className="flex items-center justify-between mb-4 shrink-0">
-        <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-          <ShieldAlert size={20} className="text-teal-600" />
-          Retention Policy Engine
-        </h2>
-        <div className="flex items-center gap-3">
-          <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-600 bg-white border border-slate-200 rounded hover:bg-slate-50">
-            <RefreshCcw size={14} /> Revert Defaults
-          </button>
-          <button className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold text-white bg-teal-600 rounded shadow-sm hover:bg-teal-700">
-            <Save size={14} /> Deploy Ruleset
-          </button>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div>
+          <h1 className="text-xl font-bold text-white flex items-center gap-2">
+            <ShieldCheck size={20} className="text-teal-400" />
+            Retention Policy & Budget Guardrail Engine
+          </h1>
+          <p className="text-xs text-slate-400">
+            Hệ thống quy chuẩn kiểm soát ngân sách: Ép cứng trần giảm giá và ngăn chặn AI Agent tự ý đưa ra ưu đãi vượt mức cho phép.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 text-xs font-mono">
+          <span className="text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20 flex items-center gap-1.5">
+            <Lock size={12} /> Guardrail: Hard Enforced
+          </span>
         </div>
       </div>
 
-      <div className="flex gap-4 flex-1 min-h-0">
-        {/* Left Pane: Segments */}
-        <div className="w-1/2 flex flex-col bg-white border border-slate-200 rounded-sm overflow-hidden">
-          <div className="bg-slate-100 border-b border-slate-200 p-3 text-xs font-bold uppercase tracking-wider text-slate-600">
-            Customer Segmentation Rules
+      {/* Main Grid: Left Segment List + Right Details & Simulator */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left Column: Segments List (Col 5) */}
+        <div className="lg:col-span-5 bg-slate-950/70 border border-slate-800 rounded-2xl p-4 space-y-2">
+          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2 pb-1">
+            Segment Guardrail Configurations (7 Tiers)
           </div>
-          <div className="flex-1 overflow-y-auto p-2 space-y-1">
-            {segmentConfigs.map(seg => (
-              <div 
-                key={seg.id}
-                onClick={() => setSelectedSegment(seg)}
-                className={`p-3 rounded border cursor-pointer transition-all flex items-center justify-between
-                  ${selectedSegment.id === seg.id ? 'border-teal-500 bg-teal-50 shadow-sm' : 'border-transparent hover:bg-slate-50'}`}
-              >
-                <div>
-                  <div className={`text-sm font-bold ${selectedSegment.id === seg.id ? 'text-teal-800' : 'text-slate-800'}`}>{seg.name}</div>
-                  <div className="text-[11px] text-slate-500">{seg.desc}</div>
-                </div>
-                <div className="text-right flex flex-col items-end">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Max Churn Risk</div>
-                  <div className="flex items-center gap-2">
-                    <input type="range" className="w-20 accent-teal-600 h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer" value={seg.riskThreshold} readOnly />
-                    <span className="text-xs font-mono font-bold text-slate-700 w-8">{seg.riskThreshold}%</span>
+
+          <div className="space-y-2">
+            {segmentGuardrails.map((seg) => {
+              const isSelected = selectedSeg.id === seg.id;
+              return (
+                <div
+                  key={seg.id}
+                  onClick={() => setSelectedSeg(seg)}
+                  className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
+                    isSelected 
+                      ? 'bg-teal-500/15 border-teal-500/40 shadow-lg shadow-teal-500/5' 
+                      : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className={`text-xs font-bold ${isSelected ? 'text-teal-300' : 'text-white'}`}>
+                      {seg.name}
+                    </span>
+                    <span className="text-[10px] font-mono text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-900/60">
+                      Max Disc: {seg.maxDiscount}%
+                    </span>
                   </div>
+                  <p className="text-[11px] text-slate-400 line-clamp-1">{seg.desc}</p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        {/* Right Pane: Action Mapping */}
-        <div className="w-1/2 flex flex-col bg-white border border-slate-200 rounded-sm overflow-hidden">
-          <div className="bg-slate-100 border-b border-slate-200 p-3 flex justify-between items-center">
-            <div className="text-xs font-bold uppercase tracking-wider text-slate-600">Action Mapping matrix</div>
-            <div className="text-[10px] font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded border border-teal-200 uppercase">
-              Editing: {selectedSegment.name}
+        {/* Right Column: Selected Segment Policy Card & Simulator (Col 7) */}
+        <div className="lg:col-span-7 space-y-6">
+          {/* Policy Detail Card */}
+          <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-5">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <div className="text-[10px] font-mono text-teal-400 uppercase tracking-wider">Active Guardrail Spec</div>
+                <h3 className="text-lg font-bold text-white">{selectedSeg.name}</h3>
+              </div>
+              <span className="text-xs px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono font-bold">
+                Max {selectedSeg.maxDiscount}% OFF
+              </span>
+            </div>
+
+            <p className="text-xs text-slate-300 leading-relaxed font-sans bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+              <strong className="text-teal-400">Business Rationale:</strong> {selectedSeg.strategy}
+            </p>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Max Free Months</div>
+                <div className="text-xl font-bold font-mono text-white">{selectedSeg.maxFreeMonths} Tháng</div>
+              </div>
+              <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Allowed Action Catalog</div>
+                <div className="flex flex-wrap gap-1.5 mt-1">
+                  {selectedSeg.allowedActions.map((a) => (
+                    <span key={a} className="text-[10px] px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-800 font-mono">
+                      {a}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div className="p-4 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
-             <div className="text-xs text-slate-600">Select the retention plays the AI Negotiator is allowed to use for this segment.</div>
-             <div className="text-[10px] flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded border border-emerald-100">
-               <ShieldCheck size={12}/> Auto-Approve Enabled
-             </div>
-          </div>
 
-          <div className="flex-1 overflow-y-auto p-4">
-             <div className="space-y-2">
-               {availableActions.map(action => {
-                 // Mock which ones are selected based on segment logic
-                 let isSelected = false;
-                 if (selectedSegment.id.includes('true_friends') && action.cost !== 'Zero') isSelected = true;
-                 if (selectedSegment.id.includes('butterflies') && action.id === 'annual_upgrade') isSelected = true;
-                 if (selectedSegment.id.includes('butterflies') && action.id === 'discount') isSelected = true;
-                 if (selectedSegment.id.includes('barnacles') && action.id === 'pause_subscription') isSelected = true;
-                 if (selectedSegment.id.includes('strangers') && action.id === 'no_action') isSelected = true;
-                 if (action.id === 'feature_education' || action.id === 'email_only') isSelected = true; // everyone gets cheap stuff
+          {/* Interactive Policy Simulator */}
+          <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div className="flex items-center gap-2">
+                <Sliders size={16} className="text-cyan-400" />
+                <h3 className="text-sm font-bold text-white">Interactive Segment & Policy Simulator</h3>
+              </div>
+              <span className="text-[10px] text-slate-400 font-mono">Live Rule Test</span>
+            </div>
 
-                 return (
-                   <label key={action.id} className={`flex items-start gap-3 p-3 border rounded cursor-pointer transition-colors ${isSelected ? 'border-teal-500 bg-teal-50/30' : 'border-slate-200 hover:bg-slate-50'}`}>
-                     <div className="mt-0.5">
-                       <input type="checkbox" defaultChecked={isSelected} className="w-4 h-4 text-teal-600 rounded border-slate-300 focus:ring-teal-500" />
-                     </div>
-                     <div className="flex-1">
-                       <div className="flex items-center justify-between mb-1">
-                         <span className="text-sm font-bold text-slate-800">{action.label}</span>
-                         <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded uppercase tracking-wider
-                           ${action.cost === 'High' ? 'bg-rose-100 text-rose-700' : action.cost === 'Zero' ? 'bg-slate-100 text-slate-600' : 'bg-blue-100 text-blue-700'}`}>
-                           Cost: {action.cost}
-                         </span>
-                       </div>
-                       <div className="flex items-center gap-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                         Type: {action.type}
-                       </div>
-                     </div>
-                   </label>
-                 )
-               })}
-             </div>
-          </div>
-          
-          <div className="p-3 bg-slate-100 border-t border-slate-200 flex justify-end">
-             <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-teal-700 bg-teal-100 rounded border border-teal-200 hover:bg-teal-200 transition-colors">
-               <Zap size={14} /> Simulate Impact <ArrowRight size={14}/>
-             </button>
+            <div className="space-y-4">
+              {/* Slider 1: LTV Percentile */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between text-xs font-mono">
+                  <span className="text-slate-300">Customer LTV Percentile:</span>
+                  <span className="text-teal-300 font-bold">{simLtvPct}th Percentile</span>
+                </div>
+                <input 
+                  type="range" 
+                  min="0" 
+                  max="100" 
+                  value={simLtvPct} 
+                  onChange={(e) => setSimLtvPct(Number(e.target.value))}
+                  className="w-full accent-teal-500 h-2 bg-slate-800 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Slider 2: Tenure Percentile */}
+              <div className="space-y-1.5">
+                <div className="flex justify-between text-xs font-mono">
+                  <span className="text-slate-300">Tenure (Loyalty) Percentile:</span>
+                  <span className="text-cyan-300 font-bold">{simTenurePct}th Percentile</span>
+                </div>
+                <input 
+                  type="range" 
+                  min="0" 
+                  max="100" 
+                  value={simTenurePct} 
+                  onChange={(e) => setSimTenurePct(Number(e.target.value))}
+                  className="w-full accent-cyan-500 h-2 bg-slate-800 rounded-lg cursor-pointer"
+                />
+              </div>
+
+              {/* Checkbox: Tribe Leader */}
+              <div className="flex items-center gap-2 pt-1">
+                <input 
+                  type="checkbox" 
+                  id="tribe_leader"
+                  checked={isTribeLeader}
+                  onChange={(e) => setIsTribeLeader(e.target.checked)}
+                  className="rounded bg-slate-800 border-slate-700 text-teal-500 focus:ring-0 cursor-pointer"
+                />
+                <label htmlFor="tribe_leader" className="text-xs text-slate-300 cursor-pointer">
+                  Is Network / Tribe Leader (High social influence score)
+                </label>
+              </div>
+
+              {/* Simulation Result Output */}
+              <div className="bg-gradient-to-r from-teal-950/40 via-slate-900 to-slate-900 p-4 rounded-xl border border-teal-500/30 flex items-center justify-between mt-4">
+                <div>
+                  <div className="text-[10px] text-teal-400 font-mono uppercase">Calculated Strategy Tier</div>
+                  <div className="text-sm font-bold text-white mt-0.5">{simResult.name}</div>
+                  <div className="text-[11px] text-slate-400 mt-1">Allowed Actions: {simResult.allowedActions.join(', ')}</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-[10px] text-slate-400 font-mono uppercase">Guardrail Ceiling</div>
+                  <div className="text-lg font-bold font-mono text-emerald-400">Max {simResult.maxDiscount}%</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

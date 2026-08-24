@@ -4,9 +4,21 @@ import shutil
 from pathlib import Path
 import pandas as pd
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 sys.path.append(str(Path(__file__).resolve().parent))
 
-from config import CUSTOMERS_CSV, ACTIONS_LOG_CSV, OUTCOMES_CSV, USE_MOCK
+from config import (
+    CUSTOMERS_CSV,
+    ACTIONS_LOG_CSV,
+    OUTCOMES_CSV,
+    USE_MOCK,
+    OPENROUTER_API_KEY,
+    RETRIEVER_MODEL,
+    NEGOTIATOR_MODEL,
+    EXECUTION_MODEL,
+)
 from data_gen.generate_customers import generate_customers
 from data_gen.generate_logs import generate_logs
 from orchestrator import run_all
@@ -21,7 +33,11 @@ def main():
     parser.add_argument("--input-csv", type=str, default=None, help="Input CSV path")
     args = parser.parse_args()
 
-    mode = "LIVE (OpenAI API)" if not USE_MOCK else "MOCK (rule-based)"
+    if not USE_MOCK:
+        provider = "OpenRouter" if OPENROUTER_API_KEY else "OpenAI"
+        mode = f"LIVE ({provider})\n  - Retriever Model:  {RETRIEVER_MODEL}\n  - Negotiator Model: {NEGOTIATOR_MODEL}\n  - Execution Model:  {EXECUTION_MODEL}"
+    else:
+        mode = "MOCK (rule-based)"
     print(f"\n>>> Running mode: {mode}\n")
 
     # Step 1: Data generation

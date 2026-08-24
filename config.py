@@ -15,20 +15,24 @@ OUTCOMES_CSV = OUTPUT_DIR / "outcomes.csv"
 for d in (DATA_DIR, LOG_DIR, OUTPUT_DIR, MESSAGES_DIR):
     d.mkdir(parents=True, exist_ok=True)
 
-# Using OpenAI Codex (gpt-3.5-turbo/gpt-4)
-RETRIEVER_MODEL = "gpt-3.5-turbo"
-NEGOTIATOR_MODEL = "gpt-4o"
-EXECUTION_MODEL = "gpt-4o"
-
 load_dotenv()
 
+# Using OpenRouter / OpenAI for Multi-Agent LLMs
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
+OPENROUTER_BASE_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
+
+# Best-in-class Model Routing
+RETRIEVER_MODEL = os.environ.get("RETRIEVER_MODEL", "google/gemini-2.5-flash")
+NEGOTIATOR_MODEL = os.environ.get("NEGOTIATOR_MODEL", "anthropic/claude-3.5-sonnet")
+EXECUTION_MODEL = os.environ.get("EXECUTION_MODEL", "anthropic/claude-3.5-sonnet")
+
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 SENDGRID_FROM_EMAIL = os.environ.get("SENDGRID_FROM_EMAIL")
 ZALO_OA_TOKEN = os.environ.get("ZALO_OA_TOKEN")
 
 # fallback to mock mode if no key provided
-USE_MOCK = OPENAI_API_KEY is None
+USE_MOCK = (OPENAI_API_KEY is None) and (OPENROUTER_API_KEY is None)
 
 # holdout group to measure real roi
 HOLDOUT_RATIO = 0.10

@@ -2,7 +2,10 @@ import sys
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from tqdm import tqdm
+from tqdm.asyncio import tqdm as async_tqdm
+
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 sys.path.append(str(Path(__file__).resolve().parent))
 from config import CUSTOMERS_CSV, ACTIONS_LOG_CSV, HOLDOUT_RATIO, RANDOM_SEED
@@ -86,8 +89,8 @@ def run_holdout_record(row: pd.Series) -> dict:
 async def _run_all_async(customers_df: pd.DataFrame) -> pd.DataFrame:
     df = split_holdout(customers_df)
 
-    # Use a semaphore to limit concurrent LLM API calls (e.g., 20 max concurrent)
-    semaphore = asyncio.Semaphore(20)
+    # Use a semaphore to limit concurrent LLM API calls (5 max concurrent to stay within free-tier rate limits)
+    semaphore = asyncio.Semaphore(5)
     
     tasks = []
     records = []
@@ -98,11 +101,10 @@ async def _run_all_async(customers_df: pd.DataFrame) -> pd.DataFrame:
         else:
             tasks.append(run_pipeline_for_customer(row, semaphore))
 
-    # Await all treatment pipelines concurrently
+    # Await all treatment pipelines concurrently with progress bar
     treatment_records = []
     if tasks:
-        # Use tqdm to show progress (though async tqdm is slightly different, we'll just gather)
-        treatment_records = await asyncio.gather(*tasks)
+        treatment_records = await async_tqdm.gather(*tasks, desc="Executing AI Agents")
     
     records.extend(treatment_records)
 

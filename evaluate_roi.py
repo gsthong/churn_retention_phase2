@@ -2,6 +2,9 @@ import sys
 from pathlib import Path
 import pandas as pd
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 sys.path.append(str(Path(__file__).resolve().parent))
 from config import OUTCOMES_CSV, ACTION_COST_ESTIMATE
 
