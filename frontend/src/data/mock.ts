@@ -1,7 +1,53 @@
+export const mockHighRiskCustomers = [
+  { id: 'CUS-9012', name: 'Acme Studio', ltv: 45200, health: 35, risk: 'High Risk', lastSeen: '14 days ago', fee: '$120/mo' },
+  { id: 'CUS-9013', name: 'Globex Inc.', ltv: 8400, health: 52, risk: 'Med Risk', lastSeen: '2 days ago', fee: '$450/mo' },
+  { id: 'CUS-9014', name: 'Initech', ltv: 1440, health: 22, risk: 'High Risk', lastSeen: '5 days ago', fee: '$89/mo' },
+];
+
+export const mockPortfolioGrowth = [
+  { name: 'Jan', value: 4000 },
+  { name: 'Feb', value: 3000 },
+  { name: 'Mar', value: 5000 },
+  { name: 'Apr', value: 4780 },
+  { name: 'May', value: 8900 },
+  { name: 'Jun', value: 12000 },
+];
+
+export const mockQuadrantDist = [
+  { name: 'True Friends', value: 450000, fill: '#0ea5e9', count: 48, desc: 'High LTV, High Loyalty' },
+  { name: 'Butterflies', value: 210000, fill: '#38bdf8', count: 62, desc: 'High LTV, Low Loyalty' },
+  { name: 'Barnacles', value: 180000, fill: '#94a3b8', count: 95, desc: 'Low LTV, High Loyalty' },
+  { name: 'Strangers', value: 80000, fill: '#cbd5e1', count: 420, desc: 'Low LTV, Low Loyalty' },
+];
+
+export const mockFunnel = [
+  { stage: 'Scanned', value: 5000 },
+  { stage: 'Retrieved', value: 4900 },
+  { stage: 'Negotiated', value: 2100 },
+  { stage: 'Executed', value: 2100 },
+  { stage: 'Saved', value: 850 },
+];
+
+export const mockInFlightOps = [
+  { id: 'OP-9012', agentId: 'AG-04', client: 'Acme Corp', segment: 'True Friend', risk: 82, ltv: 45200, predSave: 82, action: '15% DISC + CALL', cost: 150, status: 'Running' },
+  { id: 'OP-9011', agentId: 'AG-02', client: 'Globex Inc', segment: 'Barnacle', risk: 41, ltv: 8400, predSave: 41, action: 'AUTO RE-ENGAGE EMAIL', cost: 0.05, status: 'Success' },
+  { id: 'OP-9010', agentId: 'AG-01', client: 'Initech', segment: 'Butterfly', risk: 15, ltv: 12000, predSave: 15, action: '10% DISC + TRIAL EXT', cost: 5, status: 'Queued' },
+  { id: 'OP-9009', agentId: 'AG-04', client: 'Soylent Corp', segment: 'True Friend', risk: 95, ltv: 85100, predSave: 95, action: 'EXEC REACHOUT + 20%', cost: 0, status: 'Saved' },
+  { id: 'OP-9008', agentId: 'AG-02', client: 'Massive Dyn', segment: 'Stranger', risk: 2, ltv: 1200, predSave: 2, action: 'EXIT SURVEY EMAIL', cost: 0.01, status: 'Churned' },
+];
+
+export const mockROI = [
+  { cost: 150, ltv: 45000, segment: 'True Friends' },
+  { cost: 200, ltv: 85000, segment: 'True Friends' },
+  { cost: 10, ltv: 12000, segment: 'Butterflies' },
+  { cost: 50, ltv: 20000, segment: 'Butterflies' },
+  { cost: 0, ltv: 5000, segment: 'Barnacles' },
+  { cost: 0.5, ltv: 8000, segment: 'Barnacles' },
+];
+
 export const mockActionRecords = [
   {
     customer_id: 'CUS-0002',
-    name: 'Trần Thị Phương',
     group: 'treatment',
     tier: 'True_Friends_Standard',
     ltv: 32570000,
@@ -19,7 +65,6 @@ export const mockActionRecords = [
   },
   {
     customer_id: 'CUS-0006',
-    name: 'Nguyễn Bảo Mai',
     group: 'treatment',
     tier: 'True_Friends_Standard',
     ltv: 16085000,
@@ -34,71 +79,7 @@ export const mockActionRecords = [
     channel: 'phone_call',
     message_sent: 'Chào bạn Bảo Mai, mình biết bạn đang cân nhắc về mức phí dịch vụ so với các lựa chọn khác. Để cảm ơn sự đồng hành của bạn suốt thời gian qua, công ty xin gửi tặng ưu đãi giảm 25% cho lần gia hạn tiếp theo.',
     agent_source: 'llm'
-  },
-  {
-    customer_id: 'CUS-0015',
-    name: 'Hoàng Minh Khôi',
-    group: 'treatment',
-    tier: 'Butterflies_Standard',
-    ltv: 16157000,
-    churn_risk_score: 0.836,
-    monthly_fee: 378000,
-    sentiment: 'frustrated',
-    pain_points: 'Khó sử dụng tính năng mới; Đang tham khảo đối thủ',
-    action_type: 'loyalty_upgrade',
-    discount_pct: 15,
-    free_months: 0,
-    reasoning: 'Commercial Play: Khóa dòng tiền trả trước 1 năm với ưu đãi 15% để ngăn chặn rủi ro chuyển dịch sang đối thủ.',
-    channel: 'email',
-    message_sent: 'Chào anh Minh Khôi, rất tiếc vì sự bất tiện khi sử dụng tính năng mới. Chúng em muốn gửi đến anh ưu đãi đặc biệt: giảm 15% khi chuyển sang gói thường niên để tối ưu chi phí và nhận hỗ trợ kỹ thuật ưu tiên.',
-    agent_source: 'mock'
-  },
-  {
-    customer_id: 'CUS-0004',
-    name: 'Nguyễn Ngọc Vy',
-    group: 'treatment',
-    tier: 'Barnacles_Standard',
-    ltv: 11258000,
-    churn_risk_score: 0.822,
-    monthly_fee: 131000,
-    sentiment: 'frustrated',
-    pain_points: 'Tốc độ mạng chậm; Cước phát sinh không rõ ràng',
-    action_type: 'pause_subscription',
-    discount_pct: 0,
-    free_months: 0,
-    reasoning: 'Nhóm Low LTV. Đề xuất Pause để giữ hồ sơ trong CRM với chi phí 0đ, tránh hao phí ngân sách CSKH.',
-    channel: 'email',
-    message_sent: 'Chào bạn Ngọc Vy, để hỗ trợ bạn tốt nhất trong giai đoạn này, chúng tôi có thể kích hoạt tính năng tạm dừng gói dịch vụ để bảo lưu thông tin và tránh phát sinh phí.',
-    agent_source: 'mock'
-  },
-  {
-    customer_id: 'CUS-0001',
-    name: 'Nguyễn Bảo Hương',
-    group: 'treatment',
-    tier: 'Strangers',
-    ltv: 3857000,
-    churn_risk_score: 0.850,
-    monthly_fee: 318000,
-    sentiment: 'frustrated',
-    pain_points: 'Ứng dụng văng; Giao diện khó hiểu; Mạng chậm',
-    action_type: 'feature_newsletter',
-    discount_pct: 0,
-    free_months: 0,
-    reasoning: 'Zero-cost save: Gửi bản tin tự động hướng dẫn tính năng mới với chi phí 0đ.',
-    channel: 'email',
-    message_sent: 'Chào bạn Bảo Hương, đội ngũ kỹ thuật đang cập nhật phiên bản mới với giao diện tối ưu hơn. Mời bạn tham khảo bản tin hướng dẫn mẹo sử dụng để có trải nghiệm mượt mà nhất nhé.',
-    agent_source: 'mock'
   }
-];
-
-export const mockQuadrantDist = [
-  { name: 'True Friends Elite', count: 48, value: 1450000000, fill: '#0d9488', desc: 'Top 5% LTV, Highly Loyal' },
-  { name: 'True Friends Standard', count: 185, value: 2850000000, fill: '#14b8a6', desc: 'High LTV, High Loyalty' },
-  { name: 'Butterflies Whales', count: 62, value: 980000000, fill: '#06b6d4', desc: 'Top LTV, High Flight Risk' },
-  { name: 'Butterflies Standard', count: 210, value: 1650000000, fill: '#38bdf8', desc: 'Med LTV, Low Loyalty' },
-  { name: 'Barnacles Heavy', count: 95, value: 450000000, fill: '#94a3b8', desc: 'Low LTV, High Cost to Serve' },
-  { name: 'Barnacles Standard', count: 320, value: 890000000, fill: '#cbd5e1', desc: 'Low LTV, High Loyalty' },
-  { name: 'Strangers', count: 420, value: 680000000, fill: '#e2e8f0', desc: 'Low LTV, Low Loyalty' }
 ];
 
 export const mockPainPointsData = [
@@ -107,15 +88,14 @@ export const mockPainPointsData = [
   { pain_point: 'So sánh giá đối thủ', count: 215, category: 'Competitor' },
   { pain_point: 'Ứng dụng bị văng', count: 185, category: 'Technical' },
   { pain_point: 'Khó sử dụng tính năng mới', count: 140, category: 'Usability' },
-  { pain_point: 'Không hoạt động (>2 tuần)', count: 110, category: 'Inactivity' }
 ];
 
 export const mockActionEffectiveness = [
-  { action: 'VIP Training / White Glove', savedRate: 78, cost: 20000, avgLTV: 28000000 },
-  { action: 'Discount Voucher (15-25%)', savedRate: 65, cost: 85000, avgLTV: 18500000 },
-  { action: 'Loyalty Upgrade (Annual)', savedRate: 58, cost: 120000, avgLTV: 16000000 },
-  { action: 'Pause Subscription', savedRate: 42, cost: 0, avgLTV: 9500000 },
-  { action: 'Feature Newsletter', savedRate: 24, cost: 0, avgLTV: 4200000 }
+  { action: 'VIP Training', savedRate: 78, cost: 20000, avgLTV: 28000000 },
+  { action: 'Discount (15-25%)', savedRate: 65, cost: 85000, avgLTV: 18500000 },
+  { action: 'Loyalty Upgrade', savedRate: 58, cost: 120000, avgLTV: 16000000 },
+  { action: 'Pause Sub', savedRate: 42, cost: 0, avgLTV: 9500000 },
+  { action: 'Newsletter', savedRate: 24, cost: 0, avgLTV: 4200000 }
 ];
 
 export const mockUpliftData = [
