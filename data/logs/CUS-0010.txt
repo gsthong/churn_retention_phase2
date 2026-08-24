@@ -1,3 +1,0 @@
-[2026-08-09 22:20] (competitor_mention) Bên đối thủ đang có gói rẻ hơn nhiều mà chất lượng nghe nói cũng ổn.
-[2026-08-04 15:20] (feature_confusion) Tính năng mới ra mà không thấy hướng dẫn sử dụng rõ ràng, hơi khó dùng.
-[2026-08-10 05:20] (silence) Không có hoạt động đăng nhập nào trong 21 ngày gần nhất.

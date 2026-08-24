@@ -1,2 +1,0 @@
-[2026-07-31 12:36] (silence) Tài khoản không phát sinh sử dụng dữ liệu trong 18 ngày qua.
-[2026-07-19 13:36] (feature_confusion) Tính năng mới ra mà không thấy hướng dẫn sử dụng rõ ràng, hơi khó dùng.

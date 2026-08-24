@@ -1,3 +1,0 @@
-[Channel: zalo] [Action: email_only]
-
-Chào Đỗ Minh Phong, đội ngũ chăm sóc khách hàng nhận thấy bạn gần đây gặp vấn đề liên quan đến ít hoạt động. Chúng tôi thực sự xin lỗi vì trải nghiệm chưa tốt này. Để cảm ơn bạn đã đồng hành, chúng tôi gửi tặng bạn gửi email thông báo tính năng mới. Nếu cần hỗ trợ thêm, đừng ngần ngại phản hồi lại tin nhắn này nhé.

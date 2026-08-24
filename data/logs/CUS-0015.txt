@@ -1,3 +1,0 @@
-[2026-07-23 03:20] (feature_confusion) Tính năng mới ra mà không thấy hướng dẫn sử dụng rõ ràng, hơi khó dùng.
-[2026-08-13 14:20] (feature_confusion) Tính năng mới ra mà không thấy hướng dẫn sử dụng rõ ràng, hơi khó dùng.
-[2026-08-11 09:20] (competitor_mention) Thấy quảng cáo bên kia khuyến mãi khủng quá, đang phân vân chuyển qua.

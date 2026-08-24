@@ -1,3 +1,0 @@
-[2026-08-04 04:36] (technical_issue) Kết nối chập chờn suốt 3 ngày nay, gọi tổng đài không ai nghe máy.
-[2026-07-25 03:36] (technical_issue) Mạng dạo này lag quá, tao load phim không nổi.
-[2026-07-17 00:36] (feature_confusion) Tính năng mới ra mà không thấy hướng dẫn sử dụng rõ ràng, hơi khó dùng.

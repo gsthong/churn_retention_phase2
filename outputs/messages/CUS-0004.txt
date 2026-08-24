@@ -1,3 +1,0 @@
-[Channel: email] [Action: pause_subscription]
-
-Chào Nguyễn Ngọc Vy, đội ngũ chăm sóc khách hàng nhận thấy bạn gần đây gặp vấn đề liên quan đến sự cố kỹ thuật / kết nối. Chúng tôi thực sự xin lỗi vì trải nghiệm chưa tốt này. Để cảm ơn bạn đã đồng hành, chúng tôi gửi tặng bạn chức năng Pause: tạm ngưng dịch vụ thay vì hủy để bảo lưu dữ liệu. Nếu cần hỗ trợ thêm, đừng ngần ngại phản hồi lại tin nhắn này nhé.

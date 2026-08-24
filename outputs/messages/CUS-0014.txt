@@ -1,3 +1,0 @@
-[Channel: phone_call] [Action: vip_training]
-
-Chào Lê Thu Dung, đội ngũ chăm sóc khách hàng nhận thấy bạn gần đây gặp vấn đề liên quan đến cân nhắc đối thủ. Chúng tôi thực sự xin lỗi vì trải nghiệm chưa tốt này. Để cảm ơn bạn đã đồng hành, chúng tôi gửi tặng bạn đánh giá chiến lược và tặng 3 giờ đào tạo VIP miễn phí để giải quyết triệt để vấn đề. Nếu cần hỗ trợ thêm, đừng ngần ngại phản hồi lại tin nhắn này nhé.

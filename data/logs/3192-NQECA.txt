@@ -1,2 +1,0 @@
-[2026-07-13 17:36] (feature_confusion) Không biết cách bật tính năng mới này thế nào, hướng dẫn rối quá.
-[2026-07-29 20:36] (technical_issue) Sao dạo này tốc độ chậm hẳn so với tháng trước vậy?

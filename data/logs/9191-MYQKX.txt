@@ -1,3 +1,0 @@
-[2026-07-22 19:36] (technical_issue) Kết nối chập chờn suốt 3 ngày nay, gọi tổng đài không ai nghe máy.
-[2026-08-03 04:36] (billing_complaint) Cho hỏi khoản phụ phí này là phí gì, không rõ ràng chút nào.
-[2026-08-04 01:36] (price_sensitive_but_positive) Dịch vụ dùng cũng ổn đó, nhưng giá hơi cao so với thu nhập hiện tại.

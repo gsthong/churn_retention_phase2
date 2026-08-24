@@ -1,3 +1,0 @@
-[2026-07-29 21:36] (technical_issue) Sao dạo này tốc độ chậm hẳn so với tháng trước vậy?
-[2026-07-12 11:36] (technical_issue) Kết nối chập chờn suốt 3 ngày nay, gọi tổng đài không ai nghe máy.
-[2026-07-14 22:36] (feature_confusion) Không biết cách bật tính năng mới này thế nào, hướng dẫn rối quá.

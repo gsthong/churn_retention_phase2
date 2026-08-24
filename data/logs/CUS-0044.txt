@@ -1,2 +1,0 @@
-[2026-07-26 21:08] (price_sensitive_but_positive) Dịch vụ dùng cũng ổn đó, nhưng giá hơi cao so với thu nhập hiện tại.
-[2026-08-15 10:08] (silence) Tài khoản không phát sinh sử dụng dữ liệu trong 18 ngày qua.
