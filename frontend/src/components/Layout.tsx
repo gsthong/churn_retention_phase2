@@ -21,6 +21,7 @@ export function Layout() {
     { name: 'ROI Analytics', path: '/analytics', tag: 'Live' },
     { name: 'Executive Overview', path: '/' },
     { name: 'Workflow Funnel', path: '/orchestrator', tag: '3 Steps' },
+    { name: 'Human Review (HITL)', path: '/hitl', tag: 'Specialist' },
     { name: 'Customer Operations', path: '/customers' },
     { name: 'Rules & Guardrails', path: '/policies' },
   ];

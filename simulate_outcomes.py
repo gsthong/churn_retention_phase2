@@ -10,8 +10,16 @@ ACTION_EFFECTIVENESS = {
     "no_action": 0.0,
     "discount": 0.22,
     "free_upgrade": 0.28,
-    "priority_support": 0.15,
-    "feature_education": 0.08,
+    "vip_training": 0.32,
+    "dedicated_csm_audit": 0.35,
+    "enterprise_trial_unlock": 0.30,
+    "cross_sell_bundle": 0.25,
+    "loyalty_upgrade": 0.24,
+    "priority_support": 0.18,
+    "pause_subscription": 0.16,
+    "feature_education": 0.10,
+    "feature_newsletter": 0.08,
+    "self_service_guide": 0.07,
     "email_only": 0.05,
 }
 

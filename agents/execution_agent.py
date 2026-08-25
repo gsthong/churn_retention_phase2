@@ -24,9 +24,14 @@ Yêu cầu:
 ACTION_DESCRIPTION_VI = {
     "discount": "giảm giá {discount_pct}% phí gia hạn trong {free_months} tháng",
     "vip_training": "đánh giá chiến lược và tặng 3 giờ đào tạo VIP miễn phí để giải quyết triệt để vấn đề",
+    "dedicated_csm_audit": "phiên tư vấn 1-1 chuyên sâu cùng Giám đốc Khách hàng và mở khóa 30 ngày trải nghiệm gói Enterprise",
+    "enterprise_trial_unlock": "mở khóa miễn phí toàn bộ bộ tính năng Doanh Nghiệp Cao Cấp trong 30 ngày",
+    "cross_sell_bundle": "ưu đãi nâng cấp gói mở rộng tích hợp với chiết khấu {discount_pct}%",
     "loyalty_upgrade": "ưu đãi Loyalty Upgrade: giảm 15% khi chuyển sang gói thường niên",
     "email_only": "gửi email thông báo tính năng mới",
     "feature_newsletter": "bản tin giới thiệu các tính năng mới giúp tối ưu hiệu suất làm việc",
+    "self_service_guide": "bộ cẩm nang hướng dẫn tự tối ưu hóa quy trình và khắc phục sự cố nhanh",
+    "priority_support": "kênh hỗ trợ ưu tiên 24/7 với thời gian phản hồi dưới 15 phút",
     "no_action": "không làm gì cả",
     "pause_subscription": "chức năng Pause: tạm ngưng dịch vụ thay vì hủy để bảo lưu dữ liệu",
 }

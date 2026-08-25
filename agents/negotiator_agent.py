@@ -54,6 +54,13 @@ def _rule_based_decision(tier: str, risk_score: float, sentiment: str) -> dict:
             "free_months": 0,
             "reasoning": "Commercial Play: Lock in capital with annual upgrade.",
         }
+    if tier == "Barnacles_Whale":
+        return {
+            "action_type": "dedicated_csm_audit" if "dedicated_csm_audit" in g["allowed_actions"] else "enterprise_trial_unlock",
+            "discount_pct": 15 if risk_score >= 0.8 else 10,
+            "free_months": 1 if risk_score >= 0.8 else 0,
+            "reasoning": "Whale Barnacle Play: Unlock enterprise audit & PoC trial to capture full wallet capacity.",
+        }
     if tier == "Barnacles_Heavy":
         return {
             "action_type": "pause_subscription" if "pause_subscription" in g["allowed_actions"] else "no_action",
@@ -77,7 +84,7 @@ def _rule_based_decision(tier: str, risk_score: float, sentiment: str) -> dict:
     }
 
 def _enforce_guardrail(decision: dict, tier: str) -> dict:
-    g = GUARDRAILS[tier]
+    g = GUARDRAILS.get(tier, GUARDRAILS["Strangers"])
 
     action_type = decision.get("action_type", "email_only")
     if action_type not in g["allowed_actions"]:
@@ -106,7 +113,7 @@ class NegotiationDecision:
     source: str
 
 async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, profile: RetrievedProfile, ltv_pct: float = None, tenure_pct: float = None) -> NegotiationDecision:
-    g = GUARDRAILS[tier]
+    g = GUARDRAILS.get(tier, GUARDRAILS["Strangers"])
     guardrail_text = (
         f"- Tier: {tier}\n"
         f"- Max discount: {g['max_discount_pct']}%\n"
@@ -121,9 +128,9 @@ async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, 
     tenure_rank_str = f"{int(tenure_pct * 100)}th percentile" if tenure_pct is not None else "Unknown"
 
     user_prompt = (
-        f"Customer: {customer_id}\n"
+        f"Customer Token: {customer_id}\n"
         f"Tier: {tier}\n"
-        f"LTV: {ltv:,.0f} (Rank: {ltv_rank_str})\n"
+        f"LTV Estimate: {ltv:,.0f} VND (Rank: {ltv_rank_str})\n"
         f"Tenure Rank: {tenure_rank_str}\n"
         f"Risk score: {risk_score}\n"
         f"Sentiment: {profile.sentiment}\n"
@@ -131,8 +138,8 @@ async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, 
         f"Summary: {profile.summary}\n"
     )
 
-    # Resource Allocation Routing: LLM only for High-Value (White-Glove)
-    if tier in ["True_Friends_Elite", "True_Friends_Standard"]:
+    # Resource Allocation Routing: LLM for High-Value & Strategic Whale Expansion
+    if tier in ["True_Friends_Elite", "True_Friends_Standard", "Barnacles_Whale"]:
         parsed = await complete_json(NEGOTIATOR_MODEL, system_prompt, user_prompt, max_tokens=400)
     else:
         parsed = None # Bypass LLM for Automated Nudge workflows

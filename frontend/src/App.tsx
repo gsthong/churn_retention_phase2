@@ -5,6 +5,7 @@ import { ROIAnalytics } from './pages/ROIAnalytics';
 import { Orchestrator } from './pages/Orchestrator';
 import { Customers } from './pages/Customers';
 import { Policies } from './pages/Policies';
+import { HumanReviewStudio } from './pages/HumanReviewStudio';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Overview />} />
           <Route path="analytics" element={<ROIAnalytics />} />
           <Route path="orchestrator" element={<Orchestrator />} />
+          <Route path="hitl" element={<HumanReviewStudio />} />
           <Route path="customers" element={<Customers />} />
           <Route path="policies" element={<Policies />} />
           <Route path="*" element={<Navigate to="/" replace />} />

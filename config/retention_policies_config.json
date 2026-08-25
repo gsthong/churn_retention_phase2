@@ -1,0 +1,255 @@
+{
+  "version": "2.0.0",
+  "last_updated": "2026-08-25",
+  "frameworks": {
+    "framework_a_cost_efficiency": {
+      "name": "Cost-Efficiency & Margin Protection Framework",
+      "description": "Ưu tiên bảo vệ biên lợi nhuận ròng, kiểm soát chặt chi phí CRC (Cost of Retention). Đối với tệp chi tiêu thấp/hàu bám (Barnacles), tuyệt đối không giảm giá sâu, sử dụng các hành động 0 đồng (Pause subscription, Self-serve support, Newsletter). Phù hợp cho giai đoạn thị trường thắt chặt hoặc doanh nghiệp SaaS tập trung vào Profitability.",
+      "target_crc_ratio": "< 5% of Saved ARR",
+      "barnacle_philosophy": "Zero-Discount / Frictionless Pause / Filter Loss-Making Accounts"
+    },
+    "framework_b_wallet_expansion": {
+      "name": "Wallet-Share Expansion & Upsell Growth Framework",
+      "description": "Ưu tiên khai thác tiềm năng doanh thu mở rộng (Expansion ARR). Đối với Whale Barnacles (doanh nghiệp lớn mua gói nhỏ), chủ động đầu tư tài nguyên CSM, mở khóa tính năng Enterprise dùng thử 30 ngày hoặc gói đào tạo chuyên sâu để cạy vỏ hàu, chuyển đổi thành True Friends. Phù hợp cho doanh nghiệp đang trong giai đoạn Scale-up chiếm lĩnh thị phần.",
+      "target_crc_ratio": "< 15% of Expansion Pipeline Value",
+      "barnacle_philosophy": "Unlock Enterprise Proof-of-Concept / Feature Expansion / Executive Audit"
+    }
+  },
+  "segments": {
+    "Barnacles_Standard": {
+      "display_name": "Standard Barnacles (Hàu Phổ Thông)",
+      "description": "Khách hàng cá nhân/nhỏ lẻ, gắn bó lâu (>50% Tenure) nhưng chi tiêu thấp (<50% LTV). Dung lượng ví nhỏ thật sự.",
+      "triggers": {
+        "churn_risk_min": 0.55,
+        "ltv_percentile_max": 0.50,
+        "tenure_percentile_min": 0.50,
+        "wallet_capacity": "Low"
+      },
+      "framework_a": {
+        "max_discount_pct": 5,
+        "max_free_months": 0,
+        "max_budget_vnd": 0,
+        "allowed_actions": ["pause_subscription", "feature_newsletter", "self_service_guide"],
+        "channel": "In-App / Email",
+        "action_playbook": "Đề xuất chức năng Tạm ngưng (Pause) thay vì Hủy để giữ dữ liệu trong CRM, gửi tài liệu hướng dẫn tự phục vụ."
+      },
+      "framework_b": {
+        "max_discount_pct": 10,
+        "max_free_months": 0,
+        "max_budget_vnd": 50000,
+        "allowed_actions": ["feature_education", "loyalty_upgrade", "micro_addon_trial"],
+        "channel": "Email / Zalo OA",
+        "action_playbook": "Tặng 7 ngày dùng thử add-on năng suất để kích hoạt nhu cầu chi tiêu thêm mà không làm giảm giá gói gốc."
+      }
+    },
+    "Barnacles_Whale": {
+      "display_name": "Whale Barnacles (Hàu Cá Voi / Doanh Nghiệp Lớn Dùng Gói Nhỏ)",
+      "description": "Khách hàng doanh nghiệp/tổ chức lớn có ngân sách dồi dào, gắn bó lâu (>70% Tenure) nhưng chỉ mua gói cơ bản hoặc tài khoản cá nhân. Tiềm năng ví cực lớn.",
+      "triggers": {
+        "churn_risk_min": 0.55,
+        "ltv_percentile_max": 0.50,
+        "tenure_percentile_min": 0.70,
+        "wallet_capacity": "High (Enterprise/B2B)"
+      },
+      "framework_a": {
+        "max_discount_pct": 15,
+        "max_free_months": 1,
+        "max_budget_vnd": 200000,
+        "allowed_actions": ["dedicated_csm_audit", "enterprise_trial_unlock", "contract_renegotiation"],
+        "channel": "Phone / Dedicated CSM Call",
+        "action_playbook": "Chuyên viên CSM cấp cao liên hệ phỏng vấn lý do chưa khai thác hết phần mềm, mở khóa 30 ngày gói Enterprise miễn phí."
+      },
+      "framework_b": {
+        "max_discount_pct": 25,
+        "max_free_months": 2,
+        "max_budget_vnd": 500000,
+        "allowed_actions": ["enterprise_trial_unlock", "vip_training", "cross_sell_bundle", "contract_renegotiation"],
+        "channel": "Executive Zoom / Strategic Meeting",
+        "action_playbook": "Tung gói chuyển đổi Enterprise thường niên giảm 20-25% kèm 3 giờ Onboarding đào tạo toàn bộ nhân viên công ty để thay thế phần mềm đối thủ."
+      }
+    },
+    "Barnacles_Heavy": {
+      "display_name": "Resource-Draining Barnacles (Hàu Chiếm Dụng Tài Nguyên)",
+      "description": "Khách hàng chi tiêu cực thấp (<20% LTV) nhưng tần suất mở ticket hỗ trợ cao bất thường, làm âm biên lợi nhuận.",
+      "triggers": {
+        "churn_risk_min": 0.70,
+        "ltv_percentile_max": 0.20,
+        "tenure_percentile_min": 0.80,
+        "wallet_capacity": "Very Low"
+      },
+      "framework_a": {
+        "max_discount_pct": 0,
+        "max_free_months": 0,
+        "max_budget_vnd": 0,
+        "allowed_actions": ["pause_subscription", "no_action", "automated_faq"],
+        "channel": "Automated System Notice",
+        "action_playbook": "Tuyệt đối không cấp chiết khấu. Đưa về luồng tài liệu tự động (FAQ/Bot). Nếu khách muốn hủy, đồng ý ngay hoặc cho tạm ngưng."
+      },
+      "framework_b": {
+        "max_discount_pct": 0,
+        "max_free_months": 0,
+        "max_budget_vnd": 0,
+        "allowed_actions": ["paid_support_tier", "pause_subscription"],
+        "channel": "Email",
+        "action_playbook": "Giới thiệu gói hỗ trợ kỹ thuật có phí (Paid Support Add-on) để tái định hình hành vi sử dụng hoặc sàng lọc tài khoản lỗ vốn."
+      }
+    },
+    "True_Friends_Elite": {
+      "display_name": "True Friends Elite (VIP Champions)",
+      "description": "Top 20% LTV và Top 20% Tenure hoặc Tribe Leaders có sức ảnh hưởng mạng lưới.",
+      "triggers": {
+        "churn_risk_min": 0.55,
+        "ltv_percentile_min": 0.80,
+        "tenure_percentile_min": 0.80,
+        "wallet_capacity": "Very High"
+      },
+      "framework_a": {
+        "max_discount_pct": 40,
+        "max_free_months": 2,
+        "max_budget_vnd": 1000000,
+        "allowed_actions": ["vip_training", "dedicated_csm_audit", "discount"],
+        "channel": "Direct Call / Senior Director Meeting",
+        "action_playbook": "Can thiệp White-Glove, giải quyết triệt để lỗi kỹ thuật, tặng 1-2 tháng dịch vụ và khóa đào tạo đội ngũ riêng."
+      },
+      "framework_b": {
+        "max_discount_pct": 40,
+        "max_free_months": 2,
+        "max_budget_vnd": 1000000,
+        "allowed_actions": ["vip_training", "dedicated_csm_audit", "discount"],
+        "channel": "Direct Call / Senior Director Meeting",
+        "action_playbook": "Can thiệp White-Glove kết hợp thỏa thuận hợp đồng dài hạn (Multi-year contract lock-in)."
+      }
+    },
+    "True_Friends_Standard": {
+      "display_name": "True Friends Standard (Khách Hàng Thân Thiết)",
+      "description": "Top 50% LTV và Top 50% Tenure.",
+      "triggers": {
+        "churn_risk_min": 0.55,
+        "ltv_percentile_min": 0.50,
+        "tenure_percentile_min": 0.50,
+        "wallet_capacity": "High"
+      },
+      "framework_a": {
+        "max_discount_pct": 25,
+        "max_free_months": 1,
+        "max_budget_vnd": 500000,
+        "allowed_actions": ["vip_training", "discount", "priority_support"],
+        "channel": "Zalo OA / Phone Call",
+        "action_playbook": "Giảm 15-25% gia hạn hoặc tặng 1 tháng để tháo gỡ điểm nghẽn trải nghiệm."
+      },
+      "framework_b": {
+        "max_discount_pct": 25,
+        "max_free_months": 1,
+        "max_budget_vnd": 500000,
+        "allowed_actions": ["vip_training", "discount", "priority_support"],
+        "channel": "Zalo OA / Phone Call",
+        "action_playbook": "Giảm 15-25% gia hạn hoặc tặng 1 tháng để tháo gỡ điểm nghẽn trải nghiệm."
+      }
+    },
+    "Butterflies_Whales": {
+      "display_name": "Butterflies Whales (Bướm Đại Gia / Chi Tiêu Cao - Gắn Bó Thấp)",
+      "description": "Top 80% LTV nhưng Tenure ngắn (<50%). Khách hàng chi đậm theo dự án ngắn hạn hoặc hay nhảy dịch vụ.",
+      "triggers": {
+        "churn_risk_min": 0.55,
+        "ltv_percentile_min": 0.80,
+        "tenure_percentile_max": 0.50,
+        "wallet_capacity": "High"
+      },
+      "framework_a": {
+        "max_discount_pct": 30,
+        "max_free_months": 0,
+        "max_budget_vnd": 750000,
+        "allowed_actions": ["loyalty_upgrade", "discount"],
+        "channel": "Executive Email / Account Meeting",
+        "action_playbook": "Khóa dòng tiền bằng ưu đãi giảm 20-30% khi ký hợp đồng thường niên 1 năm."
+      },
+      "framework_b": {
+        "max_discount_pct": 30,
+        "max_free_months": 0,
+        "max_budget_vnd": 750000,
+        "allowed_actions": ["loyalty_upgrade", "discount"],
+        "channel": "Executive Email / Account Meeting",
+        "action_playbook": "Khóa dòng tiền bằng ưu đãi giảm 20-30% khi ký hợp đồng thường niên 1 năm."
+      }
+    },
+    "Butterflies_Standard": {
+      "display_name": "Butterflies Standard (Bướm Giao Dịch Ngắn Hạn)",
+      "description": "LTV trung bình (50-80%) và Tenure ngắn (<50%).",
+      "triggers": {
+        "churn_risk_min": 0.55,
+        "ltv_percentile_min": 0.50,
+        "tenure_percentile_max": 0.50,
+        "wallet_capacity": "Medium"
+      },
+      "framework_a": {
+        "max_discount_pct": 15,
+        "max_free_months": 0,
+        "max_budget_vnd": 250000,
+        "allowed_actions": ["loyalty_upgrade", "discount"],
+        "channel": "In-App / Email",
+        "action_playbook": "Ưu đãi giảm giá 15% ngắn hạn nếu cam kết gói 6 tháng."
+      },
+      "framework_b": {
+        "max_discount_pct": 15,
+        "max_free_months": 0,
+        "max_budget_vnd": 250000,
+        "allowed_actions": ["loyalty_upgrade", "discount"],
+        "channel": "In-App / Email",
+        "action_playbook": "Ưu đãi giảm giá 15% ngắn hạn nếu cam kết gói 6 tháng."
+      }
+    },
+    "Strangers": {
+      "display_name": "Strangers (Khách Vãng Lai)",
+      "description": "LTV thấp (<50%) và Tenure ngắn (<50%). Khách mới dùng thử hoặc không phù hợp thị trường mục tiêu.",
+      "triggers": {
+        "churn_risk_min": 0.55,
+        "ltv_percentile_max": 0.50,
+        "tenure_percentile_max": 0.50,
+        "wallet_capacity": "Low"
+      },
+      "framework_a": {
+        "max_discount_pct": 5,
+        "max_free_months": 0,
+        "max_budget_vnd": 10000,
+        "allowed_actions": ["feature_newsletter", "email_only"],
+        "channel": "Automated Email",
+        "action_playbook": "Gửi email tự động giới thiệu tính năng, không tốn chi phí nhân sự hay ngân sách lớn."
+      },
+      "framework_b": {
+        "max_discount_pct": 5,
+        "max_free_months": 0,
+        "max_budget_vnd": 10000,
+        "allowed_actions": ["feature_newsletter", "email_only"],
+        "channel": "Automated Email",
+        "action_playbook": "Gửi email tự động giới thiệu tính năng, không tốn chi phí nhân sự hay ngân sách lớn."
+      }
+    }
+  },
+  "hitl_governance_rules": {
+    "recommended_split": {
+      "automated_ai_percent": 80,
+      "human_specialist_percent": 20
+    },
+    "tier_1_autonomous_mass": {
+      "description": "Tự động hóa hoàn toàn 100% không cần can thiệp thủ công (Zero-touch)",
+      "segments": ["Strangers", "Barnacles_Standard", "Butterflies_Standard"],
+      "action_rules": "Tuân thủ hard rule guardrail trong config, gửi email/in-app tự động."
+    },
+    "tier_2_batch_review": {
+      "description": "AI đề xuất + Chuyên viên duyệt nhanh theo nhóm (Batch Review with 1-click Approval)",
+      "segments": ["Butterflies_Whales", "Barnacles_Heavy"],
+      "action_rules": "Chuyên viên có thể lọc theo phân khúc, kiểm tra nhanh ROI và ấn duyệt đồng loạt."
+    },
+    "tier_3_white_glove_copilot": {
+      "description": "AI làm Co-Pilot + 100% Chuyên viên kiểm duyệt, tùy chỉnh và tương tác trực tiếp",
+      "segments": ["True_Friends_Elite", "Barnacles_Whale"],
+      "action_rules": "AI phân tích log, tóm tắt pain points và draft kịch bản đàm phán; Chuyên viên trực tiếp review, tinh chỉnh nội dung và liên hệ."
+    }
+  },
+  "data_privacy_rules": {
+    "pii_masking_enabled": true,
+    "masked_fields": ["full_name", "phone_number", "email_address", "credit_card", "bank_account", "exact_ip"],
+    "retention_policy_compliance": ["GDPR_Art_6", "Decree_13_2023_ND_CP_Vietnam", "SOC2_Type_II"],
+    "anonymization_strategy": "Tokenized Customer ID + Pseudonym Masking + Aggregated Feature Buckets"
+  }
+}

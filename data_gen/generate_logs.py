@@ -18,6 +18,9 @@ import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 import pandas as pd
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))

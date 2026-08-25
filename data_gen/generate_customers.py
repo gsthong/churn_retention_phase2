@@ -16,6 +16,9 @@ import random
 import sys
 from pathlib import Path
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 import numpy as np
 import pandas as pd
 
@@ -70,6 +73,9 @@ def generate_customers(n: int = 200, seed: int = RANDOM_SEED) -> pd.DataFrame:
             network_influence_score = min(network_influence_score, 0.79)
         is_tribe_leader = network_influence_score > 0.8
 
+        # Enterprise wallet capacity (khoảng 15% là khách hàng doanh nghiệp tiềm năng lớn)
+        is_enterprise_wallet = rng.random() < 0.18
+
         rows.append(
             {
                 "customer_id": customer_id,
@@ -83,6 +89,7 @@ def generate_customers(n: int = 200, seed: int = RANDOM_SEED) -> pd.DataFrame:
                 "ltv": ltv,
                 "network_influence_score": network_influence_score,
                 "is_tribe_leader": is_tribe_leader,
+                "is_enterprise_wallet": is_enterprise_wallet,
             }
         )
 
@@ -94,7 +101,7 @@ def generate_customers(n: int = 200, seed: int = RANDOM_SEED) -> pd.DataFrame:
     df['tenure_pct'] = df['tenure_months'].rank(pct=True)
 
     df["tier"] = df.apply(lambda row: assign_advanced_segment(
-        row["ltv_pct"], row["tenure_pct"], row["is_tribe_leader"]
+        row["ltv_pct"], row["tenure_pct"], row["is_tribe_leader"], row.get("is_enterprise_wallet", False)
     ), axis=1)
     
     return df

@@ -79,6 +79,64 @@ export interface AgentGraphResponse {
   }>;
 }
 
+export interface PoliciesResponse {
+  guardrails: Record<string, {
+    max_discount_pct: number;
+    max_free_months: number;
+    allowed_actions: string[];
+  }>;
+  policies_config?: {
+    frameworks?: Record<string, {
+      name: string;
+      description: string;
+      target_crc_ratio: string;
+      barnacle_philosophy: string;
+    }>;
+    segments?: Record<string, any>;
+    hitl_governance_rules?: any;
+    data_privacy_rules?: any;
+  };
+  matrix_table?: any[];
+  action_costs: Record<string, string>;
+}
+
+export interface HitlQueueResponse {
+  summary: {
+    total_treatment_cases: number;
+    tier1_autonomous_count: number;
+    tier1_autonomous_pct: number;
+    tier2_batch_count: number;
+    tier2_batch_pct: number;
+    tier3_copilot_count: number;
+    tier3_copilot_pct: number;
+    target_automation_ratio: string;
+  };
+  tier1_autonomous: ActionRecord[];
+  tier2_batch: ActionRecord[];
+  tier3_copilot: ActionRecord[];
+}
+
+export interface PrivacyTelemetryResponse {
+  status: string;
+  pii_masking: {
+    enabled: boolean;
+    masked_attributes: string[];
+    redaction_method: string;
+    llm_exposure_level: string;
+  };
+  regulatory_frameworks: {
+    name: string;
+    status: string;
+    audit_score: string;
+  }[];
+  hitl_split: {
+    ai_autonomous_pct: number;
+    human_oversight_pct: number;
+    human_saved_hours_monthly: number;
+    estimated_labor_cost_saved_vnd: number;
+  };
+}
+
 export async function fetchStats(): Promise<StatsResponse | null> {
   try {
     const res = await fetch(`${API_BASE}/stats`);
@@ -118,6 +176,69 @@ export async function fetchAnalytics(): Promise<AnalyticsResponse | null> {
 export async function fetchAgentGraph(): Promise<AgentGraphResponse | null> {
   try {
     const res = await fetch(`${API_BASE}/agent-graph`);
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchPolicies(): Promise<PoliciesResponse | null> {
+  try {
+    const res = await fetch(`${API_BASE}/policies`);
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchHitlQueue(): Promise<HitlQueueResponse | null> {
+  try {
+    const res = await fetch(`${API_BASE}/hitl/queue`);
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function overrideAction(payload: {
+  customer_id: string;
+  action_type: string;
+  discount_pct: number;
+  free_months: number;
+  specialist_note: string;
+  custom_message?: string;
+}): Promise<boolean> {
+  try {
+    const res = await fetch(`${API_BASE}/hitl/override`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+export async function batchApprove(payload: { customer_ids?: string[]; tier?: string }): Promise<boolean> {
+  try {
+    const res = await fetch(`${API_BASE}/hitl/batch-approve`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+export async function fetchPrivacyTelemetry(): Promise<PrivacyTelemetryResponse | null> {
+  try {
+    const res = await fetch(`${API_BASE}/hitl/privacy-telemetry`);
     if (!res.ok) throw new Error('API error');
     return await res.json();
   } catch {
