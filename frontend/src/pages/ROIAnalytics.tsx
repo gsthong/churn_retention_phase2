@@ -8,7 +8,6 @@ import {
   Search, 
   RefreshCw, 
   ArrowUpRight,
-  ArrowDownRight,
   X
 } from 'lucide-react';
 import { fetchAnalytics, fetchStats, fetchActions } from '../api/client';
@@ -101,25 +100,8 @@ export function ROIAnalytics() {
     <div className="flex flex-col space-y-2.5 font-sans">
       {/* Row 1: 6 Macro KPI Tickers */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 shrink-0">
-        {/* Metric 1 */}
-        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-18">
-          <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>AT-RISK ACCOUNTS</span>
-            <span className="text-rose-500 font-bold">●</span>
-          </div>
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-lg font-bold font-mono text-slate-900">
-              {stats?.total_customers ? stats.total_customers.toLocaleString() : '4,291'}
-            </span>
-            <span className="text-[10px] font-mono text-rose-600 flex items-center">
-              <ArrowUpRight size={10} /> 12%
-            </span>
-          </div>
-          <div className="text-[8.5px] font-mono text-slate-400">P1 Classification</div>
-        </div>
-        
-        {/* Metric 2 */}
-        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-18">
+        {/* Metric 1: Saved Revenue */}
+        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-20">
           <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
             <span>SECURED REVENUE</span>
             <span className="text-emerald-500 font-bold">●</span>
@@ -129,76 +111,103 @@ export function ROIAnalytics() {
               <span className="text-lg font-bold font-mono text-slate-900">
                 {stats?.roi_metrics?.revenue_saved_vnd 
                   ? `$${(stats.roi_metrics.revenue_saved_vnd / 24000 / 1000).toFixed(1)}k`
-                  : '$1.24M'}
+                  : '$153.1k'}
               </span>
               <span className="text-[10px] font-mono text-emerald-600 flex items-center">
-                <ArrowUpRight size={10} /> $42k
+                <ArrowUpRight size={10} /> +{((stats?.roi_metrics?.uplift_pct_points || 0.339) * 100).toFixed(1)}%
               </span>
             </div>
-            {/* Sparkline Visualizer */}
-            <div className="flex items-end gap-0.5 h-3.5">
-              <div className="w-1 h-1.5 bg-slate-200 rounded-xs"></div>
-              <div className="w-1 h-2 bg-slate-300 rounded-xs"></div>
-              <div className="w-1 h-2 bg-slate-400 rounded-xs"></div>
-              <div className="w-1 h-3 bg-slate-600 rounded-xs"></div>
-              <div className="w-1 h-2.5 bg-slate-700 rounded-xs"></div>
-              <div className="w-1 h-3.5 bg-slate-900 rounded-xs"></div>
-            </div>
           </div>
-          <div className="text-[8.5px] font-mono text-slate-400">Net Preserved LTV</div>
-        </div>
-
-        {/* Metric 3 */}
-        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-18">
-          <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>CAC / CRC RATIO</span>
-          </div>
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-lg font-bold font-mono text-slate-900">1 : 12.4</span>
-          </div>
-          <div className="text-[8.5px] font-mono text-slate-400">Industry avg: 1:3.0</div>
-        </div>
-
-        {/* Metric 4 */}
-        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-18">
-          <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>NET CHURN RATE</span>
-          </div>
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-lg font-bold font-mono text-slate-900">-1.2%</span>
-            <span className="text-[9px] font-mono text-slate-400">Tgt -0.5%</span>
-          </div>
-          <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
-             <div className="bg-slate-800 h-full w-[85%]"></div>
+          <div className="text-[8.5px] font-mono text-slate-400">
+            {stats?.roi_metrics?.revenue_saved_vnd 
+              ? `${(stats.roi_metrics.revenue_saved_vnd / 1e9).toFixed(2)}B VND` 
+              : '3.67B VND Saved'}
           </div>
         </div>
 
-        {/* Metric 5 */}
-        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-18">
+        {/* Metric 2: Cost Per Save (CPS) */}
+        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-20">
           <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>AVG SAVE TIME</span>
+            <span>COST PER SAVE (CPS)</span>
+            <span className="text-indigo-500 font-bold font-mono">Table 0</span>
           </div>
           <div className="flex items-baseline gap-1.5">
-            <span className="text-lg font-bold font-mono text-slate-900">4.2h</span>
-            <span className="text-[9px] font-mono text-emerald-600 flex items-center">
-              <ArrowDownRight size={10} /> 0.8h
+            <span className="text-lg font-bold font-mono text-slate-900">
+              {stats?.roi_metrics?.cost_per_save_vnd 
+                ? `$${Math.round(stats.roi_metrics.cost_per_save_vnd / 24000)}` 
+                : '$33.5'}
+            </span>
+            <span className="text-[9px] font-mono text-indigo-600 font-semibold bg-indigo-50 px-1 rounded">
+              {stats?.roi_metrics?.cost_per_save_vnd 
+                ? `${Math.round(stats.roi_metrics.cost_per_save_vnd / 1000)}k VND`
+                : '806k VND'}
             </span>
           </div>
-          <div className="text-[8.5px] font-mono text-slate-400">Alert to settlement</div>
+          <div className="text-[8.5px] font-mono text-slate-400">Action Cost / Saved User</div>
         </div>
 
-        {/* Metric 6 */}
-        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-18">
+        {/* Metric 3: Margin Erosion Rate */}
+        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-20">
           <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>PREVENTION RATE</span>
+            <span>MARGIN EROSION</span>
           </div>
-          <div className="flex items-baseline justify-between">
-            <span className="text-lg font-bold font-mono text-slate-900">68.4%</span>
-            <span className="text-[9px] font-mono text-emerald-700 font-semibold bg-emerald-50 px-1 rounded">High</span>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-lg font-bold font-mono text-emerald-700">
+              {stats?.roi_metrics?.margin_erosion_pct !== undefined 
+                ? `${stats.roi_metrics.margin_erosion_pct.toFixed(2)}%` 
+                : '1.34%'}
+            </span>
+            <span className="text-[9px] font-mono text-slate-400">Safe &lt; 5%</span>
           </div>
           <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
-             <div className="bg-emerald-600 h-full w-[68%]"></div>
+             <div className="bg-emerald-600 h-full w-[25%]"></div>
           </div>
+          <div className="text-[8.5px] font-mono text-slate-400">Total Action Cost / Saved ARR</div>
+        </div>
+
+        {/* Metric 4: Sleeping Dogs Cost Avoidance */}
+        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-20">
+          <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
+            <span>SLEEPING DOGS SAVED</span>
+          </div>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-lg font-bold font-mono text-slate-900">
+              {stats?.roi_metrics?.sleeping_dogs_avoided_cost_vnd 
+                ? `$${(stats.roi_metrics.sleeping_dogs_avoided_cost_vnd / 24000 / 1000).toFixed(1)}k`
+                : '$182.5k'}
+            </span>
+          </div>
+          <div className="text-[8.5px] font-mono text-slate-400">Triage Effect (Cost Avoided)</div>
+        </div>
+
+        {/* Metric 5: NRR / GRR */}
+        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-20">
+          <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
+            <span>NRR / GRR BENCHMARK</span>
+          </div>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-lg font-bold font-mono text-indigo-900">
+              {stats?.roi_metrics?.nrr_pct || 118.5}%
+            </span>
+            <span className="text-[9px] font-mono text-slate-500">GRR {stats?.roi_metrics?.grr_pct || 53.9}%</span>
+          </div>
+          <div className="text-[8.5px] font-mono text-slate-400">Net Revenue Retained</div>
+        </div>
+
+        {/* Metric 6: ROI Multiple */}
+        <div className="bg-white p-2.5 border border-slate-200 rounded flex flex-col justify-between h-20">
+          <div className="flex justify-between items-center text-[9px] font-mono text-slate-400 uppercase tracking-wider">
+            <span>ROI MULTIPLE</span>
+          </div>
+          <div className="flex items-baseline justify-between">
+            <span className="text-lg font-bold font-mono text-slate-900">
+              {stats?.roi_metrics?.roi ? `${stats.roi_metrics.roi.toFixed(1)}x` : '73.7x'}
+            </span>
+            <span className="text-[9px] font-mono text-emerald-700 font-semibold bg-emerald-50 px-1 rounded">
+              High Leverage
+            </span>
+          </div>
+          <div className="text-[8.5px] font-mono text-slate-400">Holdout Validated</div>
         </div>
       </div>
 

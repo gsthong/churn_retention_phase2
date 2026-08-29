@@ -34,6 +34,8 @@ import asyncio
 async def run_pipeline_for_customer(row: pd.Series, semaphore: asyncio.Semaphore) -> dict:
     async with semaphore:
         customer_id = row["customer_id"]
+        churn_reason = str(row.get("churn_reason", "N/A"))
+        churn_category = str(row.get("churn_category", "voluntary"))
 
         profile = await retrieve(customer_id)
         decision = await negotiate(
@@ -44,6 +46,8 @@ async def run_pipeline_for_customer(row: pd.Series, semaphore: asyncio.Semaphore
             profile=profile,
             ltv_pct=row.get("ltv_pct", 0.5),
             tenure_pct=row.get("tenure_pct", 0.5),
+            churn_category=churn_category,
+            churn_reason=churn_reason,
         )
         result = await execute(customer_id, row["name"], profile, decision)
 
@@ -53,6 +57,8 @@ async def run_pipeline_for_customer(row: pd.Series, semaphore: asyncio.Semaphore
             "tier": row["tier"],
             "ltv": row["ltv"],
             "churn_risk_score": row["churn_risk_score"],
+            "churn_reason": churn_reason,
+            "churn_category": churn_category,
             "monthly_fee": row["monthly_fee"],
             "sentiment": profile.sentiment,
             "pain_points": "; ".join(profile.pain_points),
@@ -73,6 +79,8 @@ def run_holdout_record(row: pd.Series) -> dict:
         "tier": row["tier"],
         "ltv": row["ltv"],
         "churn_risk_score": row["churn_risk_score"],
+        "churn_reason": str(row.get("churn_reason", "N/A")),
+        "churn_category": str(row.get("churn_category", "voluntary")),
         "monthly_fee": row["monthly_fee"],
         "sentiment": "n/a",
         "pain_points": "",

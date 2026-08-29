@@ -17,6 +17,11 @@ export interface StatsResponse {
     avg_ltv_treatment?: number;
     revenue_saved_vnd?: number;
     total_action_cost_vnd?: number;
+    cost_per_save_vnd?: number;
+    margin_erosion_pct?: number;
+    sleeping_dogs_avoided_cost_vnd?: number;
+    grr_pct?: number;
+    nrr_pct?: number;
     roi?: number;
   };
   provider: string;
@@ -27,12 +32,35 @@ export interface StatsResponse {
   };
 }
 
+export interface InterventionItem {
+  id: string;
+  name: string;
+  cost_usd: number | string;
+  cost_vnd: number;
+  churn_reduced_pp: string;
+  suitable_for: string;
+  frequency: string;
+  max_budget_usd: number;
+  risk_level: number;
+  description: string;
+}
+
+export interface BudgetCeilingItem {
+  churn_risk: string;
+  barrier: string;
+  clv: string;
+  action: string;
+  budget_ceiling: string;
+}
+
 export interface ActionRecord {
   customer_id: string;
   group: string;
   tier: string;
   ltv: number;
   churn_risk_score: number;
+  churn_reason?: string;
+  churn_category?: string;
   monthly_fee: number;
   sentiment: string;
   pain_points: string;
@@ -50,11 +78,28 @@ export interface AnalyticsResponse {
   actions_dist: { action: string; count: number }[];
   sentiment_dist: { sentiment: string; count: number }[];
   pain_points: { pain_point: string; count: number }[];
+  churn_categories?: { category: string; count: number }[];
+  top_churn_reasons?: { reason: string; count: number }[];
   uplift_comparison: {
     holdout_churn_rate: number;
     treatment_churn_rate: number;
     uplift: number;
   };
+}
+
+export interface Phase1DatasetSummary {
+  dataset_name: string;
+  total_records: number;
+  churned_records: number;
+  retained_records: number;
+  churn_rate_pct: number;
+  voluntary_churn_count: number;
+  involuntary_churn_count: number;
+  vague_churn_count: number;
+  top_churn_reasons: { reason: string; count: number }[];
+  contract_distribution: Record<string, number>;
+  payment_method_distribution: Record<string, number>;
+  monthly_charges_usd: { min: number; mean: number; max: number; median: number };
 }
 
 export interface AgentGraphResponse {
@@ -95,6 +140,8 @@ export interface PoliciesResponse {
     segments?: Record<string, any>;
     hitl_governance_rules?: any;
     data_privacy_rules?: any;
+    intervention_catalog?: InterventionItem[];
+    budget_ceiling_matrix?: BudgetCeilingItem[];
   };
   matrix_table?: any[];
   action_costs: Record<string, string>;
@@ -239,6 +286,30 @@ export async function batchApprove(payload: { customer_ids?: string[]; tier?: st
 export async function fetchPrivacyTelemetry(): Promise<PrivacyTelemetryResponse | null> {
   try {
     const res = await fetch(`${API_BASE}/hitl/privacy-telemetry`);
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchPhase1Summary(): Promise<Phase1DatasetSummary | null> {
+  try {
+    const res = await fetch(`${API_BASE}/phase1/dataset-summary`);
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function trainPhase1Model(payload?: { n_customers?: number; filter_voluntary?: boolean }): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE}/phase1/train-and-predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload || {})
+    });
     if (!res.ok) throw new Error('API error');
     return await res.json();
   } catch {

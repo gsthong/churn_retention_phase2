@@ -1,141 +1,111 @@
-# Phase 2 — Multi-Agent Retention Action Layer
+# Phase 1 & Phase 2 — Churn Prediction & Multi-Agent Retention Workflow
 
-Code đầy đủ cho **Phase 2** của đề tài *Churn Prediction + Multi-Agent Retention Workflow*:
-nhận đầu vào là danh sách khách hàng nguy cơ rời bỏ cao (giả lập output của Phase 1),
-rồi để 3 AI Agent tự vận hành: đào dữ liệu → ra quyết định giữ chân → soạn & "gửi" tin nhắn cá nhân hóa.
+Hệ thống hoàn chỉnh kết hợp **Phase 1 (Machine Learning Churn Prediction & Churn Reason Categorization)** và **Phase 2 (Multi-Agent Retention Action Layer)** trên bộ dữ liệu thực tế **IBM Telco Customer Churn (7,043 khách hàng)**.
 
-## Cấu trúc thư mục
+---
+
+## 📂 Cấu trúc thư mục
 
 ```
 churn_retention_phase2/
-├── config.py                    # Guardrail ngân sách, catalog hành động, model routing
-├── main.py                      # Entry point — chạy toàn bộ pipeline
-├── orchestrator.py              # Chia holdout/treatment + điều phối 3 agent
+├── config.py                    # Cấu hình dataset, phân loại lý do churn, guardrail, model routing
+├── phase1_model.py              # Phase 1: Train Random Forest trên Telco dataset, phân loại lý do rời bỏ & xuất cohort
+├── prepare_real_data.py         # Script chuẩn bị dữ liệu thực tế cho pipeline
+├── main.py                      # Entry point — chạy toàn bộ pipeline Phase 1 & Phase 2
+├── orchestrator.py              # Chia holdout/treatment + điều phối 3 AI Agent
 ├── simulate_outcomes.py         # Mô phỏng kết quả sau 1 tháng (CHỈ DÙNG CHO DEMO)
-├── evaluate_roi.py              # Tính ROI: so sánh holdout vs treatment
+├── evaluate_roi.py              # Tính ROI & NRR: so sánh holdout vs treatment
+├── notebooks/                   # Jupyter Notebooks nghiên cứu & huấn luyện Phase 1
+│   ├── AISC_Customer_Churn_Data_Final.ipynb  # Phân loại lý do Churn (Voluntary / Involuntary)
+│   └── Lab_Build_Model.ipynb                 # Thử nghiệm mô hình Random Forest
 ├── data_gen/
-│   ├── generate_customers.py    # Sinh danh sách khách hàng nguy cơ cao (giả lập output Phase 1)
-│   └── generate_logs.py         # Sinh log tương tác / support ticket giả lập (data "làm màu")
+│   ├── generate_customers.py    # Sinh dữ liệu khách hàng tổng hợp (nếu không dùng dataset thật)
+│   └── generate_logs.py         # Sinh log tương tác theo 20 lý do Churn thực tế từ dataset
 ├── agents/
-│   ├── llm_client.py            # Wrapper gọi Anthropic API, tự fallback sang mock nếu thiếu API key
-│   ├── data_retriever_agent.py  # Đặc vụ thu thập — đọc log, trích xuất pain point
-│   ├── negotiator_agent.py      # Đặc vụ đàm phán — ra quyết định, ép guardrail ngân sách
-│   └── execution_agent.py       # Đặc vụ thực thi — soạn & "gửi" tin nhắn cá nhân hóa
-├── data/                        # (sinh ra khi chạy) customer CSV + log thô
-└── outputs/                     # (sinh ra khi chạy) actions_log.csv, outcomes.csv, tin nhắn đã gửi
+│   ├── llm_client.py            # Client gọi Groq/OpenRouter/OpenAI API + rule-based fallback
+│   ├── data_retriever_agent.py  # Agent 1: Đọc log, trích xuất pain points & sentiment
+│   ├── negotiator_agent.py      # Agent 2: Chiến lược CAC/CRC & ép guardrail ngân sách
+│   ├── execution_agent.py       # Agent 3: Soạn & gửi tin nhắn cá nhân hóa tiếng Việt
+│   └── privacy_guard.py         # Bảo vệ PII (Nghị định 13/2023 & GDPR)
+├── data/
+│   ├── Telco_customer_churn.xlsx # Dữ liệu gốc 7,043 khách hàng IBM Telco
+│   ├── at_risk_customers.csv     # Cohort nguy cơ cao do Phase 1 xuất ra
+│   └── logs/                     # Log tương tác của từng khách hàng
+├── app/                         # Backend FastAPI API
+│   ├── server.py                # Server entrypoint
+│   └── api/endpoints.py         # Endpoints: Stats, Analytics, HITL, Phase 1 Summary
+├── frontend/                    # Giao diện React + Vite + Tailwind Dashboard
+└── outputs/                     # actions_log.csv, outcomes.csv, messages/
 ```
 
-## Cài đặt
+---
 
+## 🎯 Phân loại lý do rời mạng (Phase 1 Ground Truth)
+
+Theo nghiên cứu từ notebook Phase 1, các lý do rời mạng được phân loại thành:
+1. **Voluntary Churn (15 lý do - Đối tượng giữ chân chính)**:
+   - Giá cước, khuyến mãi đối thủ (*Competitor made better offer*, *Price too high*, *Extra data charges*).
+   - Tốc độ & thiết bị (*Competitor offered higher download speeds*, *Competitor had better devices*).
+   - Chất lượng hỗ trợ & dịch vụ (*Attitude of support person*, *Poor expertise of phone support*, *Service dissatisfaction*).
+2. **Involuntary Churn (4 lý do - Cơ chế bảo toàn ngân sách)**:
+   - Di dời/Chuyển nhà (*Moved*), qua đời (*Deceased*), ngoài vùng phủ (*Limited range of services*), sự cố hạ tầng (*Network reliability*).
+   - **Chiến lược Agent**: Không lãng phí ngân sách ưu đãi/discount vào nhóm bất khả kháng, kích hoạt tính năng **Pause Subscription / Bảo lưu**.
+3. **Vague Churn**:
+   - Không rõ nguyên nhân (*Don't know*) -> Nudge tính năng tự động.
+
+---
+
+## 🚀 Hướng dẫn chạy
+
+### 1. Cài đặt môi trường
 ```bash
 pip install -r requirements.txt
+pip install openpyxl
 ```
 
-## Chạy demo
-
-### Cách 1 — Không cần API key (MOCK MODE)
-
-Chạy được ngay, không tốn phí, không cần mạng. Mỗi agent dùng logic rule-based
-(cây quyết định) thay cho LLM, vẫn tôn trọng đầy đủ guardrail ngân sách:
+### 2. Chạy toàn bộ Pipeline (Phase 1 ML + Phase 2 Multi-Agent)
 
 ```bash
-python main.py
+# Chạy với dữ liệu thật Telco_customer_churn.xlsx (200 khách hàng nguy cơ cao)
+python main.py --source telco_xlsx --n-customers 200
+
+# Chạy và ép huấn luyện lại mô hình Phase 1 ML
+python main.py --run-phase1 --n-customers 200
+
+# Chỉ tập trung vào nhóm Voluntary Churn (khách hàng có thể giữ chân được)
+python main.py --source telco_xlsx --filter-voluntary --n-customers 200
 ```
 
-### Cách 2 — Chạy thật với Claude (LIVE MODE)
-
+### 3. Chạy từng module độc lập
 ```bash
-export ANTHROPIC_API_KEY="sk-ant-..."
-python main.py
+# Bước 1: Huấn luyện mô hình Phase 1 & xuất cohort
+python phase1_model.py --n-customers 200
+
+# Bước 2: Sinh log tương tác theo lý do churn
+python -m data_gen.generate_logs
+
+# Bước 3: Chạy 3 AI Agent (Retriever -> Negotiator -> Execution)
+python orchestrator.py
+
+# Bước 4: Mô phỏng kết quả sau 1 tháng
+python simulate_outcomes.py
+
+# Bước 5: Tính toán ROI & NRR
+python evaluate_roi.py
 ```
 
-Khi có API key, hệ thống tự động gọi Claude thật cho cả 3 agent:
-- **Data Retriever Agent** dùng `claude-haiku-4-5-20251001` (model rẻ, đủ cho tác vụ trích xuất đơn giản)
-- **Negotiator Agent** & **Execution Agent** dùng `claude-sonnet-5` (tác vụ ra quyết định chiến lược
-  và sinh nội dung cá nhân hóa cần model mạnh hơn)
-
-Đây cũng là một điểm nên nhấn khi thuyết trình: **model routing để tối ưu chi phí vận hành**,
-một pattern kiến trúc rất thực tế trong các hệ thống Agentic AI sản xuất.
-
-### Tuỳ chọn CLI
-
+### 4. Khởi động Web Dashboard (FastAPI + React)
 ```bash
-python main.py --n-customers 300 --holdout 0.15
+# Terminal 1: Backend FastAPI
+python app/server.py
+
+# Terminal 2: Frontend Vite
+cd frontend
+npm run dev
 ```
 
-- `--n-customers`: số khách hàng nguy cơ cao giả lập (mặc định 200)
-- `--holdout`: tỉ lệ nhóm đối chứng (mặc định lấy theo `config.HOLDOUT_RATIO` = 10%)
-- `--skip-data-gen`: dùng lại dữ liệu đã sinh trước đó thay vì tạo mới
+---
 
-## Chạy từng bước riêng lẻ (khi cần debug / demo từng phase)
-
-```bash
-python -m data_gen.generate_customers   # sinh data/at_risk_customers.csv
-python -m data_gen.generate_logs        # sinh data/logs/*.txt
-python orchestrator.py                  # chạy 3 agent -> outputs/actions_log.csv
-python simulate_outcomes.py             # mô phỏng churned/retained -> outputs/outcomes.csv
-python evaluate_roi.py                  # in báo cáo ROI
-```
-
-## Kiến trúc Guardrail (điểm mấu chốt để bảo vệ trước ban giám khảo)
-
-`Negotiator Agent` gọi LLM để đề xuất hành động, nhưng **đề xuất đó không bao giờ
-được thực thi trực tiếp**. Hàm `_enforce_guardrail()` trong `agents/negotiator_agent.py`
-luôn chạy sau cùng, ép `discount_pct` / `free_months` / `action_type` về đúng giới hạn
-định nghĩa sẵn trong `config.GUARDRAILS` theo tier khách hàng — dù LLM có "sáng tạo"
-đề xuất vượt khung, hệ thống vẫn không bao giờ thực thi hành động vượt ngân sách.
-Script test nhanh guardrail:
-
-```bash
-python -c "
-import pandas as pd
-from config import GUARDRAILS
-df = pd.read_csv('outputs/actions_log.csv')
-violations = df[df.apply(lambda r: r['discount_pct'] > GUARDRAILS[r['tier']]['max_discount_pct'], axis=1)]
-print('Số vi phạm guardrail:', len(violations))
-"
-```
-
-## Lưu ý về `simulate_outcomes.py`
-
-File này **chỉ phục vụ demo/thuyết trình** — nó tự sinh ra kết quả giả lập "khách có
-rời bỏ hay không sau 1 tháng" dựa trên một hàm xác suất đơn giản, vì demo không thể
-chờ dữ liệu thật một tháng. Khi triển khai thật, bước này phải được thay bằng dữ liệu
-gia hạn/hủy gói thực tế của khách hàng.
-
-Một lưu ý thú vị khi thuyết trình: với cỡ mẫu nhỏ (`--n-customers` dưới ~100), nhóm
-holdout chỉ có vài chục người nên kết quả A/B test có thể nhiễu (do phương sai thống
-kê), đôi khi ra kết quả ngược trực giác. Cỡ mẫu càng lớn (khuyến nghị ≥200), kết quả
-càng ổn định và phản ánh đúng hiệu quả thật của hệ thống — đây chính là lý do vì sao
-cỡ mẫu (statistical power) luôn là một câu hỏi quan trọng trong thiết kế A/B test,
-và là một điểm bạn có thể chủ động nêu ra để "chặn đầu" câu hỏi phản biện của giám khảo.
-
-## Ví dụ output
-
-```
-BÁO CÁO ROI - HOLDOUT vs TREATMENT
-============================================================
-Số khách hàng nhóm đối chứng (holdout):   20
-Số khách hàng nhóm điều trị (treatment):  180
-------------------------------------------------------------
-Tỉ lệ rời bỏ - Holdout:    85.0%
-Tỉ lệ rời bỏ - Treatment:  55.6%
-Mức giảm tỉ lệ rời bỏ:     29.4% điểm phần trăm
-------------------------------------------------------------
-Ước tính số khách được giữ chân:  53.0 khách
-LTV trung bình (treatment):        16,680,811 VND
-=> Doanh thu ước tính cứu được:    884,082,989 VND
-------------------------------------------------------------
-Tổng chi phí ưu đãi đã bỏ ra:       6,110,900 VND
-=> ROI:                            143.67x
-============================================================
-```
-
-## Việc cần làm tiếp (nếu muốn phát triển thêm cho vòng sau)
-
-- Nối `data_gen/generate_customers.py` với model Phase 1 thật (XGBoost train trên
-  bộ IBM Telco Customer Churn) thay vì sinh `churn_risk_score`/`ltv` ngẫu nhiên.
-- Thay `simulate_outcomes.py` bằng dữ liệu gia hạn/hủy gói thực tế khi có.
-- Thêm kênh gửi thật (SendGrid cho email, Zalo OA API cho Zalo) vào `execution_agent.py`
-  thay vì ghi ra file `.txt`.
-- Thêm cơ chế retry/backoff cho `llm_client.py` khi gọi API thật ở quy mô lớn.
+## 🛡️ Kiến trúc Guardrail & Governance
+- `Negotiator Agent` đề xuất giải pháp nhưng luôn bị ép tuân thủ `_enforce_guardrail()` theo từng phân khúc kinh doanh (`True_Friends_Elite`, `Butterflies_Whales`, `Barnacles_Whale`, `Strangers`).
+- Tỷ lệ tự động hóa: **80% Autonomous (AI) : 20% Human Oversight (HITL Specialist Review)**.

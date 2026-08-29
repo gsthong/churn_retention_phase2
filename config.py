@@ -9,8 +9,63 @@ OUTPUT_DIR = ROOT_DIR / "outputs"
 MESSAGES_DIR = OUTPUT_DIR / "messages"
 
 CUSTOMERS_CSV = DATA_DIR / "at_risk_customers.csv"
+TELCO_DATASET_PATH = DATA_DIR / "Telco_customer_churn.xlsx"
 ACTIONS_LOG_CSV = OUTPUT_DIR / "actions_log.csv"
 OUTCOMES_CSV = OUTPUT_DIR / "outcomes.csv"
+
+# Reason Categorization from Phase 1 Notebook
+CHURN_REASONS_VOLUNTARY = [
+    "Competitor made better offer",
+    "Competitor had better devices",
+    "Competitor offered higher download speeds",
+    "Competitor offered more data",
+    "Product dissatisfaction",
+    "Service dissatisfaction",
+    "Long distance charges",
+    "Attitude of service provider",
+    "Attitude of support person",
+    "Poor expertise of online support",
+    "Poor expertise of phone support",
+    "Extra data charges",
+    "Price too high",
+    "Lack of affordable download/upload speed",
+    "Lack of self-service on Website",
+]
+
+CHURN_REASONS_INVOLUNTARY = [
+    "Limited range of services",
+    "Network reliability",
+    "Deceased",
+    "Moved",
+]
+
+CHURN_REASONS_VAGUE = [
+    "Don't know",
+]
+
+CONTRACT_ENCODING = {
+    "Month-to-month": 1,
+    "Two year": 2,
+    "One year": 3,
+}
+
+PAYMENT_METHOD_ENCODING = {
+    "Mailed check": 1,
+    "Electronic check": 2,
+    "Bank transfer (automatic)": 3,
+    "Credit card (automatic)": 4,
+}
+
+def categorize_churn_reason(reason: str) -> str:
+    if not isinstance(reason, str):
+        return "voluntary"
+    if reason in CHURN_REASONS_VOLUNTARY:
+        return "voluntary"
+    elif reason in CHURN_REASONS_INVOLUNTARY:
+        return "involuntary"
+    elif reason in CHURN_REASONS_VAGUE:
+        return "vague"
+    return "voluntary"
 
 for d in (DATA_DIR, LOG_DIR, OUTPUT_DIR, MESSAGES_DIR):
     d.mkdir(parents=True, exist_ok=True)

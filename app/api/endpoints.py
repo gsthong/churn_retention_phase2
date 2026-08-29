@@ -14,6 +14,7 @@ from config import (
     ACTIONS_LOG_CSV,
     OUTCOMES_CSV,
     CUSTOMERS_CSV,
+    TELCO_DATASET_PATH,
     GUARDRAILS,
     ACTION_COST_ESTIMATE,
     RETRIEVER_MODEL,
@@ -23,6 +24,8 @@ from config import (
     OPENROUTER_API_KEY
 )
 from evaluate_roi import evaluate
+from phase1_model import get_dataset_summary, run_phase1
+from data_gen.generate_logs import generate_logs
 
 router = APIRouter()
 
@@ -128,7 +131,14 @@ def get_analytics():
     pain_series = pd.Series(pain_points_list).value_counts().head(10).to_dict()
     pain_points_dist = [{"pain_point": k, "count": int(v)} for k, v in pain_series.items()]
     
-    # 5. Holdout vs Treatment Churn comparison
+    # 5. Churn Categories & Reasons Breakdown
+    churn_cats = actions_df["churn_category"].value_counts().to_dict() if "churn_category" in actions_df.columns else {}
+    churn_categories_dist = [{"category": k, "count": int(v)} for k, v in churn_cats.items()]
+
+    top_reasons = actions_df["churn_reason"].value_counts().head(8).to_dict() if "churn_reason" in actions_df.columns else {}
+    top_reasons_dist = [{"reason": k, "count": int(v)} for k, v in top_reasons.items() if k != "N/A" and k != ""]
+
+    # 6. Holdout vs Treatment Churn comparison
     holdout_churn_rate = 0.0
     treatment_churn_rate = 0.0
     if not outcomes_df.empty and "group" in outcomes_df.columns and "churned" in outcomes_df.columns:
@@ -142,6 +152,8 @@ def get_analytics():
         "actions_dist": actions_dist,
         "sentiment_dist": sentiment_dist,
         "pain_points": pain_points_dist,
+        "churn_categories": churn_categories_dist,
+        "top_churn_reasons": top_reasons_dist,
         "uplift_comparison": {
             "holdout_churn_rate": holdout_churn_rate,
             "treatment_churn_rate": treatment_churn_rate,
@@ -352,8 +364,6 @@ def batch_approve(payload: dict):
     df.loc[idx, "agent_source"] = "human_batch_approved"
     df.to_csv(ACTIONS_LOG_CSV, index=False, encoding="utf-8-sig")
 
-    return {"status": "success", "approved_count": len(idx)}
-
 @router.get("/hitl/privacy-telemetry")
 def get_privacy_telemetry():
     """
@@ -379,4 +389,38 @@ def get_privacy_telemetry():
             "estimated_labor_cost_saved_vnd": 36900000
         }
     }
+
+@router.get("/phase1/dataset-summary")
+def get_phase1_dataset_summary():
+    """
+    Returns statistical breakdown of Telco_customer_churn.xlsx (Phase 1 Ground Truth)
+    """
+    if not TELCO_DATASET_PATH.exists():
+        raise HTTPException(status_code=404, detail="Telco dataset not found")
+    try:
+        return get_dataset_summary()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/phase1/train-and-predict")
+def train_phase1(payload: dict = None):
+    """
+    Runs Phase 1 ML pipeline on Telco dataset, trains Random Forest model, and generates at_risk_customers.csv
+    """
+    payload = payload or {}
+    n_customers = int(payload.get("n_customers", 200))
+    filter_voluntary = bool(payload.get("filter_voluntary", False))
+    try:
+        df, metrics = run_phase1(n_customers=n_customers, filter_voluntary_only=filter_voluntary)
+        generate_logs(df)
+        return {
+            "status": "success",
+            "generated_customers": len(df),
+            "metrics": metrics,
+            "tier_counts": df["tier"].value_counts().to_dict(),
+            "churn_category_counts": df["churn_category"].value_counts().to_dict()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 

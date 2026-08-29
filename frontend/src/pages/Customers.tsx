@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { 
-  Search
+  Search,
+  Sparkles,
+  AlertTriangle,
+  HelpCircle
 } from 'lucide-react';
 import { fetchActions } from '../api/client';
 import type { ActionRecord } from '../api/client';
@@ -12,10 +15,11 @@ export function Customers() {
   const [search, setSearch] = useState('');
   const [tierFilter, setTierFilter] = useState('all');
   const [actionFilter, setActionFilter] = useState('all');
+  const [categoryFilter, setCategoryFilter] = useState('all');
   const [selectedCustomer, setSelectedCustomer] = useState<ActionRecord | null>(mockActionRecords[0]);
 
   useEffect(() => {
-    fetchActions({ limit: 200 }).then(res => {
+    fetchActions({ limit: 300 }).then(res => {
       if (res.actions.length > 0) {
         setActions(res.actions);
         setFilteredActions(res.actions);
@@ -31,6 +35,7 @@ export function Customers() {
       result = result.filter(a => 
         a.customer_id.toLowerCase().includes(q) ||
         (a.pain_points && a.pain_points.toLowerCase().includes(q)) ||
+        (a.churn_reason && a.churn_reason.toLowerCase().includes(q)) ||
         a.tier.toLowerCase().includes(q)
       );
     }
@@ -40,8 +45,11 @@ export function Customers() {
     if (actionFilter !== 'all') {
       result = result.filter(a => a.action_type.toLowerCase() === actionFilter.toLowerCase());
     }
+    if (categoryFilter !== 'all') {
+      result = result.filter(a => (a.churn_category || 'voluntary').toLowerCase() === categoryFilter.toLowerCase());
+    }
     setFilteredActions(result);
-  }, [search, tierFilter, actionFilter, actions]);
+  }, [search, tierFilter, actionFilter, categoryFilter, actions]);
 
   const formatVND = (num: number) => {
     if (!num) return '$0';
@@ -54,6 +62,29 @@ export function Customers() {
     return 'bg-emerald-500';
   };
 
+  const renderCategoryBadge = (cat?: string) => {
+    const c = (cat || 'voluntary').toLowerCase();
+    if (c === 'involuntary') {
+      return (
+        <span className="inline-flex items-center gap-1 text-[9px] font-mono text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">
+          <AlertTriangle size={10} /> Involuntary
+        </span>
+      );
+    }
+    if (c === 'vague') {
+      return (
+        <span className="inline-flex items-center gap-1 text-[9px] font-mono text-purple-700 bg-purple-50 border border-purple-200 px-1.5 py-0.5 rounded">
+          <HelpCircle size={10} /> Vague
+        </span>
+      );
+    }
+    return (
+      <span className="inline-flex items-center gap-1 text-[9px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">
+        <Sparkles size={10} /> Voluntary
+      </span>
+    );
+  };
+
   return (
     <div className="space-y-3 font-sans">
       {/* Header */}
@@ -62,7 +93,7 @@ export function Customers() {
           <h1 className="text-lg font-bold text-slate-900">
             Customer Directory & Operations
           </h1>
-          <div className="text-xs text-slate-400">Account profiles, extracted signals, and dispatched interventions</div>
+          <div className="text-xs text-slate-400">Account profiles, extracted signals, Phase 1 Churn reasons, and dispatched interventions</div>
         </div>
 
         <div className="text-xs font-mono text-slate-500 bg-white px-2.5 py-1 rounded border border-slate-200">
@@ -72,11 +103,11 @@ export function Customers() {
 
       {/* Filter & Search Bar */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-2 bg-white p-2.5 rounded border border-slate-200">
-        <div className="md:col-span-6 relative">
+        <div className="md:col-span-5 relative">
           <Search size={12} className="absolute left-2.5 top-2.5 text-slate-400" />
           <input 
             type="text"
-            placeholder="Filter by account ID, pain point, segment..."
+            placeholder="Filter by account ID, pain point, churn reason, segment..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full bg-slate-50 border border-slate-200 rounded pl-7 pr-3 py-1 text-xs text-slate-800 focus:bg-white focus:outline-none focus:border-slate-400"
@@ -94,13 +125,27 @@ export function Customers() {
             <option value="True_Friends_Standard">True Friends Standard</option>
             <option value="Butterflies_Whales">Butterflies Whales</option>
             <option value="Butterflies_Standard">Butterflies Standard</option>
+            <option value="Barnacles_Whale">Barnacles Whale</option>
             <option value="Barnacles_Heavy">Barnacles Heavy</option>
             <option value="Barnacles_Standard">Barnacles Standard</option>
             <option value="Strangers">Strangers</option>
           </select>
         </div>
 
-        <div className="md:col-span-3">
+        <div className="md:col-span-2">
+          <select 
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs text-slate-700 focus:bg-white focus:outline-none focus:border-slate-400"
+          >
+            <option value="all">All Churn Types</option>
+            <option value="voluntary">Voluntary (Retainable)</option>
+            <option value="involuntary">Involuntary (Safeguarded)</option>
+            <option value="vague">Vague</option>
+          </select>
+        </div>
+
+        <div className="md:col-span-2">
           <select 
             value={actionFilter}
             onChange={(e) => setActionFilter(e.target.value)}
@@ -108,10 +153,12 @@ export function Customers() {
           >
             <option value="all">All Actions</option>
             <option value="vip_training">VIP Training</option>
+            <option value="dedicated_csm_audit">Dedicated CSM Audit</option>
             <option value="discount">Discount Offer</option>
             <option value="loyalty_upgrade">Loyalty Upgrade</option>
             <option value="pause_subscription">Pause Subscription</option>
             <option value="feature_newsletter">Feature Newsletter</option>
+            <option value="no_action">No Action</option>
           </select>
         </div>
       </div>
@@ -126,9 +173,10 @@ export function Customers() {
                 <tr>
                   <th className="px-3 py-2">Account ID</th>
                   <th className="px-3 py-2">Segment</th>
+                  <th className="px-3 py-2">Type</th>
                   <th className="px-3 py-2">LTV</th>
                   <th className="px-3 py-2">Action</th>
-                  <th className="px-3 py-2 w-24">Risk</th>
+                  <th className="px-3 py-2 w-20">Risk</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-[10.5px]">
@@ -148,6 +196,9 @@ export function Customers() {
                       </td>
                       <td className="px-3 py-2 font-sans text-slate-600">
                         {c.tier.replace(/_/g, ' ')}
+                      </td>
+                      <td className="px-3 py-2">
+                        {renderCategoryBadge(c.churn_category)}
                       </td>
                       <td className="px-3 py-2 text-slate-800">
                         {formatVND(c.ltv)}
@@ -185,9 +236,12 @@ export function Customers() {
                   <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Account Profile</span>
                   <h3 className="text-sm font-bold text-slate-900">{selectedCustomer.customer_id}</h3>
                 </div>
-                <span className="text-[9px] font-mono text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
-                  {selectedCustomer.tier.replace(/_/g, ' ')}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  {renderCategoryBadge(selectedCustomer.churn_category)}
+                  <span className="text-[9px] font-mono text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                    {selectedCustomer.tier.replace(/_/g, ' ')}
+                  </span>
+                </div>
               </div>
 
               {/* Financial Profile */}
@@ -205,6 +259,18 @@ export function Customers() {
                   <div className="text-slate-800">{formatVND(selectedCustomer.monthly_fee)}</div>
                 </div>
               </div>
+
+              {/* Phase 1 Root Cause Ground Truth */}
+              {selectedCustomer.churn_reason && (
+                <div className="bg-amber-50/60 p-2.5 rounded border border-amber-200 text-xs space-y-0.5">
+                  <div className="text-[9px] font-mono font-bold text-amber-800 uppercase tracking-wider">
+                    Phase 1 Telco Churn Reason
+                  </div>
+                  <div className="text-amber-950 font-medium text-[11px]">
+                    "{selectedCustomer.churn_reason}"
+                  </div>
+                </div>
+              )}
 
               {/* Signal Analysis */}
               <div className="bg-slate-50 p-2.5 rounded border border-slate-200 space-y-1 text-xs">

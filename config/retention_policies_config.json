@@ -251,5 +251,135 @@
     "masked_fields": ["full_name", "phone_number", "email_address", "credit_card", "bank_account", "exact_ip"],
     "retention_policy_compliance": ["GDPR_Art_6", "Decree_13_2023_ND_CP_Vietnam", "SOC2_Type_II"],
     "anonymization_strategy": "Tokenized Customer ID + Pseudonym Masking + Aggregated Feature Buckets"
-  }
+  },
+  "intervention_catalog": [
+    {
+      "id": "I1",
+      "name": "Personalized Message",
+      "cost_usd": 0.20,
+      "cost_vnd": 5000,
+      "churn_reduced_pp": "+1–3 pp",
+      "suitable_for": "Low engagement / Inactive",
+      "frequency": "1 / month",
+      "max_budget_usd": 1.0,
+      "risk_level": 1,
+      "description": "Email/In-app nudge nhẹ nhàng, không tốn chi phí, nhắc nhở giá trị hiện có."
+    },
+    {
+      "id": "I2",
+      "name": "Loyalty Reward",
+      "cost_usd": 3.0,
+      "cost_vnd": 72000,
+      "churn_reduced_pp": "+2–5 pp",
+      "suitable_for": "Loyal Customers",
+      "frequency": "1 / quarter",
+      "max_budget_usd": 10.0,
+      "risk_level": 1,
+      "description": "Quà tri ân tích điểm / tính năng cộng thêm cho khách hàng lâu năm."
+    },
+    {
+      "id": "I3",
+      "name": "5% Discount Offer",
+      "cost_usd": "3–10",
+      "cost_vnd": 120000,
+      "churn_reduced_pp": "+3–7 pp",
+      "suitable_for": "Price Sensitivity Barrier",
+      "frequency": "1 / 6 months",
+      "max_budget_usd": 20.0,
+      "risk_level": 2,
+      "description": "Chiết khấu nhẹ 5% để giải tỏa rào cản giá tạm thời mà không phá vỡ mỏ neo giá."
+    },
+    {
+      "id": "I4",
+      "name": "10% Discount Offer",
+      "cost_usd": "6–20",
+      "cost_vnd": 240000,
+      "churn_reduced_pp": "+5–10 pp",
+      "suitable_for": "Price Sensitivity / Competitor Offer",
+      "frequency": "1 / year",
+      "max_budget_usd": 30.0,
+      "risk_level": 3,
+      "description": "Giảm 10% có điều kiện (gắn với cam kết gia hạn 6-12 tháng)."
+    },
+    {
+      "id": "I5",
+      "name": "Free Month Trial Extension",
+      "cost_usd": "20–40",
+      "cost_vnd": 600000,
+      "churn_reduced_pp": "+7–12 pp",
+      "suitable_for": "High-Value Champions (True Friends)",
+      "frequency": "1 / year",
+      "max_budget_usd": 50.0,
+      "risk_level": 4,
+      "description": "Tặng 1 tháng miễn phí khi ký hợp đồng thường niên cho khách hàng High LTV."
+    },
+    {
+      "id": "I6",
+      "name": "Feature Upgrade / Enterprise PoC",
+      "cost_usd": "5–15",
+      "cost_vnd": 200000,
+      "churn_reduced_pp": "+4–8 pp",
+      "suitable_for": "Feature Limitation Barrier",
+      "frequency": "1 / 6 months",
+      "max_budget_usd": 25.0,
+      "risk_level": 2,
+      "description": "Mở khóa 30 ngày dùng thử bộ tính năng Doanh nghiệp cao cấp để giải quyết rào cản tính năng."
+    },
+    {
+      "id": "I7",
+      "name": "Plan Redesign / Subscription Pause",
+      "cost_usd": "2–5",
+      "cost_vnd": 50000,
+      "churn_reduced_pp": "+3–8 pp",
+      "suitable_for": "Plan Mismatch / Moving / Temporary Absence",
+      "frequency": "1 / year",
+      "max_budget_usd": 15.0,
+      "risk_level": 1,
+      "description": "Tái cơ cấu gói cước hoặc kích hoạt tính năng Pause để giữ khách hàng trong CRM."
+    },
+    {
+      "id": "I8",
+      "name": "Service Recovery (Apology & Fix)",
+      "cost_usd": "5–30",
+      "cost_vnd": 350000,
+      "churn_reduced_pp": "+5–15 pp",
+      "suitable_for": "Technical / Support Service Issue",
+      "frequency": "1 / incident",
+      "max_budget_usd": 40.0,
+      "risk_level": 3,
+      "description": "Quy trình xin lỗi chân thành + hỗ trợ kỹ thuật ưu tiên + voucher bồi thường trải nghiệm."
+    },
+    {
+      "id": "I9",
+      "name": "Dedicated Support & Strategic Review",
+      "cost_usd": "15–50",
+      "cost_vnd": 800000,
+      "churn_reduced_pp": "+8–15 pp",
+      "suitable_for": "Very High LTV / Severe Barrier",
+      "frequency": "1 / year",
+      "max_budget_usd": 75.0,
+      "risk_level": 4,
+      "description": "Phiên tư vấn 1-1 chuyên sâu cùng Giám đốc Khách hàng (T-Mobile TEX White-Glove Play)."
+    },
+    {
+      "id": "I10",
+      "name": "No Intervention (Zero-Cost Filter)",
+      "cost_usd": 0,
+      "cost_vnd": 0,
+      "churn_reduced_pp": "0 pp",
+      "suitable_for": "Low LTV / Negative EV / Sleeping Dogs",
+      "frequency": "Unlimited",
+      "max_budget_usd": 0,
+      "risk_level": 0,
+      "description": "Bộ lọc tuyệt đối: Không gửi ưu đãi làm xói mòn lợi nhuận với nhóm khách hàng không đáng cứu."
+    }
+  ],
+  "budget_ceiling_matrix": [
+    { "churn_risk": "Low", "barrier": "Low", "clv": "High", "action": "No-cost / Loyalty Nudge", "budget_ceiling": "0–2% CLV" },
+    { "churn_risk": "Medium", "barrier": "Low", "clv": "High", "action": "Loyalty + Small Incentive", "budget_ceiling": "2–5% CLV" },
+    { "churn_risk": "High", "barrier": "Low", "clv": "High", "action": "Strong Temporary Offer", "budget_ceiling": "5–10% CLV" },
+    { "churn_risk": "Low", "barrier": "High", "clv": "High", "action": "Diagnose + Service Recovery", "budget_ceiling": "2–5% CLV" },
+    { "churn_risk": "Medium", "barrier": "High", "clv": "High", "action": "Personalized Save Package", "budget_ceiling": "5–10% CLV" },
+    { "churn_risk": "High", "barrier": "High", "clv": "Very High", "action": "Escalation + Bespoke Retention", "budget_ceiling": "10–15%+ CLV" }
+  ]
 }

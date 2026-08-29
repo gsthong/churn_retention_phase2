@@ -23,8 +23,17 @@ Trả lời DUY NHẤT bằng JSON:
 }}
 """
 
-def _rule_based_decision(tier: str, risk_score: float, sentiment: str) -> dict:
-    g = GUARDRAILS[tier]
+def _rule_based_decision(tier: str, risk_score: float, sentiment: str, churn_category: str = "voluntary", churn_reason: str = "") -> dict:
+    g = GUARDRAILS.get(tier, GUARDRAILS["Strangers"])
+
+    # Involuntary churn safeguard: Do not waste marketing discount budget on unrecoverable moves/life events
+    if churn_category == "involuntary" or any(k in churn_reason.lower() for k in ["moved", "deceased"]):
+        return {
+            "action_type": "pause_subscription" if "pause_subscription" in g["allowed_actions"] else "no_action",
+            "discount_pct": 0,
+            "free_months": 0,
+            "reasoning": "Involuntary churn safeguard: Khách chuyển địa điểm/bất khả kháng, bảo toàn ngân sách và kích hoạt bảo lưu/Pause.",
+        }
 
     if tier == "True_Friends_Elite":
         return {
@@ -112,7 +121,17 @@ class NegotiationDecision:
     reasoning: str
     source: str
 
-async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, profile: RetrievedProfile, ltv_pct: float = None, tenure_pct: float = None) -> NegotiationDecision:
+async def negotiate(
+    customer_id: str, 
+    tier: str, 
+    ltv: float, 
+    risk_score: float, 
+    profile: RetrievedProfile, 
+    ltv_pct: float = None, 
+    tenure_pct: float = None,
+    churn_category: str = "voluntary",
+    churn_reason: str = ""
+) -> NegotiationDecision:
     g = GUARDRAILS.get(tier, GUARDRAILS["Strangers"])
     guardrail_text = (
         f"- Tier: {tier}\n"
@@ -133,22 +152,24 @@ async def negotiate(customer_id: str, tier: str, ltv: float, risk_score: float, 
         f"LTV Estimate: {ltv:,.0f} VND (Rank: {ltv_rank_str})\n"
         f"Tenure Rank: {tenure_rank_str}\n"
         f"Risk score: {risk_score}\n"
+        f"Churn Category: {churn_category}\n"
+        f"Churn Reason: {churn_reason}\n"
         f"Sentiment: {profile.sentiment}\n"
         f"Pain points: {', '.join(profile.pain_points)}\n"
         f"Summary: {profile.summary}\n"
     )
 
     # Resource Allocation Routing: LLM for High-Value & Strategic Whale Expansion
-    if tier in ["True_Friends_Elite", "True_Friends_Standard", "Barnacles_Whale"]:
+    if tier in ["True_Friends_Elite", "True_Friends_Standard", "Barnacles_Whale"] and churn_category != "involuntary":
         parsed = await complete_json(NEGOTIATOR_MODEL, system_prompt, user_prompt, max_tokens=400)
     else:
-        parsed = None # Bypass LLM for Automated Nudge workflows
+        parsed = None # Bypass LLM for Automated Nudge workflows or Involuntary Churn
 
     if parsed and "action_type" in parsed:
         decision = _enforce_guardrail(parsed, tier)
         source = "llm"
     else:
-        decision = _enforce_guardrail(_rule_based_decision(tier, risk_score, profile.sentiment), tier)
+        decision = _enforce_guardrail(_rule_based_decision(tier, risk_score, profile.sentiment, churn_category, churn_reason), tier)
         source = "mock"
 
     return NegotiationDecision(

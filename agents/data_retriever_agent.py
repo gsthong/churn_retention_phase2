@@ -19,29 +19,38 @@ Trả lời DUY NHẤT bằng JSON:
 """
 
 KEYWORD_MAP = {
-    "technical_issue": ["lag", "chậm", "văng", "chập chờn", "kết nối", "mạng"],
-    "billing_complaint": ["trừ tiền", "hóa đơn", "phí", "phụ phí"],
-    "competitor_mention": ["đối thủ", "nhà mạng khác", "chuyển qua", "khuyến mãi khủng"],
-    "feature_confusion": ["hướng dẫn", "không biết cách", "khó dùng", "giao diện"],
-    "silence": ["không có hoạt động", "không phát sinh", "không mở app"],
-    "price_sensitive_but_positive": ["giá hơi cao", "chi tiêu eo hẹp", "cân nhắc cắt giảm"],
+    "technical_issue": ["lag", "chậm", "văng", "chập chờn", "kết nối", "mạng", "rớt", "modem"],
+    "billing_complaint": ["trừ tiền", "hóa đơn", "phí", "phụ phí", "cước", "đắt", "vượt gói"],
+    "competitor_mention": ["đối thủ", "nhà mạng khác", "chuyển qua", "khuyến mãi khủng", "bên kia", "500mbps", "wifi 6"],
+    "support_dissatisfaction": ["tổng đài", "thái độ", "kỹ thuật viên", "khiếu nại", "thờ ơ", "không nghe máy", "bảo trì"],
+    "feature_confusion": ["hướng dẫn", "không biết cách", "khó dùng", "giao diện", "tự đổi gói", "app"],
+    "relocation": ["chuyển nhà", "chuyển địa điểm", "công tác", "tỉnh khác"],
+    "deceased": ["qua đời", "mất", "người thân", "thanh lý"],
+    "silence": ["không có hoạt động", "không phát sinh", "không mở app", "ít nhu cầu"],
+    "price_sensitive_but_positive": ["giá hơi cao", "chi tiêu eo hẹp", "cân nhắc cắt giảm", "vừa túi tiền"],
 }
 
 CATEGORY_TO_SENTIMENT = {
     "technical_issue": "frustrated",
     "billing_complaint": "frustrated",
+    "support_dissatisfaction": "frustrated",
     "competitor_mention": "price_sensitive",
     "feature_confusion": "neutral",
+    "relocation": "neutral",
+    "deceased": "neutral",
     "silence": "silent",
     "price_sensitive_but_positive": "price_sensitive",
 }
 
 CATEGORY_TO_PAIN_POINT_VI = {
     "technical_issue": "Sự cố kỹ thuật / kết nối",
-    "billing_complaint": "Thắc mắc hóa đơn/phí",
-    "competitor_mention": "Cân nhắc đối thủ",
-    "feature_confusion": "Khó sử dụng",
-    "silence": "Ít hoạt động",
+    "billing_complaint": "Thắc mắc hóa đơn / cước phí",
+    "support_dissatisfaction": "Chất lượng CSKH / hỗ trợ",
+    "competitor_mention": "Cân nhắc gói cước đối thủ",
+    "feature_confusion": "Khó sử dụng giao diện / tính năng",
+    "relocation": "Chuyển địa điểm / công tác",
+    "deceased": "Thủ tục thanh lý hợp đồng",
+    "silence": "Ít hoạt động / không tương tác",
     "price_sensitive_but_positive": "Nhạy cảm giá",
 }
 

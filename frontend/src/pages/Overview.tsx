@@ -4,7 +4,6 @@ import {
 } from 'recharts';
 import { 
   ArrowUpRight, 
-  ArrowDownRight, 
   Search,
   Check
 } from 'lucide-react';
@@ -52,49 +51,68 @@ export function Overview() {
 
       {/* Row 1: 4 Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {/* Card 1 */}
+        {/* Card 1: Saved Revenue */}
         <div className="bg-white p-3.5 rounded border border-slate-200">
           <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1">
-            MONTHLY RECURRING REVENUE
+            SECURED REVENUE (SAVED ARR)
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-xl font-bold text-slate-900 tracking-tight font-mono">$45.2k</span>
-            <span className="flex items-center text-emerald-600 text-[10px] font-mono">
-              <ArrowUpRight size={10} className="mr-0.5" /> 12%
+            <span className="text-xl font-bold text-slate-900 tracking-tight font-mono">
+              {stats?.roi_metrics?.revenue_saved_vnd 
+                ? `$${(stats.roi_metrics.revenue_saved_vnd / 24000 / 1000).toFixed(1)}k`
+                : '$153.1k'}
+            </span>
+            <span className="flex items-center text-emerald-600 text-[10px] font-mono font-semibold">
+              <ArrowUpRight size={10} className="mr-0.5" /> 
+              +{((stats?.roi_metrics?.uplift_pct_points || 0.339) * 100).toFixed(1)}% Uplift
             </span>
           </div>
         </div>
 
-        {/* Card 2 */}
+        {/* Card 2: Cost Per Save (CPS) */}
         <div className="bg-white p-3.5 rounded border border-slate-200">
           <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1">
-            NET CHURN RATE
+            COST PER SAVE (CPS)
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-xl font-bold text-slate-900 tracking-tight font-mono">2.4%</span>
-            <span className="flex items-center text-emerald-600 text-[10px] font-mono">
-              <ArrowDownRight size={10} className="mr-0.5" /> 0.5%
+            <span className="text-xl font-bold text-slate-900 tracking-tight font-mono">
+              {stats?.roi_metrics?.cost_per_save_vnd 
+                ? `$${Math.round(stats.roi_metrics.cost_per_save_vnd / 24000)}` 
+                : '$33.5'}
+            </span>
+            <span className="flex items-center text-indigo-600 text-[10px] font-mono">
+              ~{stats?.roi_metrics?.cost_per_save_vnd ? `${Math.round(stats.roi_metrics.cost_per_save_vnd / 1000)}k VND` : '806k VND'}
             </span>
           </div>
         </div>
 
-        {/* Card 3 */}
+        {/* Card 3: Active Retention Plans */}
         <div className="bg-white p-3.5 rounded border border-slate-200">
           <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1">
-            ACTIVE RETENTION PLANS
+            ACTIVE RETENTION QUEUE
           </div>
-          <div className="text-xl font-bold text-slate-900 tracking-tight font-mono">
-            {stats?.total_customers ? stats.treatment_count : 14}
+          <div className="flex items-baseline gap-2">
+            <span className="text-xl font-bold text-slate-900 tracking-tight font-mono">
+              {stats?.total_customers ? `${stats.treatment_count} Accounts` : '180 Accounts'}
+            </span>
+            <span className="text-slate-400 text-[10px] font-mono">
+              10% Holdout
+            </span>
           </div>
         </div>
 
-        {/* Card 4 */}
+        {/* Card 4: Net Revenue Retention (NRR) */}
         <div className="bg-white p-3.5 rounded border border-slate-200">
           <div className="text-[9px] font-mono text-slate-400 uppercase tracking-wider mb-1">
-            AVG HEALTH INDEX
+            NET REVENUE RETENTION (NRR)
           </div>
-          <div className="text-xl font-bold text-slate-900 tracking-tight font-mono">
-            78<span className="text-slate-400 text-xs font-normal"> / 100</span>
+          <div className="flex items-baseline gap-2">
+            <span className="text-xl font-bold text-indigo-900 tracking-tight font-mono">
+              {stats?.roi_metrics?.nrr_pct || 118.5}%
+            </span>
+            <span className="text-emerald-600 text-[10px] font-mono font-semibold">
+              GRR {stats?.roi_metrics?.grr_pct || 53.9}%
+            </span>
           </div>
         </div>
       </div>
