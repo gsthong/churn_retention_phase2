@@ -316,3 +316,75 @@ export async function trainPhase1Model(payload?: { n_customers?: number; filter_
     return null;
   }
 }
+
+export interface GovernanceStatusResponse {
+  circuit_breaker: {
+    is_tripped: boolean;
+    daily_budget_ceiling_vnd: number;
+    cumulative_spend_vnd: number;
+    utilization_pct: number;
+    downgraded_cases_count: number;
+    status: string;
+  };
+  anti_gaming_shield: {
+    cooling_period_days: number;
+    blocked_gaming_attempts: number;
+    status: string;
+  };
+  hitl_distribution: {
+    tier1_autonomous: number;
+    tier2_batch_review: number;
+    tier3_copilot_specialist: number;
+    total_treatment: number;
+    compliance_ratio: string;
+  };
+  regulatory_compliance: {
+    framework: string;
+    status: string;
+    score: string;
+  }[];
+}
+
+export async function fetchGovernanceStatus(): Promise<GovernanceStatusResponse | null> {
+  try {
+    const res = await fetch(`${API_BASE}/governance/status`);
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export interface UpliftAnalyticsResponse {
+  uplift_metrics: any;
+  phenotype_distribution: Record<string, number>;
+  causal_inference_summary: {
+    methodology: string;
+    treatment_effect: string;
+    p_value: number;
+    is_significant: boolean;
+    ci_95: [number, number];
+    conclusion: string;
+  };
+}
+
+export async function fetchUpliftAnalytics(): Promise<UpliftAnalyticsResponse | null> {
+  try {
+    const res = await fetch(`${API_BASE}/analytics/uplift`);
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchMarketCompetition(): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE}/market-competition`);
+    if (!res.ok) throw new Error('API error');
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+

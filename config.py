@@ -101,6 +101,32 @@ USE_MOCK = (len(GROQ_API_KEYS) == 0) and (len(OPENROUTER_API_KEYS) == 0) and (OP
 HOLDOUT_RATIO = 0.10
 RANDOM_SEED = 42
 
+# ==========================================
+# 🛡️ AI GOVERNANCE & SAFETY CONTROLS
+# ==========================================
+# Financial Circuit Breaker: Stop-loss cap to prevent runaway AI discounting
+CIRCUIT_BREAKER_DAILY_MAX_BUDGET_VND = 35_000_000  # Ngưỡng ngắt khẩn cấp hàng ngày
+CIRCUIT_BREAKER_MAX_MARGIN_EROSION_PCT = 25.0       # Tỷ lệ xói mòn biên lợi nhuận tối đa cho phép
+
+# Anti-Gaming & Frequency Capping: Ngăn chặn khách dọa hủy để trục lợi khuyến mãi
+ANTI_GAMING_COOLING_PERIOD_DAYS = 180              # Tối đa 1 ưu đãi tài chính / 6 tháng / khách
+MAX_FINANCIAL_PROMO_PER_YEAR = 2
+
+# Human-In-The-Loop (HITL) Allocation Ratio Targets
+HITL_TARGETS = {
+    "tier1_autonomous_pct": 80.0,   # Tự động hóa 80% (low-risk / zero-cost actions)
+    "tier2_batch_review_pct": 15.0, # Duyệt gom theo lô 15% (mid-tier offers)
+    "tier3_copilot_pct": 5.0,       # Chuyên viên CSM đàm phán 5% (VIP / High LTV)
+}
+
+# ==========================================
+# 📊 CAUSAL INFERENCE & UPLIFT SEGMENTS
+# ==========================================
+UPLIFT_PERSUADABLE = "persuadable"    # Cứu được nếu có can thiệp (Target chính)
+UPLIFT_SURE_THING = "sure_thing"      # Tự ở lại dù không can thiệp (Tránh lãng phí)
+UPLIFT_LOST_CAUSE = "lost_cause"      # Rời đi dù có ưu đãi (Involuntary / Pause subscription)
+UPLIFT_SLEEPING_DOG = "sleeping_dog"  # Nhắc tới là hủy ngay (Tuyệt đối không chạm)
+
 # tier guardrails based on advanced business segments
 GUARDRAILS = {
     "True_Friends_Elite": {
