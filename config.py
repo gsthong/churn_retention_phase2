@@ -97,9 +97,41 @@ ZALO_OA_TOKEN = os.environ.get("ZALO_OA_TOKEN")
 # Fallback to mock mode only if no keys at all
 USE_MOCK = (len(GROQ_API_KEYS) == 0) and (len(OPENROUTER_API_KEYS) == 0) and (OPENAI_API_KEY is None)
 
-# holdout group to measure real roi
+# ==========================================
+# 🧪 A/B TEST & HOLDOUT GROUP POLICY
+# ==========================================
+# Tỷ lệ nhóm đối chứng (5-15% tùy quy mô doanh nghiệp, mặc định 10%)
+# Kohavi, R., Tang, D., & Xu, Y. (2020). Trustworthy online controlled experiments.
 HOLDOUT_RATIO = 0.10
 RANDOM_SEED = 42
+
+# Ngưỡng Churn Risk tối thiểu để tính can thiệp vào A/B Test tài chính
+# Những khách hàng có Churn Risk < ngưỡng này hoặc chỉ được can thiệp kỹ thuật/thanh toán
+# sẽ KHÔNG được tính vào phép đo ROI / A/B Test (chỉ đưa vào luồng hỗ trợ chuẩn)
+AB_TEST_MIN_CHURN_RISK = 0.25
+
+# ==========================================
+# 📈 GIẢ ĐỊNH KINH DOANH & RETENTION UPLIFT
+# ==========================================
+# Tỷ lệ ở lại tăng thêm nhờ can thiệp AI (so với không làm gì - Holdout baseline)
+# Nguồn: Ascarza (2018). Retention futility. Journal of Marketing Research, 55(1), 80-98.
+# & Hiệu chỉnh dựa trên benchmark ngành telecom (Ringly.io, 2026)
+
+# Churn Risk >= 80%: Khách gần chắc chắn rời đi, ưu đãi cứu được 1 phần nhỏ nhạy cảm
+RETENTION_UPLIFT_HIGH_RISK = 0.05   # +5 percentage points
+
+# 50% <= Churn Risk < 80%: Khách đang phân vân, trúng đích mang lại hiệu quả rõ rệt
+RETENTION_UPLIFT_MID_RISK  = 0.10   # +10 percentage points
+
+# Churn Risk < 50%: Khách có thiện chí ở lại, chỉ cần hỗ trợ nhẹ là đủ giữ chân
+RETENTION_UPLIFT_LOW_RISK  = 0.15   # +15 percentage points
+
+# Giả định: LTV của khách được giữ chân lấy trung bình phân khúc (Homogeneous LTV Assumption)
+LTV_HOMOGENEOUS_ASSUMPTION = True
+
+# Giả định: Tỷ lệ Churn KHÔNG thay đổi nếu vấn đề cốt lõi chưa được giải quyết
+# (can thiệp tài chính thuần túy mà không fix technical/service issue => uplift = 0)
+UPLIFT_ZERO_IF_UNRESOLVED = True
 
 # ==========================================
 # 🛡️ AI GOVERNANCE & SAFETY CONTROLS
