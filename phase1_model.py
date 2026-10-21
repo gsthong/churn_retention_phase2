@@ -65,19 +65,36 @@ from config import (
     assign_advanced_segment,
 )
 
-SURNAMES = ["Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh", "Phan", "Vũ", "Võ", "Đặng", "Bùi", "Đỗ"]
-MIDDLE_MALE = ["Văn", "Hữu", "Đức", "Minh", "Quốc", "Thành", "Công", "Đình"]
-MIDDLE_FEMALE = ["Thị", "Ngọc", "Thu", "Diễm", "Kim", "Bảo", "Khánh", "Mai"]
-GIVEN_MALE = ["An", "Bình", "Cường", "Dũng", "Hải", "Khôi", "Long", "Nam", "Phong", "Quân", "Sơn", "Tuấn", "Khang", "Tâm"]
-GIVEN_FEMALE = ["Anh", "Chi", "Dung", "Hà", "Hương", "Lan", "Linh", "Mai", "Ngân", "Phương", "Trang", "Vy", "Thảo", "Hạnh"]
+ENGLISH_FIRST_NAMES_MALE = [
+    "James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph",
+    "Thomas", "Charles", "Daniel", "Matthew", "Anthony", "Donald", "Mark", "Paul",
+    "Steven", "Andrew", "Kenneth", "Joshua", "Kevin", "Brian", "George", "Timothy",
+    "Ronald", "Jason", "Edward", "Jeffrey", "Ryan", "Jacob", "Gary", "Nicholas",
+    "Eric", "Jonathan", "Stephen", "Larry", "Justin", "Scott", "Brandon", "Benjamin"
+]
+ENGLISH_FIRST_NAMES_FEMALE = [
+    "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica",
+    "Sarah", "Karen", "Lisa", "Nancy", "Betty", "Margaret", "Sandra", "Ashley",
+    "Kimberly", "Emily", "Donna", "Michelle", "Carol", "Amanda", "Melissa", "Deborah",
+    "Stephanie", "Rebecca", "Sharon", "Laura", "Cynthia", "Kathleen", "Amy", "Angela",
+    "Shirley", "Anna", "Brenda", "Pamela", "Emma", "Nicole", "Helen", "Samantha"
+]
+ENGLISH_LAST_NAMES = [
+    "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis",
+    "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson",
+    "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Perez", "Thompson",
+    "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson", "Walker",
+    "Young", "Allen", "King", "Wright", "Scott", "Torres", "Nguyen", "Hill",
+    "Flores", "Green", "Adams", "Nelson", "Baker", "Hall", "Rivera", "Campbell",
+    "Mitchell", "Carter", "Roberts"
+]
 
 
 def _random_name(rng: random.Random) -> str:
     is_male = rng.random() < 0.5
-    surname = rng.choice(SURNAMES)
-    middle = rng.choice(MIDDLE_MALE if is_male else MIDDLE_FEMALE)
-    given = rng.choice(GIVEN_MALE if is_male else GIVEN_FEMALE)
-    return f"{surname} {middle} {given}"
+    first = rng.choice(ENGLISH_FIRST_NAMES_MALE if is_male else ENGLISH_FIRST_NAMES_FEMALE)
+    last = rng.choice(ENGLISH_LAST_NAMES)
+    return f"{first} {last}"
 
 
 def load_and_clean_telco_data(filepath: Optional[Path] = None) -> pd.DataFrame:

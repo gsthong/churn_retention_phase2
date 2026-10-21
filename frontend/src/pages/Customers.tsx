@@ -290,7 +290,7 @@ export function Customers() {
                 <div className="flex items-center justify-between text-[9px] font-mono font-bold text-slate-500 uppercase tracking-wider">
                   <span>Strategy & Guardrail Validation</span>
                   <span className="text-slate-600 bg-white px-1 py-0.2 rounded border border-slate-200">
-                    Enforced ✓
+                    Enforced
                   </span>
                 </div>
                 <div className="text-slate-800 font-mono text-[11px]">

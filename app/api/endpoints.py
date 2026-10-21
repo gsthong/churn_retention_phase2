@@ -88,6 +88,12 @@ def get_actions(
     df = _safe_read_csv(ACTIONS_LOG_CSV)
     if df.empty:
         return {"total": 0, "actions": []}
+
+    customers_df = _safe_read_csv(CUSTOMERS_CSV)
+    if not customers_df.empty and "customer_id" in customers_df.columns:
+        extra_cols = [c for c in ["original_telco_id", "name", "tenure_months", "contract_type", "payment_method", "total_charges", "network_influence_score", "is_tribe_leader", "is_enterprise_wallet"] if c in customers_df.columns and c not in df.columns]
+        if extra_cols:
+            df = df.merge(customers_df[["customer_id"] + extra_cols], on="customer_id", how="left")
         
     if tier and tier != "all":
         df = df[df["tier"].str.lower() == tier.lower()]
@@ -281,6 +287,12 @@ def get_hitl_queue():
     actions_df = _safe_read_csv(ACTIONS_LOG_CSV)
     if actions_df.empty:
         return {"tier1_autonomous": [], "tier2_batch": [], "tier3_copilot": [], "summary": {}}
+
+    customers_df = _safe_read_csv(CUSTOMERS_CSV)
+    if not customers_df.empty and "customer_id" in customers_df.columns:
+        extra_cols = [c for c in ["original_telco_id", "name", "tenure_months", "contract_type", "payment_method", "total_charges", "network_influence_score", "is_tribe_leader", "is_enterprise_wallet"] if c in customers_df.columns and c not in actions_df.columns]
+        if extra_cols:
+            actions_df = actions_df.merge(customers_df[["customer_id"] + extra_cols], on="customer_id", how="left")
 
     treatment_df = actions_df[actions_df["group"] == "treatment"].copy()
     if treatment_df.empty:

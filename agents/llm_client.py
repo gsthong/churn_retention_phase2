@@ -83,11 +83,9 @@ class MultiKeyLLMPool:
         # 1. Try Groq Pool First (Fastest & high RPM)
         if self.groq_clients:
             groq_model = "qwen/qwen3.6-27b"
+            dead_clients = []
 
-            for attempt in range(len(self.groq_clients)):
-                client = self._get_next_groq()
-                if not client:
-                    break
+            for client in list(self.groq_clients):
                 try:
                     resp = await client.chat.completions.create(
                         model=groq_model,
@@ -105,20 +103,23 @@ class MultiKeyLLMPool:
                     return content
                 except Exception as e:
                     err_msg = str(e)
-                    if "429" in err_msg or "rate_limit" in err_msg.lower():
+                    if "401" in err_msg or "invalid_api_key" in err_msg.lower():
+                        dead_clients.append(client)
+                    elif "429" in err_msg or "rate_limit" in err_msg.lower():
                         await asyncio.sleep(0.1)
-                        continue
                     else:
                         print(f"[WARN] Groq key error: {err_msg[:90]}... Rotating.")
-                        continue
+
+            for dc in dead_clients:
+                if dc in self.groq_clients:
+                    self.groq_clients.remove(dc)
 
         # 2. Fallback to OpenRouter Pool
         if self.openrouter_clients:
             or_model = "openrouter/free"
-            for attempt in range(len(self.openrouter_clients)):
-                client = self._get_next_openrouter()
-                if not client:
-                    break
+            dead_or = []
+
+            for client in list(self.openrouter_clients):
                 try:
                     resp = await client.chat.completions.create(
                         model=or_model,
@@ -131,10 +132,20 @@ class MultiKeyLLMPool:
                     )
                     return resp.choices[0].message.content
                 except Exception as e:
-                    if "429" in str(e):
+                    err_msg = str(e)
+                    if "401" in err_msg or "user not found" in err_msg.lower():
+                        dead_or.append(client)
+                    elif "429" in err_msg:
                         await asyncio.sleep(0.2)
-                        continue
                     continue
+
+            for dc in dead_or:
+                if dc in self.openrouter_clients:
+                    self.openrouter_clients.remove(dc)
+
+        if not self.groq_clients and not self.openrouter_clients and not getattr(self, "_warned_fallback", False):
+            self._warned_fallback = True
+            print("[INFO] Không có API Key LLM hợp lệ hoặc đã hết hạn. Hệ thống tự động chuyển sang chế độ Rule-Based / Template Engine (Tốc độ cao & chuẩn xác).")
 
         return None
 

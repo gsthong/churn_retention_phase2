@@ -1,201 +1,201 @@
 ﻿customer_id,original_telco_id,name,tenure_months,contract_type,payment_method,monthly_fee,total_charges,churn_risk_score,ltv,churn_reason,churn_category,network_influence_score,is_tribe_leader,is_enterprise_wallet,ltv_pct,tenure_pct,tier
-CUS-0001,2777-PHDEI,Nguyễn Kim Hà,1,Month-to-month,Electronic check,1873000.0,1873000.0,0.932,27780000.0,Competitor offered more data,voluntary,0.774,False,False,0.28,0.1125,Strangers
-CUS-0002,2862-PFNIK,Võ Ngọc Phương,1,Month-to-month,Electronic check,593000.0,593000.0,0.723,8938000.0,Competitor made better offer,voluntary,0.439,False,True,0.035,0.1125,Strangers
-CUS-0003,8158-WPEZG,Võ Văn Phong,11,Month-to-month,Electronic check,856000.0,10202000.0,0.581,27274000.0,Competitor made better offer,voluntary,0.79,False,False,0.275,0.58,Barnacles_Standard
-CUS-0004,1309-BXVOQ,Phạm Mai Phương,21,Month-to-month,Electronic check,2546000.0,53999000.0,0.819,90498000.0,Long distance charges,voluntary,0.697,False,False,0.785,0.7225,True_Friends_Standard
-CUS-0005,5047-LHVLY,Lê Khánh Lan,1,Month-to-month,Mailed check,1204000.0,1204000.0,0.759,17761000.0,Extra data charges,voluntary,0.094,False,False,0.13,0.1125,Strangers
-CUS-0006,2024-BASKD,Trần Ngọc Linh,1,Month-to-month,Mailed check,1790000.0,1790000.0,0.907,29428000.0,Competitor offered more data,voluntary,0.79,False,False,0.3,0.1125,Strangers
-CUS-0007,2692-PFYTJ,Nguyễn Mai Ngân,1,Month-to-month,Mailed check,618000.0,618000.0,0.671,6969000.0,Competitor made better offer,voluntary,0.761,False,False,0.01,0.1125,Strangers
-CUS-0008,1031-IIDEO,Hoàng Thành Quân,1,Month-to-month,Electronic check,1700000.0,1700000.0,0.896,21243000.0,Network reliability,involuntary,0.786,False,True,0.22,0.1125,Strangers
-CUS-0009,6807-SIWJI,Hoàng Ngọc Hạnh,38,One year,Electronic check,2516000.0,93294000.0,0.539,120557000.0,Competitor made better offer,voluntary,0.128,False,True,0.885,0.87,True_Friends_Elite
-CUS-0010,8937-RDTHP,Bùi Thành Cường,1,Month-to-month,Mailed check,2030000.0,2030000.0,0.909,22200000.0,Poor expertise of phone support,voluntary,0.45,False,False,0.23,0.1125,Strangers
-CUS-0011,8778-LMWTJ,Bùi Hữu Quân,9,Month-to-month,Electronic check,1796000.0,16997000.0,0.756,58449000.0,Competitor made better offer,voluntary,0.371,False,False,0.615,0.525,True_Friends_Standard
-CUS-0012,2587-EKXTS,Vũ Công Hải,44,Month-to-month,Electronic check,2676000.0,117964000.0,0.583,148224000.0,Competitor made better offer,voluntary,0.79,False,False,0.92,0.905,True_Friends_Elite
-CUS-0013,1587-FKLZB,Bùi Bảo Hạnh,66,Month-to-month,Credit card (automatic),2388000.0,163732000.0,0.59,206515000.0,Attitude of support person,voluntary,0.644,False,True,0.995,0.9975,True_Friends_Elite
-CUS-0014,9497-QCMMS,Huỳnh Khánh Hương,1,Month-to-month,Electronic check,2245000.0,2245000.0,0.935,51958000.0,Competitor made better offer,voluntary,0.79,False,False,0.565,0.1125,Butterflies_Standard
-CUS-0015,9828-AOQLM,Đỗ Bảo Hà,1,Month-to-month,Electronic check,1097000.0,1097000.0,0.818,15082000.0,Competitor offered higher download speeds,voluntary,0.443,False,False,0.09,0.1125,Strangers
-CUS-0016,0337-CNPZE,Vũ Thu Hương,41,Month-to-month,Electronic check,2551000.0,106643000.0,0.753,161571000.0,Price too high,voluntary,0.227,False,False,0.94,0.88,True_Friends_Elite
-CUS-0017,5883-GTGVD,Đỗ Khánh Phương,19,Month-to-month,Electronic check,2399000.0,46362000.0,0.815,81579000.0,Attitude of service provider,voluntary,0.555,False,False,0.74,0.6875,True_Friends_Standard
-CUS-0018,8785-EPNCG,Võ Mai Chi,11,Month-to-month,Credit card (automatic),556000.0,5885000.0,0.367,18497000.0,Competitor made better offer,voluntary,0.064,False,False,0.145,0.58,Barnacles_Standard
-CUS-0019,2834-SPCJV,Lê Công Quân,52,Month-to-month,Electronic check,2018000.0,104368000.0,0.617,152800000.0,Competitor had better devices,voluntary,0.79,False,False,0.93,0.95,True_Friends_Elite
-CUS-0020,5561-NWEVX,Võ Kim Ngân,2,Month-to-month,Electronic check,1901000.0,4148000.0,0.865,36275000.0,Price too high,voluntary,0.632,False,True,0.39,0.25,Strangers
-CUS-0021,9809-IMGCQ,Bùi Kim Thảo,22,Month-to-month,Electronic check,2321000.0,49991000.0,0.795,91379000.0,Competitor made better offer,voluntary,0.758,False,True,0.795,0.7425,True_Friends_Standard
-CUS-0022,6397-JNZZG,Vũ Văn Tuấn,43,Month-to-month,Credit card (automatic),1333000.0,56213000.0,0.491,69932000.0,Competitor offered higher download speeds,voluntary,0.355,False,False,0.695,0.8975,True_Friends_Standard
-CUS-0023,1334-FJSVR,Lê Ngọc Hạnh,1,Month-to-month,Electronic check,582000.0,582000.0,0.723,7207000.0,Lack of self-service on Website,voluntary,0.79,False,False,0.015,0.1125,Strangers
-CUS-0024,1867-BDVFH,Phạm Thu Lan,11,Month-to-month,Electronic check,1784000.0,20021000.0,0.715,56236000.0,Competitor made better offer,voluntary,0.79,False,False,0.6,0.58,True_Friends_Standard
-CUS-0025,3518-PZXZQ,Võ Thị Phương,1,Month-to-month,Mailed check,1327000.0,1327000.0,0.69,16449000.0,Competitor made better offer,voluntary,0.778,False,True,0.11,0.1125,Strangers
-CUS-0026,0524-IAVZO,Hoàng Diễm Anh,30,Month-to-month,Electronic check,2040000.0,62982000.0,0.652,93158000.0,Don't know,vague,0.195,False,False,0.81,0.8175,True_Friends_Elite
-CUS-0027,5393-RXQSZ,Đỗ Đình Tâm,1,Month-to-month,Electronic check,1910000.0,1910000.0,0.935,18710000.0,Attitude of support person,voluntary,0.467,False,False,0.155,0.1125,Strangers
-CUS-0028,6110-OHIHY,Lê Mai Ngân,3,Month-to-month,Electronic check,1902000.0,6422000.0,0.856,38246000.0,Competitor offered higher download speeds,voluntary,0.044,False,False,0.425,0.305,Strangers
-CUS-0029,7783-YKGDV,Phạm Diễm Vy,12,Month-to-month,Bank transfer (automatic),2393000.0,29723000.0,0.851,54017000.0,Lack of affordable download/upload speed,voluntary,0.154,False,False,0.585,0.6,True_Friends_Standard
-CUS-0030,3319-DWOEP,Vũ Mai Chi,6,Month-to-month,Electronic check,2298000.0,13770000.0,0.871,66624000.0,Competitor made better offer,voluntary,0.683,False,True,0.67,0.4225,Butterflies_Standard
-CUS-0031,2485-ITVKB,Võ Minh Quân,2,Month-to-month,Electronic check,842000.0,1650000.0,0.792,10552000.0,Attitude of support person,voluntary,0.745,False,True,0.045,0.25,Strangers
-CUS-0032,5138-WVKYJ,Phạm Ngọc Anh,10,Month-to-month,Electronic check,2365000.0,24205000.0,0.875,58810000.0,Competitor offered higher download speeds,voluntary,0.79,False,True,0.62,0.555,True_Friends_Standard
-CUS-0033,0082-LDZUE,Bùi Đình Dũng,1,Month-to-month,Mailed check,1063000.0,1063000.0,0.693,19887000.0,Competitor made better offer,voluntary,0.326,False,False,0.19,0.1125,Strangers
-CUS-0034,2985-FMWYF,Đặng Mai Hà,23,Month-to-month,Electronic check,2244000.0,56197000.0,0.725,99829000.0,Competitor made better offer,voluntary,0.37,False,False,0.84,0.76,True_Friends_Standard
-CUS-0035,5960-MVTUK,Trần Công Khôi,3,Month-to-month,Electronic check,714000.0,2324000.0,0.704,12106000.0,Competitor made better offer,voluntary,0.47,False,False,0.06,0.305,Strangers
-CUS-0036,1513-XNPPH,Bùi Ngọc Anh,12,Month-to-month,Electronic check,2146000.0,26296000.0,0.841,69619000.0,Product dissatisfaction,voluntary,0.189,False,False,0.69,0.6,True_Friends_Standard
-CUS-0037,6941-PMGEP,Phạm Diễm Hà,5,Month-to-month,Electronic check,1920000.0,9900000.0,0.856,40136000.0,Competitor made better offer,voluntary,0.13,False,True,0.455,0.385,Strangers
-CUS-0038,9450-TRJUU,Vũ Minh Tâm,35,Month-to-month,Electronic check,1996000.0,68363000.0,0.688,86982000.0,Competitor made better offer,voluntary,0.476,False,False,0.765,0.8575,True_Friends_Standard
-CUS-0039,5707-ORNDZ,Võ Ngọc Anh,9,Month-to-month,Electronic check,1309000.0,11857000.0,0.582,36236000.0,Network reliability,involuntary,0.227,False,False,0.385,0.525,Barnacles_Standard
-CUS-0040,6599-RCLCJ,Trần Minh Cường,47,Month-to-month,Electronic check,2629000.0,122989000.0,0.614,184644000.0,Don't know,vague,0.67,False,False,0.98,0.9175,True_Friends_Elite
-CUS-0041,8718-PTMEZ,Nguyễn Thu Linh,13,Month-to-month,Electronic check,745000.0,8334000.0,0.56,23624000.0,Don't know,vague,0.437,False,False,0.235,0.6225,Barnacles_Standard
-CUS-0042,9057-MSWCO,Vũ Kim Linh,27,Month-to-month,Credit card (automatic),738000.0,19322000.0,0.521,27963000.0,Poor expertise of phone support,voluntary,0.79,False,False,0.285,0.7925,Barnacles_Standard
-CUS-0043,6034-YMTOB,Bùi Mai Dung,5,Month-to-month,Mailed check,1816000.0,9587000.0,0.699,26265000.0,Competitor made better offer,voluntary,0.7,False,False,0.265,0.385,Strangers
-CUS-0044,0772-GYEQQ,Đỗ Văn Tuấn,3,Month-to-month,Mailed check,2120000.0,6289000.0,0.804,50402000.0,Competitor offered more data,voluntary,0.312,False,True,0.56,0.305,Butterflies_Standard
-CUS-0045,7277-OZCGZ,Võ Đức An,22,Month-to-month,Electronic check,2137000.0,45270000.0,0.73,92104000.0,Competitor made better offer,voluntary,0.79,False,True,0.805,0.7425,True_Friends_Standard
-CUS-0046,4585-HETAI,Đặng Hữu Sơn,4,Month-to-month,Electronic check,1770000.0,7811000.0,0.813,43395000.0,Service dissatisfaction,voluntary,0.79,False,False,0.505,0.3475,Butterflies_Standard
-CUS-0047,0654-HMSHN,Đặng Diễm Phương,21,Month-to-month,Electronic check,2506000.0,51791000.0,0.815,89842000.0,Attitude of support person,voluntary,0.387,False,False,0.775,0.7225,True_Friends_Standard
-CUS-0048,5567-WSELE,Đặng Thành Hải,3,Month-to-month,Electronic check,2270000.0,6709000.0,0.872,34122000.0,Competitor had better devices,voluntary,0.288,False,False,0.36,0.305,Strangers
-CUS-0049,3858-VOBET,Phan Đức Sơn,23,Month-to-month,Electronic check,1799000.0,41051000.0,0.54,83486000.0,Competitor offered higher download speeds,voluntary,0.682,False,False,0.75,0.76,True_Friends_Standard
-CUS-0050,6856-RAURS,Trần Thị Mai,2,Month-to-month,Mailed check,1798000.0,3265000.0,0.652,17965000.0,Competitor made better offer,voluntary,0.14,False,False,0.135,0.25,Strangers
-CUS-0051,7994-UYIVZ,Võ Minh Phong,8,Month-to-month,Bank transfer (automatic),2056000.0,15827000.0,0.817,36486000.0,Competitor made better offer,voluntary,0.2,False,False,0.395,0.4925,Strangers
-CUS-0052,1580-BMCMR,Phạm Bảo Hương,19,Month-to-month,Electronic check,2095000.0,39295000.0,0.741,76561000.0,Competitor made better offer,voluntary,0.007,False,False,0.72,0.6875,True_Friends_Standard
-CUS-0053,0921-OHLVP,Đặng Thị Trang,22,Month-to-month,Electronic check,1993000.0,43183000.0,0.717,85889000.0,Competitor made better offer,voluntary,0.787,False,False,0.76,0.7425,True_Friends_Standard
-CUS-0054,1518-VOWAV,Lê Kim Chi,9,Month-to-month,Electronic check,1792000.0,16885000.0,0.708,59176000.0,Limited range of services,involuntary,0.665,False,False,0.625,0.525,True_Friends_Standard
-CUS-0055,4724-WXVWF,Hoàng Minh Tuấn,48,Month-to-month,Electronic check,2290000.0,106687000.0,0.625,146386000.0,Competitor made better offer,voluntary,0.705,False,False,0.915,0.925,True_Friends_Elite
-CUS-0056,7294-TMAOP,Võ Mai Hương,1,Month-to-month,Electronic check,2173000.0,2173000.0,0.934,25007000.0,Competitor made better offer,voluntary,0.781,False,False,0.25,0.1125,Strangers
-CUS-0057,9300-RENDD,Phan Quốc An,1,Month-to-month,Electronic check,1919000.0,1919000.0,0.949,38879000.0,Attitude of support person,voluntary,0.459,False,False,0.435,0.1125,Strangers
-CUS-0058,8372-JUXUI,Hoàng Thu Vy,1,Month-to-month,Electronic check,1784000.0,1784000.0,0.907,21865000.0,Service dissatisfaction,voluntary,0.569,False,False,0.225,0.1125,Strangers
-CUS-0059,6331-EWIEB,Trần Ngọc Vy,20,Month-to-month,Electronic check,2046000.0,41628000.0,0.775,61384000.0,Moved,involuntary,0.14,False,False,0.645,0.7025,True_Friends_Standard
-CUS-0060,1043-YCUTE,Đặng Thu Linh,56,Two year,Credit card (automatic),604000.0,31852000.0,0.387,46348000.0,Service dissatisfaction,voluntary,0.115,False,False,0.525,0.9775,True_Friends_Standard
-CUS-0061,7410-YTJIK,Nguyễn Bảo Hà,7,Month-to-month,Mailed check,1811000.0,11538000.0,0.736,32343000.0,Lack of self-service on Website,voluntary,0.668,False,False,0.335,0.4575,Strangers
-CUS-0062,7011-CVEUC,Võ Công Quân,25,Month-to-month,Credit card (automatic),2297000.0,56120000.0,0.651,97788000.0,Competitor made better offer,voluntary,0.471,False,False,0.83,0.7775,True_Friends_Standard
-CUS-0063,7359-PTSXY,Lê Đức Long,1,Month-to-month,Electronic check,1098000.0,1098000.0,0.822,16606000.0,Attitude of support person,voluntary,0.565,False,False,0.115,0.1125,Strangers
-CUS-0064,8118-LSUEL,Phan Minh Hải,23,Month-to-month,Electronic check,2554000.0,59604000.0,0.763,115864000.0,Product dissatisfaction,voluntary,0.765,False,False,0.865,0.76,True_Friends_Standard
-CUS-0065,5383-MMTWC,Nguyễn Đình Dũng,8,Month-to-month,Electronic check,2016000.0,14722000.0,0.848,53582000.0,Limited range of services,involuntary,0.635,False,False,0.58,0.4925,Butterflies_Standard
-CUS-0066,5240-IJOQT,Phạm Minh An,1,Month-to-month,Electronic check,1793000.0,1793000.0,0.908,25805000.0,Competitor offered higher download speeds,voluntary,0.554,False,False,0.255,0.1125,Strangers
-CUS-0067,6860-YRJZP,Trần Quốc Khôi,9,Month-to-month,Electronic check,1777000.0,16283000.0,0.668,30520000.0,Competitor made better offer,voluntary,0.559,False,False,0.32,0.525,Barnacles_Standard
-CUS-0068,9231-ZJYAM,Võ Bảo Anh,4,Month-to-month,Electronic check,1892000.0,7027000.0,0.824,47145000.0,Moved,involuntary,0.304,False,False,0.53,0.3475,Butterflies_Standard
-CUS-0069,9572-WUKSB,Hoàng Văn Bình,3,Month-to-month,Electronic check,718000.0,2214000.0,0.715,14897000.0,Competitor made better offer,voluntary,0.031,False,False,0.085,0.305,Strangers
-CUS-0070,4307-KWMXE,Phan Ngọc Linh,10,Month-to-month,Electronic check,858000.0,9355000.0,0.564,17122000.0,Competitor made better offer,voluntary,0.437,False,False,0.12,0.555,Barnacles_Standard
-CUS-0071,8945-MUQUF,Phan Văn Phong,51,One year,Electronic check,2275000.0,116102000.0,0.328,162275000.0,Attitude of service provider,voluntary,0.215,False,False,0.95,0.945,True_Friends_Elite
-CUS-0072,9420-LOJKX,Đỗ Diễm Lan,15,Month-to-month,Credit card (automatic),2378000.0,34234000.0,0.724,62447000.0,Competitor offered more data,voluntary,0.409,False,False,0.65,0.6525,True_Friends_Standard
-CUS-0073,1640-PLFMP,Đặng Bảo Trang,1,Month-to-month,Electronic check,1686000.0,1686000.0,0.867,29087000.0,Competitor made better offer,voluntary,0.79,False,False,0.295,0.1125,Strangers
-CUS-0074,1346-UFHAX,Hoàng Công Khôi,13,Month-to-month,Credit card (automatic),1920000.0,24704000.0,0.648,67535000.0,Competitor made better offer,voluntary,0.234,False,False,0.675,0.6225,True_Friends_Standard
-CUS-0075,6267-DCFFZ,Phan Công Sơn,30,Month-to-month,Electronic check,2161000.0,63053000.0,0.646,95831000.0,Competitor made better offer,voluntary,0.058,False,True,0.825,0.8175,True_Friends_Elite
-CUS-0076,5141-ZUVBH,Phan Thị Hương,9,Month-to-month,Bank transfer (automatic),2232000.0,20886000.0,0.8,41126000.0,Competitor made better offer,voluntary,0.281,False,False,0.48,0.525,Barnacles_Standard
-CUS-0077,9101-BWFSS,Bùi Bảo Mai,50,One year,Electronic check,2605000.0,134657000.0,0.557,179192000.0,Moved,involuntary,0.294,False,False,0.965,0.94,True_Friends_Elite
-CUS-0078,6372-RFVNS,Đỗ Thu Trang,1,Month-to-month,Electronic check,1891000.0,1891000.0,0.945,40278000.0,Attitude of service provider,voluntary,0.662,False,False,0.465,0.1125,Strangers
-CUS-0079,5552-ZNFSJ,Huỳnh Ngọc Hạnh,1,Month-to-month,Electronic check,1087000.0,1087000.0,0.821,20949000.0,Don't know,vague,0.557,False,False,0.215,0.1125,Strangers
-CUS-0080,8620-RJPZN,Phạm Đức An,1,Month-to-month,Electronic check,497000.0,497000.0,0.583,6582000.0,Competitor made better offer,voluntary,0.784,False,False,0.005,0.1125,Strangers
-CUS-0081,5868-YWPDW,Trần Mai Linh,6,Month-to-month,Electronic check,2021000.0,12460000.0,0.864,59622000.0,Limited range of services,involuntary,0.664,False,False,0.63,0.4225,Butterflies_Standard
-CUS-0082,1501-SGHBW,Phan Mai Linh,2,Month-to-month,Mailed check,1100000.0,1944000.0,0.745,18853000.0,Competitor made better offer,voluntary,0.406,False,False,0.165,0.25,Strangers
-CUS-0083,1589-AGTLK,Trần Công Dũng,3,Month-to-month,Electronic check,1088000.0,3396000.0,0.745,14058000.0,Competitor offered more data,voluntary,0.79,False,False,0.07,0.305,Strangers
-CUS-0084,8185-UPYBR,Nguyễn Diễm Hạnh,6,Month-to-month,Electronic check,1812000.0,10512000.0,0.79,52826000.0,Product dissatisfaction,voluntary,0.167,False,True,0.57,0.4225,Butterflies_Standard
-CUS-0085,1478-VPOAD,Võ Thành Khang,1,Month-to-month,Electronic check,1051000.0,1051000.0,0.791,20528000.0,Competitor made better offer,voluntary,0.023,False,False,0.205,0.1125,Strangers
-CUS-0086,8739-WWKDU,Võ Khánh Hạnh,25,Month-to-month,Electronic check,2148000.0,52708000.0,0.703,94371000.0,Attitude of service provider,voluntary,0.09,False,False,0.82,0.7775,True_Friends_Standard
-CUS-0087,0265-PSUAE,Vũ Đình Hải,16,Month-to-month,Bank transfer (automatic),2417000.0,36545000.0,0.701,68807000.0,Competitor made better offer,voluntary,0.722,False,False,0.685,0.6625,True_Friends_Standard
-CUS-0088,7845-URHJN,Võ Đình Sơn,8,Month-to-month,Bank transfer (automatic),484000.0,3750000.0,0.422,13014000.0,Price too high,voluntary,0.462,False,False,0.065,0.4925,Strangers
-CUS-0089,7993-PYKOF,Phạm Kim Lan,8,Month-to-month,Electronic check,1800000.0,15191000.0,0.801,33817000.0,Network reliability,involuntary,0.161,False,False,0.355,0.4925,Strangers
-CUS-0090,6729-GDNGC,Phạm Công Tuấn,20,Month-to-month,Bank transfer (automatic),1937000.0,38741000.0,0.538,62845000.0,Competitor made better offer,voluntary,0.501,False,False,0.655,0.7025,True_Friends_Standard
-CUS-0091,1013-QCWAM,Huỳnh Đình Long,66,Month-to-month,Electronic check,2419000.0,160578000.0,0.576,213496000.0,Competitor made better offer,voluntary,0.152,False,False,1.0,0.9975,True_Friends_Elite
-CUS-0092,2868-MZAGQ,Đặng Văn Tâm,1,Month-to-month,Electronic check,1902000.0,1902000.0,0.95,43997000.0,Service dissatisfaction,voluntary,0.696,False,False,0.515,0.1125,Butterflies_Standard
-CUS-0093,7389-KBFIT,Huỳnh Quốc Khang,2,Month-to-month,Mailed check,726000.0,1530000.0,0.596,14270000.0,Competitor made better offer,voluntary,0.446,False,False,0.075,0.25,Strangers
-CUS-0094,6141-OOXUQ,Võ Diễm Mai,1,Month-to-month,Mailed check,472000.0,472000.0,0.688,11266000.0,Service dissatisfaction,voluntary,0.381,False,False,0.05,0.1125,Strangers
-CUS-0095,9840-DVNDC,Huỳnh Công Tuấn,6,Month-to-month,Credit card (automatic),1932000.0,11113000.0,0.793,27968000.0,Attitude of support person,voluntary,0.302,False,False,0.29,0.4225,Strangers
-CUS-0096,0504-HHAPI,Đặng Văn Long,27,Month-to-month,Credit card (automatic),2119000.0,59226000.0,0.647,79738000.0,Don't know,vague,0.63,False,False,0.73,0.7925,True_Friends_Standard
-CUS-0097,5940-AHUHD,Phan Đức Tâm,1,Month-to-month,Mailed check,1694000.0,1694000.0,0.882,24312000.0,Lack of self-service on Website,voluntary,0.362,False,True,0.245,0.1125,Strangers
-CUS-0098,0135-NMXAP,Phạm Đình Khôi,12,Month-to-month,Bank transfer (automatic),2154000.0,25258000.0,0.832,74119000.0,Attitude of support person,voluntary,0.088,False,False,0.705,0.6,True_Friends_Standard
-CUS-0099,0122-OAHPZ,Phan Quốc Tâm,7,Month-to-month,Electronic check,1772000.0,12270000.0,0.806,29799000.0,Price too high,voluntary,0.118,False,True,0.31,0.4575,Strangers
-CUS-0100,1564-NTYXF,Huỳnh Diễm Trang,13,Month-to-month,Electronic check,1968000.0,27053000.0,0.808,53527000.0,Attitude of support person,voluntary,0.79,False,False,0.575,0.6225,True_Friends_Standard
-CUS-0101,4112-LUEIZ,Nguyễn Minh Dũng,10,Month-to-month,Electronic check,2148000.0,20714000.0,0.845,56852000.0,Lack of self-service on Website,voluntary,0.79,False,False,0.605,0.555,True_Friends_Standard
-CUS-0102,7228-OMTPN,Vũ Hữu Quân,4,Month-to-month,Electronic check,2123000.0,8896000.0,0.858,29752000.0,Don't know,vague,0.7,False,False,0.305,0.3475,Strangers
-CUS-0103,2507-QZPQS,Huỳnh Đức Quân,15,Month-to-month,Electronic check,2297000.0,34826000.0,0.805,80757000.0,Competitor made better offer,voluntary,0.266,False,False,0.735,0.6525,True_Friends_Standard
-CUS-0104,8510-AWCXC,Lê Quốc Bình,13,Month-to-month,Electronic check,2419000.0,31394000.0,0.84,63025000.0,Attitude of support person,voluntary,0.79,False,False,0.66,0.6225,True_Friends_Standard
-CUS-0105,2013-SGDXK,Phan Khánh Vy,1,Month-to-month,Electronic check,2023000.0,2023000.0,0.919,19599000.0,Competitor offered more data,voluntary,0.779,False,False,0.18,0.1125,Strangers
-CUS-0106,8160-HOWOX,Phạm Ngọc Vy,7,Month-to-month,Electronic check,1604000.0,10994000.0,0.515,42163000.0,Competitor made better offer,voluntary,0.717,False,False,0.49,0.4575,Strangers
-CUS-0107,1596-BBVTG,Trần Thị Lan,35,Month-to-month,Credit card (automatic),1808000.0,63265000.0,0.597,83406000.0,Don't know,vague,0.449,False,False,0.745,0.8575,True_Friends_Standard
-CUS-0108,9944-HKVVB,Bùi Thành An,3,Month-to-month,Electronic check,2282000.0,7378000.0,0.859,60877000.0,Competitor offered higher download speeds,voluntary,0.272,False,False,0.64,0.305,Butterflies_Standard
-CUS-0109,4236-XPXAV,Huỳnh Đình Tuấn,5,Month-to-month,Mailed check,2380000.0,11161000.0,0.827,32895000.0,Moved,involuntary,0.096,False,True,0.34,0.385,Strangers
-CUS-0110,9804-ICWBG,Bùi Kim Phương,1,Month-to-month,Electronic check,1678000.0,1678000.0,0.931,24156000.0,Attitude of support person,voluntary,0.79,False,False,0.24,0.1125,Strangers
-CUS-0111,7964-VEXDG,Phan Quốc Khôi,21,Month-to-month,Electronic check,1928000.0,41933000.0,0.712,77246000.0,Competitor made better offer,voluntary,0.456,False,False,0.725,0.7225,True_Friends_Standard
-CUS-0112,3481-JHUZH,Vũ Minh Khang,41,Month-to-month,Electronic check,1926000.0,82536000.0,0.62,126888000.0,Competitor made better offer,voluntary,0.202,False,False,0.895,0.88,True_Friends_Elite
-CUS-0113,6457-GIRWB,Nguyễn Đình Tâm,1,Month-to-month,Electronic check,1664000.0,1664000.0,0.931,20587000.0,Attitude of service provider,voluntary,0.306,False,False,0.21,0.1125,Strangers
-CUS-0114,4781-ZXYGU,Hoàng Thành Hải,1,Month-to-month,Bank transfer (automatic),484000.0,484000.0,0.584,8151000.0,Competitor made better offer,voluntary,0.579,False,False,0.03,0.1125,Strangers
-CUS-0115,7901-HXJVA,Nguyễn Minh Bình,14,Month-to-month,Electronic check,1835000.0,26821000.0,0.717,43644000.0,Competitor made better offer,voluntary,0.177,False,False,0.51,0.6425,True_Friends_Standard
-CUS-0116,9430-FRQOC,Phạm Mai Trang,4,Month-to-month,Mailed check,2090000.0,8195000.0,0.829,54902000.0,Competitor offered higher download speeds,voluntary,0.79,False,False,0.595,0.3475,Butterflies_Standard
-CUS-0117,6175-IRFIT,Hoàng Minh Long,5,Month-to-month,Mailed check,1890000.0,10232000.0,0.726,29964000.0,Competitor made better offer,voluntary,0.759,False,False,0.315,0.385,Strangers
-CUS-0118,6172-FECYY,Vũ Bảo Linh,49,Month-to-month,Electronic check,2028000.0,102116000.0,0.65,139748000.0,Competitor offered more data,voluntary,0.719,False,False,0.905,0.9325,True_Friends_Elite
-CUS-0119,5501-TVMGM,Vũ Quốc Hải,1,Month-to-month,Electronic check,1326000.0,1326000.0,0.794,18591000.0,Competitor made better offer,voluntary,0.432,False,True,0.15,0.1125,Strangers
-CUS-0120,8993-IZEUX,Trần Đức Dũng,7,Month-to-month,Bank transfer (automatic),1660000.0,11728000.0,0.52,40413000.0,Competitor made better offer,voluntary,0.627,False,False,0.47,0.4575,Strangers
-CUS-0121,8414-MYSHR,Võ Kim Chi,5,Month-to-month,Electronic check,2194000.0,10794000.0,0.877,35665000.0,Network reliability,involuntary,0.584,False,False,0.375,0.385,Strangers
-CUS-0122,1579-KLYDT,Hoàng Văn Tuấn,7,Month-to-month,Electronic check,2171000.0,14243000.0,0.877,60755000.0,Competitor made better offer,voluntary,0.65,False,False,0.635,0.4575,Butterflies_Standard
-CUS-0123,9921-ZVRHG,Võ Kim Vy,14,Month-to-month,Electronic check,1931000.0,25728000.0,0.757,57821000.0,Service dissatisfaction,voluntary,0.084,False,False,0.61,0.6425,True_Friends_Standard
-CUS-0124,9965-YOKZB,Trần Thị Phương,9,Month-to-month,Electronic check,2012000.0,18964000.0,0.839,48927000.0,Network reliability,involuntary,0.416,False,False,0.55,0.525,True_Friends_Standard
-CUS-0125,5950-AAAGJ,Nguyễn Quốc Tâm,18,Month-to-month,Bank transfer (automatic),2023000.0,36910000.0,0.602,74230000.0,Competitor made better offer,voluntary,0.042,False,False,0.71,0.6775,True_Friends_Standard
-CUS-0126,0187-QSXOE,Trần Văn Cường,7,Month-to-month,Electronic check,2136000.0,14531000.0,0.856,63326000.0,Competitor made better offer,voluntary,0.494,False,False,0.665,0.4575,Butterflies_Standard
-CUS-0127,5698-BQJOH,Phạm Hữu Phong,9,Month-to-month,Electronic check,2266000.0,20574000.0,0.858,71070000.0,Price too high,voluntary,0.33,False,False,0.7,0.525,True_Friends_Standard
-CUS-0128,1320-HTRDR,Phạm Khánh Mai,3,Month-to-month,Electronic check,1812000.0,5294000.0,0.781,48405000.0,Attitude of service provider,voluntary,0.145,False,False,0.54,0.305,Butterflies_Standard
-CUS-0129,4547-KQRTM,Phan Kim Phương,10,Month-to-month,Bank transfer (automatic),1921000.0,19937000.0,0.82,48675000.0,Competitor offered higher download speeds,voluntary,0.103,False,False,0.545,0.555,True_Friends_Standard
-CUS-0130,7854-FOKSF,Phạm Diễm Hương,1,Month-to-month,Electronic check,862000.0,862000.0,0.835,17230000.0,Competitor offered higher download speeds,voluntary,0.588,False,True,0.125,0.1125,Strangers
-CUS-0131,5027-XWQHA,Trần Đức An,6,Month-to-month,Electronic check,1074000.0,6503000.0,0.64,15469000.0,Network reliability,involuntary,0.171,False,False,0.095,0.4225,Strangers
-CUS-0132,5899-MQZZL,Nguyễn Minh Hải,13,Month-to-month,Mailed check,1800000.0,23987000.0,0.661,39748000.0,Competitor offered higher download speeds,voluntary,0.79,False,False,0.445,0.6225,Barnacles_Standard
-CUS-0133,7233-DRTRF,Bùi Minh Hải,63,Month-to-month,Electronic check,2458000.0,154657000.0,0.523,204761000.0,Competitor made better offer,voluntary,0.581,False,False,0.99,0.99,True_Friends_Elite
-CUS-0134,2332-EFBJY,Phạm Khánh Chi,16,Month-to-month,Mailed check,473000.0,8218000.0,0.289,14723000.0,Lack of self-service on Website,voluntary,0.347,False,False,0.08,0.6625,Barnacles_Standard
-CUS-0135,6982-UQZLY,Lê Ngọc Anh,1,Month-to-month,Mailed check,500000.0,500000.0,0.722,8134000.0,Attitude of support person,voluntary,0.591,False,False,0.025,0.1125,Strangers
-CUS-0136,7439-DKZTW,Đặng Kim Mai,1,Month-to-month,Electronic check,1933000.0,1933000.0,0.923,26320000.0,Competitor made better offer,voluntary,0.023,False,False,0.27,0.1125,Strangers
-CUS-0137,5655-JSMZM,Hoàng Mai Mai,49,Month-to-month,Electronic check,2309000.0,113238000.0,0.697,167767000.0,Competitor offered higher download speeds,voluntary,0.79,False,True,0.955,0.9325,True_Friends_Elite
-CUS-0138,9137-UIYPG,Huỳnh Quốc An,35,Month-to-month,Electronic check,2566000.0,90155000.0,0.597,146063000.0,Competitor made better offer,voluntary,0.482,False,False,0.91,0.8575,True_Friends_Elite
-CUS-0139,3154-CFSZG,Đặng Thị Thảo,47,Month-to-month,Electronic check,2161000.0,99293000.0,0.578,127740000.0,Competitor made better offer,voluntary,0.783,False,False,0.9,0.9175,True_Friends_Elite
-CUS-0140,1724-BQUHA,Lê Đình Phong,5,Month-to-month,Electronic check,2148000.0,11465000.0,0.871,34818000.0,Attitude of support person,voluntary,0.083,False,False,0.365,0.385,Strangers
-CUS-0141,8473-VUVJN,Đặng Công Sơn,1,Month-to-month,Electronic check,1768000.0,1768000.0,0.926,40261000.0,Attitude of service provider,voluntary,0.487,False,False,0.46,0.1125,Strangers
-CUS-0142,7786-WBJYI,Phan Thành Khôi,4,Month-to-month,Bank transfer (automatic),1871000.0,7333000.0,0.834,47485000.0,Price too high,voluntary,0.491,False,False,0.535,0.3475,Butterflies_Standard
-CUS-0143,6032-IGALN,Đỗ Đình Hải,1,Month-to-month,Mailed check,602000.0,602000.0,0.685,12086000.0,Service dissatisfaction,voluntary,0.79,False,False,0.055,0.1125,Strangers
-CUS-0144,0533-BNWKF,Nguyễn Mai Chi,55,Month-to-month,Electronic check,2051000.0,116993000.0,0.55,162131000.0,Lack of affordable download/upload speed,voluntary,0.572,False,False,0.945,0.9675,True_Friends_Elite
-CUS-0145,1925-TIBLE,Phan Thị Trang,7,Month-to-month,Electronic check,2076000.0,13980000.0,0.864,46258000.0,Competitor offered higher download speeds,voluntary,0.473,False,False,0.52,0.4575,Butterflies_Standard
-CUS-0146,3803-KMQFW,Võ Thành Quân,1,Month-to-month,Mailed check,493000.0,493000.0,0.725,7981000.0,Competitor offered more data,voluntary,0.267,False,False,0.02,0.1125,Strangers
-CUS-0147,4710-FDUIZ,Phạm Kim Ngân,56,One year,Credit card (automatic),2407000.0,134747000.0,0.429,184524000.0,Competitor offered more data,voluntary,0.332,False,False,0.975,0.9775,True_Friends_Elite
-CUS-0148,7120-RFMVS,Vũ Ngọc Anh,1,Month-to-month,Electronic check,2028000.0,2028000.0,0.935,37234000.0,Price too high,voluntary,0.521,False,False,0.42,0.1125,Strangers
-CUS-0149,6591-QGOYB,Lê Quốc Phong,17,Month-to-month,Bank transfer (automatic),2560000.0,40130000.0,0.623,68331000.0,Competitor made better offer,voluntary,0.439,False,False,0.68,0.67,True_Friends_Standard
-CUS-0150,5028-GZLDO,Trần Đình Bình,2,Month-to-month,Credit card (automatic),1697000.0,3377000.0,0.761,39469000.0,Service dissatisfaction,voluntary,0.022,False,True,0.44,0.25,Strangers
-CUS-0151,9651-GTSAQ,Hoàng Kim Linh,53,One year,Bank transfer (automatic),2546000.0,138474000.0,0.498,184007000.0,Attitude of support person,voluntary,0.79,False,False,0.97,0.9575,True_Friends_Elite
-CUS-0152,9095-HFAFX,Võ Đức Long,5,Month-to-month,Credit card (automatic),1944000.0,9350000.0,0.861,38261000.0,Competitor made better offer,voluntary,0.79,False,False,0.43,0.385,Strangers
-CUS-0153,9003-CPATH,Lê Ngọc Hương,42,Month-to-month,Electronic check,1918000.0,79522000.0,0.614,99339000.0,Competitor made better offer,voluntary,0.14,False,False,0.835,0.89,True_Friends_Elite
-CUS-0154,2011-TRQYE,Võ Quốc Tâm,18,Month-to-month,Credit card (automatic),804000.0,14400000.0,0.46,32004000.0,Product dissatisfaction,voluntary,0.554,False,False,0.325,0.6775,Barnacles_Standard
-CUS-0155,8313-NDOIA,Đặng Mai Hạnh,24,Month-to-month,Electronic check,2500000.0,59872000.0,0.778,118002000.0,Competitor made better offer,voluntary,0.109,False,False,0.87,0.77,True_Friends_Standard
-CUS-0156,9537-VHDTA,Võ Công Nam,1,Month-to-month,Mailed check,1229000.0,1229000.0,0.759,19413000.0,Competitor made better offer,voluntary,0.672,False,False,0.175,0.1125,Strangers
-CUS-0157,5976-JCJRH,Phạm Khánh Hà,10,Month-to-month,Electronic check,1687000.0,17717000.0,0.751,32306000.0,Limited range of services,involuntary,0.281,False,False,0.33,0.555,Barnacles_Standard
-CUS-0158,7321-VGNKU,Vũ Công Long,2,Month-to-month,Electronic check,1688000.0,2886000.0,0.682,36086000.0,Competitor made better offer,voluntary,0.659,False,False,0.38,0.25,Strangers
-CUS-0159,0618-XWMSS,Lê Mai Anh,28,Month-to-month,Bank transfer (automatic),1798000.0,49645000.0,0.554,88424000.0,Long distance charges,voluntary,0.727,False,False,0.77,0.8025,True_Friends_Standard
-CUS-0160,1041-RXHRA,Trần Đình Bình,41,Month-to-month,Bank transfer (automatic),1686000.0,68833000.0,0.487,91810000.0,Attitude of support person,voluntary,0.769,False,False,0.8,0.88,True_Friends_Elite
-CUS-0161,7969-AULMZ,Phan Thu Chi,21,Month-to-month,Electronic check,2336000.0,50868000.0,0.818,91243000.0,Moved,involuntary,0.108,False,False,0.79,0.7225,True_Friends_Standard
-CUS-0162,3842-IYKUE,Đỗ Công Sơn,35,Month-to-month,Credit card (automatic),2047000.0,70020000.0,0.646,90122000.0,Competitor offered more data,voluntary,0.79,False,False,0.78,0.8575,True_Friends_Standard
-CUS-0163,2103-ZRXFN,Võ Khánh Lan,1,Month-to-month,Mailed check,1218000.0,1218000.0,0.772,18908000.0,Competitor made better offer,voluntary,0.23,False,False,0.17,0.1125,Strangers
-CUS-0164,7730-IUTDZ,Võ Văn Quân,43,Month-to-month,Electronic check,1805000.0,76766000.0,0.613,110505000.0,Network reliability,involuntary,0.037,False,False,0.86,0.8975,True_Friends_Elite
-CUS-0165,0256-LTHVJ,Phạm Ngọc Linh,28,Month-to-month,Electronic check,1945000.0,53450000.0,0.676,93914000.0,Competitor had better devices,voluntary,0.555,False,False,0.815,0.8025,True_Friends_Elite
-CUS-0166,7254-IQWOZ,Trần Mai Dung,1,Month-to-month,Electronic check,1672000.0,1672000.0,0.947,36838000.0,Network reliability,involuntary,0.371,False,False,0.4,0.1125,Strangers
-CUS-0167,2501-XWWTZ,Nguyễn Quốc Khôi,11,Month-to-month,Electronic check,1685000.0,18241000.0,0.655,35327000.0,Competitor made better offer,voluntary,0.79,False,True,0.37,0.58,Barnacles_Standard
-CUS-0168,9367-WXLCH,Đặng Thu Dung,8,Month-to-month,Bank transfer (automatic),2028000.0,15904000.0,0.8,33361000.0,Extra data charges,voluntary,0.79,False,False,0.35,0.4925,Strangers
-CUS-0169,6821-BUXUX,Bùi Minh Nam,13,Month-to-month,Electronic check,2320000.0,29868000.0,0.838,49449000.0,Attitude of support person,voluntary,0.317,False,True,0.555,0.6225,True_Friends_Standard
-CUS-0170,1740-CSDJP,Hoàng Đình Hải,1,Month-to-month,Bank transfer (automatic),846000.0,846000.0,0.752,9468000.0,Lack of affordable download/upload speed,voluntary,0.79,False,False,0.04,0.1125,Strangers
-CUS-0171,1452-KIOVK,Hoàng Đức Bình,22,Month-to-month,Credit card (automatic),2138000.0,46786000.0,0.576,84919000.0,Competitor made better offer,voluntary,0.291,False,False,0.755,0.7425,True_Friends_Standard
-CUS-0172,6474-FVJLC,Bùi Khánh Vy,2,Month-to-month,Electronic check,2064000.0,3971000.0,0.861,41503000.0,Attitude of support person,voluntary,0.515,False,False,0.485,0.25,Strangers
-CUS-0173,8713-IGZSO,Phan Đình Bình,2,Month-to-month,Mailed check,596000.0,1488000.0,0.535,15751000.0,Competitor made better offer,voluntary,0.256,False,False,0.1,0.25,Strangers
-CUS-0174,1567-DSCIC,Đỗ Kim Anh,8,Month-to-month,Electronic check,2256000.0,18568000.0,0.866,42319000.0,Product dissatisfaction,voluntary,0.79,False,False,0.495,0.4925,Strangers
-CUS-0175,5399-ZIMKF,Đặng Văn Quân,5,Month-to-month,Electronic check,1792000.0,9208000.0,0.796,32999000.0,Competitor made better offer,voluntary,0.165,False,False,0.345,0.385,Strangers
-CUS-0176,4763-PGDPO,Phạm Bảo Hà,4,Month-to-month,Electronic check,1690000.0,6744000.0,0.785,37123000.0,Competitor offered more data,voluntary,0.045,False,False,0.41,0.3475,Strangers
-CUS-0177,9057-SIHCH,Đỗ Thu Trang,3,Month-to-month,Electronic check,2318000.0,7006000.0,0.874,37233000.0,Price too high,voluntary,0.435,False,False,0.415,0.305,Strangers
-CUS-0178,1618-CFHME,Vũ Văn Quân,2,Month-to-month,Electronic check,1822000.0,3440000.0,0.831,18752000.0,Don't know,vague,0.79,False,True,0.16,0.25,Strangers
-CUS-0179,9921-EZKBY,Huỳnh Khánh Dung,33,Month-to-month,Bank transfer (automatic),2287000.0,78604000.0,0.517,106844000.0,Competitor made better offer,voluntary,0.79,False,False,0.85,0.84,True_Friends_Elite
-CUS-0180,7465-ZZRVX,Huỳnh Kim Hạnh,1,Month-to-month,Electronic check,1688000.0,1688000.0,0.885,20067000.0,Competitor made better offer,voluntary,0.749,False,False,0.195,0.1125,Strangers
-CUS-0181,3001-CBHLQ,Hoàng Bảo Thảo,32,Month-to-month,Electronic check,2518000.0,80437000.0,0.715,120383000.0,Competitor offered higher download speeds,voluntary,0.79,False,False,0.88,0.8275,True_Friends_Elite
-CUS-0182,3808-HFKDE,Phạm Công Tâm,20,Month-to-month,Electronic check,1064000.0,22252000.0,0.507,36978000.0,Competitor made better offer,voluntary,0.79,False,False,0.405,0.7025,Barnacles_Standard
-CUS-0183,4680-KUTAJ,Nguyễn Kim Ngân,11,Month-to-month,Electronic check,1334000.0,13939000.0,0.52,40694000.0,Competitor made better offer,voluntary,0.519,False,False,0.475,0.58,Barnacles_Standard
-CUS-0184,4523-WXCEF,Hoàng Khánh Hạnh,59,Month-to-month,Electronic check,2426000.0,144958000.0,0.649,185327000.0,Service dissatisfaction,voluntary,0.316,False,False,0.985,0.985,True_Friends_Elite
-CUS-0185,4143-OOBWZ,Vũ Thị Phương,5,Month-to-month,Electronic check,1951000.0,9991000.0,0.865,39794000.0,Attitude of service provider,voluntary,0.772,False,False,0.45,0.385,Strangers
-CUS-0186,3550-SAHFP,Phạm Ngọc Trang,33,Month-to-month,Electronic check,2000000.0,66188000.0,0.679,109836000.0,Price too high,voluntary,0.662,False,False,0.855,0.84,True_Friends_Elite
-CUS-0187,8818-XYFCQ,Phan Hữu Cường,32,Month-to-month,Credit card (automatic),2389000.0,76912000.0,0.701,124940000.0,Competitor made better offer,voluntary,0.374,False,True,0.89,0.8275,True_Friends_Elite
-CUS-0188,3162-ZJZFU,Trần Ngọc Hà,53,Month-to-month,Electronic check,2221000.0,114707000.0,0.564,156462000.0,Competitor made better offer,voluntary,0.094,False,True,0.935,0.9575,True_Friends_Elite
-CUS-0189,5117-IFGPS,Bùi Công Quân,29,Month-to-month,Electronic check,2023000.0,56586000.0,0.722,74526000.0,Competitor made better offer,voluntary,0.747,False,True,0.715,0.81,True_Friends_Standard
-CUS-0190,8267-ZNYVZ,Trần Đình Quân,33,One year,Electronic check,2490000.0,80665000.0,0.611,118752000.0,Attitude of service provider,voluntary,0.262,False,False,0.875,0.84,True_Friends_Elite
-CUS-0191,5616-PRTNT,Huỳnh Minh Nam,20,Month-to-month,Electronic check,466000.0,8988000.0,0.392,16043000.0,Competitor offered higher download speeds,voluntary,0.79,False,False,0.105,0.7025,Barnacles_Standard
-CUS-0192,6712-OAWRH,Bùi Thành Phong,26,Month-to-month,Electronic check,2190000.0,56443000.0,0.713,101592000.0,Competitor offered higher download speeds,voluntary,0.241,False,False,0.845,0.785,True_Friends_Standard
-CUS-0193,9957-YODKZ,Hoàng Minh Bình,6,Month-to-month,Electronic check,1939000.0,10970000.0,0.856,54489000.0,Competitor made better offer,voluntary,0.123,False,False,0.59,0.4225,Butterflies_Standard
-CUS-0194,8325-QRPZR,Phạm Văn An,7,Month-to-month,Electronic check,1804000.0,12600000.0,0.793,43023000.0,Competitor made better offer,voluntary,0.79,False,False,0.5,0.4575,Butterflies_Standard
-CUS-0195,5948-UJZLF,Đặng Minh Bình,2,Month-to-month,Mailed check,1182000.0,2328000.0,0.722,20318000.0,Competitor made better offer,voluntary,0.153,False,False,0.2,0.25,Strangers
-CUS-0196,6680-WKXRZ,Phạm Bảo Thảo,3,Month-to-month,Bank transfer (automatic),1786000.0,5179000.0,0.763,19853000.0,Don't know,vague,0.179,False,False,0.185,0.305,Strangers
-CUS-0197,8380-PEFPE,Lê Đức Phong,1,Month-to-month,Electronic check,1720000.0,1720000.0,0.893,18074000.0,Attitude of support person,voluntary,0.599,False,True,0.14,0.1125,Strangers
-CUS-0198,3898-GUYTS,Nguyễn Thu Anh,45,Month-to-month,Electronic check,2329000.0,105241000.0,0.696,149352000.0,Competitor made better offer,voluntary,0.79,False,False,0.925,0.91,True_Friends_Elite
-CUS-0199,1389-CXMLU,Nguyễn Thu Hương,3,Month-to-month,Electronic check,2185000.0,6938000.0,0.85,26114000.0,Competitor made better offer,voluntary,0.196,False,False,0.26,0.305,Strangers
-CUS-0200,0486-HECZI,Đỗ Ngọc Mai,55,Month-to-month,Electronic check,2322000.0,125734000.0,0.603,173604000.0,Long distance charges,voluntary,0.31,False,False,0.96,0.9675,True_Friends_Elite
+CUS-0001,2777-PHDEI,Patricia Mitchell,1,Month-to-month,Electronic check,1873000.0,1873000.0,0.932,27780000.0,Competitor offered more data,voluntary,0.774,False,False,0.28,0.1125,Strangers
+CUS-0002,2862-PFNIK,Brenda Garcia,1,Month-to-month,Electronic check,593000.0,593000.0,0.723,8938000.0,Competitor made better offer,voluntary,0.439,False,True,0.035,0.1125,Strangers
+CUS-0003,8158-WPEZG,Mark Allen,11,Month-to-month,Electronic check,856000.0,10202000.0,0.581,27274000.0,Competitor made better offer,voluntary,0.79,False,False,0.275,0.58,Barnacles_Standard
+CUS-0004,1309-BXVOQ,Brenda Clark,21,Month-to-month,Electronic check,2546000.0,53999000.0,0.819,90498000.0,Long distance charges,voluntary,0.697,False,False,0.785,0.7225,True_Friends_Standard
+CUS-0005,5047-LHVLY,Mary Carter,1,Month-to-month,Mailed check,1204000.0,1204000.0,0.759,17761000.0,Extra data charges,voluntary,0.094,False,False,0.13,0.1125,Strangers
+CUS-0006,2024-BASKD,Charles Wilson,1,Month-to-month,Mailed check,1790000.0,1790000.0,0.907,29428000.0,Competitor offered more data,voluntary,0.79,False,False,0.3,0.1125,Strangers
+CUS-0007,2692-PFYTJ,Richard Thompson,1,Month-to-month,Mailed check,618000.0,618000.0,0.671,6969000.0,Competitor made better offer,voluntary,0.761,False,False,0.01,0.1125,Strangers
+CUS-0008,1031-IIDEO,Kathleen Wright,1,Month-to-month,Electronic check,1700000.0,1700000.0,0.896,21243000.0,Network reliability,involuntary,0.786,False,False,0.22,0.1125,Strangers
+CUS-0009,6807-SIWJI,Kenneth Green,38,One year,Electronic check,2516000.0,93294000.0,0.539,120557000.0,Competitor made better offer,voluntary,0.128,False,False,0.885,0.87,True_Friends_Elite
+CUS-0010,8937-RDTHP,Elizabeth Williams,1,Month-to-month,Mailed check,2030000.0,2030000.0,0.909,22200000.0,Poor expertise of phone support,voluntary,0.45,False,False,0.23,0.1125,Strangers
+CUS-0011,8778-LMWTJ,Sandra Miller,9,Month-to-month,Electronic check,1796000.0,16997000.0,0.756,58449000.0,Competitor made better offer,voluntary,0.371,False,False,0.615,0.525,True_Friends_Standard
+CUS-0012,2587-EKXTS,Lisa White,44,Month-to-month,Electronic check,2676000.0,117964000.0,0.583,148224000.0,Competitor made better offer,voluntary,0.79,False,False,0.92,0.905,True_Friends_Elite
+CUS-0013,1587-FKLZB,Elizabeth Hill,66,Month-to-month,Credit card (automatic),2388000.0,163732000.0,0.59,206515000.0,Attitude of support person,voluntary,0.644,False,False,0.995,0.9975,True_Friends_Elite
+CUS-0014,9497-QCMMS,Jacob Harris,1,Month-to-month,Electronic check,2245000.0,2245000.0,0.935,51958000.0,Competitor made better offer,voluntary,0.79,False,False,0.565,0.1125,Butterflies_Standard
+CUS-0015,9828-AOQLM,Sandra Baker,1,Month-to-month,Electronic check,1097000.0,1097000.0,0.818,15082000.0,Competitor offered higher download speeds,voluntary,0.443,False,False,0.09,0.1125,Strangers
+CUS-0016,0337-CNPZE,Robert Lee,41,Month-to-month,Electronic check,2551000.0,106643000.0,0.753,161571000.0,Price too high,voluntary,0.227,False,True,0.94,0.88,True_Friends_Elite
+CUS-0017,5883-GTGVD,Emma Rivera,19,Month-to-month,Electronic check,2399000.0,46362000.0,0.815,81579000.0,Attitude of service provider,voluntary,0.555,False,False,0.74,0.6875,True_Friends_Standard
+CUS-0018,8785-EPNCG,Jacob Martinez,11,Month-to-month,Credit card (automatic),556000.0,5885000.0,0.367,18497000.0,Competitor made better offer,voluntary,0.064,False,False,0.145,0.58,Barnacles_Standard
+CUS-0019,2834-SPCJV,Kimberly Mitchell,52,Month-to-month,Electronic check,2018000.0,104368000.0,0.617,152800000.0,Competitor had better devices,voluntary,0.79,False,False,0.93,0.95,True_Friends_Elite
+CUS-0020,5561-NWEVX,Mark Rodriguez,2,Month-to-month,Electronic check,1901000.0,4148000.0,0.865,36275000.0,Price too high,voluntary,0.632,False,True,0.39,0.25,Strangers
+CUS-0021,9809-IMGCQ,Joseph Martinez,22,Month-to-month,Electronic check,2321000.0,49991000.0,0.795,91379000.0,Competitor made better offer,voluntary,0.758,False,False,0.795,0.7425,True_Friends_Standard
+CUS-0022,6397-JNZZG,William Harris,43,Month-to-month,Credit card (automatic),1333000.0,56213000.0,0.491,69932000.0,Competitor offered higher download speeds,voluntary,0.355,False,False,0.695,0.8975,True_Friends_Standard
+CUS-0023,1334-FJSVR,Pamela Smith,1,Month-to-month,Electronic check,582000.0,582000.0,0.723,7207000.0,Lack of self-service on Website,voluntary,0.79,False,True,0.015,0.1125,Strangers
+CUS-0024,1867-BDVFH,Emily Roberts,11,Month-to-month,Electronic check,1784000.0,20021000.0,0.715,56236000.0,Competitor made better offer,voluntary,0.79,False,True,0.6,0.58,True_Friends_Standard
+CUS-0025,3518-PZXZQ,Jacob Smith,1,Month-to-month,Mailed check,1327000.0,1327000.0,0.69,16449000.0,Competitor made better offer,voluntary,0.778,False,False,0.11,0.1125,Strangers
+CUS-0026,0524-IAVZO,Eric Carter,30,Month-to-month,Electronic check,2040000.0,62982000.0,0.652,93158000.0,Don't know,vague,0.195,False,False,0.81,0.8175,True_Friends_Elite
+CUS-0027,5393-RXQSZ,Michelle Green,1,Month-to-month,Electronic check,1910000.0,1910000.0,0.935,18710000.0,Attitude of support person,voluntary,0.467,False,False,0.155,0.1125,Strangers
+CUS-0028,6110-OHIHY,Daniel Wright,3,Month-to-month,Electronic check,1902000.0,6422000.0,0.856,38246000.0,Competitor offered higher download speeds,voluntary,0.044,False,False,0.425,0.305,Strangers
+CUS-0029,7783-YKGDV,Helen Lee,12,Month-to-month,Bank transfer (automatic),2393000.0,29723000.0,0.851,54017000.0,Lack of affordable download/upload speed,voluntary,0.154,False,True,0.585,0.6,True_Friends_Standard
+CUS-0030,3319-DWOEP,Joshua Thomas,6,Month-to-month,Electronic check,2298000.0,13770000.0,0.871,66624000.0,Competitor made better offer,voluntary,0.683,False,False,0.67,0.4225,Butterflies_Standard
+CUS-0031,2485-ITVKB,Barbara Campbell,2,Month-to-month,Electronic check,842000.0,1650000.0,0.792,10552000.0,Attitude of support person,voluntary,0.745,False,True,0.045,0.25,Strangers
+CUS-0032,5138-WVKYJ,Sarah Rodriguez,10,Month-to-month,Electronic check,2365000.0,24205000.0,0.875,58810000.0,Competitor offered higher download speeds,voluntary,0.79,False,False,0.62,0.555,True_Friends_Standard
+CUS-0033,0082-LDZUE,Jonathan Hill,1,Month-to-month,Mailed check,1063000.0,1063000.0,0.693,19887000.0,Competitor made better offer,voluntary,0.326,False,False,0.19,0.1125,Strangers
+CUS-0034,2985-FMWYF,Betty Rivera,23,Month-to-month,Electronic check,2244000.0,56197000.0,0.725,99829000.0,Competitor made better offer,voluntary,0.37,False,False,0.84,0.76,True_Friends_Standard
+CUS-0035,5960-MVTUK,Cynthia King,3,Month-to-month,Electronic check,714000.0,2324000.0,0.704,12106000.0,Competitor made better offer,voluntary,0.47,False,False,0.06,0.305,Strangers
+CUS-0036,1513-XNPPH,John Nguyen,12,Month-to-month,Electronic check,2146000.0,26296000.0,0.841,69619000.0,Product dissatisfaction,voluntary,0.189,False,False,0.69,0.6,True_Friends_Standard
+CUS-0037,6941-PMGEP,Michael Anderson,5,Month-to-month,Electronic check,1920000.0,9900000.0,0.856,40136000.0,Competitor made better offer,voluntary,0.13,False,True,0.455,0.385,Strangers
+CUS-0038,9450-TRJUU,Eric Thomas,35,Month-to-month,Electronic check,1996000.0,68363000.0,0.688,86982000.0,Competitor made better offer,voluntary,0.476,False,False,0.765,0.8575,True_Friends_Standard
+CUS-0039,5707-ORNDZ,Emma Torres,9,Month-to-month,Electronic check,1309000.0,11857000.0,0.582,36236000.0,Network reliability,involuntary,0.227,False,False,0.385,0.525,Barnacles_Standard
+CUS-0040,6599-RCLCJ,Betty Miller,47,Month-to-month,Electronic check,2629000.0,122989000.0,0.614,184644000.0,Don't know,vague,0.67,False,False,0.98,0.9175,True_Friends_Elite
+CUS-0041,8718-PTMEZ,Jacob Campbell,13,Month-to-month,Electronic check,745000.0,8334000.0,0.56,23624000.0,Don't know,vague,0.437,False,False,0.235,0.6225,Barnacles_Standard
+CUS-0042,9057-MSWCO,Linda Sanchez,27,Month-to-month,Credit card (automatic),738000.0,19322000.0,0.521,27963000.0,Poor expertise of phone support,voluntary,0.79,False,False,0.285,0.7925,Barnacles_Standard
+CUS-0043,6034-YMTOB,Anthony Gonzalez,5,Month-to-month,Mailed check,1816000.0,9587000.0,0.699,26265000.0,Competitor made better offer,voluntary,0.7,False,True,0.265,0.385,Strangers
+CUS-0044,0772-GYEQQ,Jacob Thomas,3,Month-to-month,Mailed check,2120000.0,6289000.0,0.804,50402000.0,Competitor offered more data,voluntary,0.312,False,True,0.56,0.305,Butterflies_Standard
+CUS-0045,7277-OZCGZ,Pamela Miller,22,Month-to-month,Electronic check,2137000.0,45270000.0,0.73,92104000.0,Competitor made better offer,voluntary,0.832,True,False,0.805,0.7425,True_Friends_Elite
+CUS-0046,4585-HETAI,Barbara Carter,4,Month-to-month,Electronic check,1770000.0,7811000.0,0.813,43395000.0,Service dissatisfaction,voluntary,0.79,False,True,0.505,0.3475,Butterflies_Standard
+CUS-0047,0654-HMSHN,Donald Sanchez,21,Month-to-month,Electronic check,2506000.0,51791000.0,0.815,89842000.0,Attitude of support person,voluntary,0.387,False,True,0.775,0.7225,True_Friends_Standard
+CUS-0048,5567-WSELE,Ronald Taylor,3,Month-to-month,Electronic check,2270000.0,6709000.0,0.872,34122000.0,Competitor had better devices,voluntary,0.288,False,False,0.36,0.305,Strangers
+CUS-0049,3858-VOBET,Larry Nelson,23,Month-to-month,Electronic check,1799000.0,41051000.0,0.54,83486000.0,Competitor offered higher download speeds,voluntary,0.682,False,True,0.75,0.76,True_Friends_Standard
+CUS-0050,6856-RAURS,Michael Nguyen,2,Month-to-month,Mailed check,1798000.0,3265000.0,0.652,17965000.0,Competitor made better offer,voluntary,0.14,False,True,0.135,0.25,Strangers
+CUS-0051,7994-UYIVZ,Michael Nguyen,8,Month-to-month,Bank transfer (automatic),2056000.0,15827000.0,0.817,36486000.0,Competitor made better offer,voluntary,0.2,False,False,0.395,0.4925,Strangers
+CUS-0052,1580-BMCMR,Linda Allen,19,Month-to-month,Electronic check,2095000.0,39295000.0,0.741,76561000.0,Competitor made better offer,voluntary,0.007,False,False,0.72,0.6875,True_Friends_Standard
+CUS-0053,0921-OHLVP,Ashley Sanchez,22,Month-to-month,Electronic check,1993000.0,43183000.0,0.717,85889000.0,Competitor made better offer,voluntary,0.787,False,False,0.76,0.7425,True_Friends_Standard
+CUS-0054,1518-VOWAV,Brandon Williams,9,Month-to-month,Electronic check,1792000.0,16885000.0,0.708,59176000.0,Limited range of services,involuntary,0.665,False,False,0.625,0.525,True_Friends_Standard
+CUS-0055,4724-WXVWF,Anna Lee,48,Month-to-month,Electronic check,2290000.0,106687000.0,0.625,146386000.0,Competitor made better offer,voluntary,0.705,False,False,0.915,0.925,True_Friends_Elite
+CUS-0056,7294-TMAOP,Ashley Taylor,1,Month-to-month,Electronic check,2173000.0,2173000.0,0.934,25007000.0,Competitor made better offer,voluntary,0.781,False,False,0.25,0.1125,Strangers
+CUS-0057,9300-RENDD,Kevin Carter,1,Month-to-month,Electronic check,1919000.0,1919000.0,0.949,38879000.0,Attitude of support person,voluntary,0.459,False,True,0.435,0.1125,Strangers
+CUS-0058,8372-JUXUI,Emma Miller,1,Month-to-month,Electronic check,1784000.0,1784000.0,0.907,21865000.0,Service dissatisfaction,voluntary,0.569,False,False,0.225,0.1125,Strangers
+CUS-0059,6331-EWIEB,George Jones,20,Month-to-month,Electronic check,2046000.0,41628000.0,0.775,61384000.0,Moved,involuntary,0.14,False,False,0.645,0.7025,True_Friends_Standard
+CUS-0060,1043-YCUTE,Stephen Rivera,56,Two year,Credit card (automatic),604000.0,31852000.0,0.387,46348000.0,Service dissatisfaction,voluntary,0.115,False,False,0.525,0.9775,True_Friends_Standard
+CUS-0061,7410-YTJIK,Anna Smith,7,Month-to-month,Mailed check,1811000.0,11538000.0,0.736,32343000.0,Lack of self-service on Website,voluntary,0.668,False,False,0.335,0.4575,Strangers
+CUS-0062,7011-CVEUC,Susan Rodriguez,25,Month-to-month,Credit card (automatic),2297000.0,56120000.0,0.651,97788000.0,Competitor made better offer,voluntary,0.471,False,False,0.83,0.7775,True_Friends_Standard
+CUS-0063,7359-PTSXY,Karen Moore,1,Month-to-month,Electronic check,1098000.0,1098000.0,0.822,16606000.0,Attitude of support person,voluntary,0.565,False,False,0.115,0.1125,Strangers
+CUS-0064,8118-LSUEL,Steven Allen,23,Month-to-month,Electronic check,2554000.0,59604000.0,0.763,115864000.0,Product dissatisfaction,voluntary,0.765,False,False,0.865,0.76,True_Friends_Standard
+CUS-0065,5383-MMTWC,Barbara Green,8,Month-to-month,Electronic check,2016000.0,14722000.0,0.848,53582000.0,Limited range of services,involuntary,0.635,False,False,0.58,0.4925,Butterflies_Standard
+CUS-0066,5240-IJOQT,Thomas Green,1,Month-to-month,Electronic check,1793000.0,1793000.0,0.908,25805000.0,Competitor offered higher download speeds,voluntary,0.554,False,True,0.255,0.1125,Strangers
+CUS-0067,6860-YRJZP,Jeffrey Scott,9,Month-to-month,Electronic check,1777000.0,16283000.0,0.668,30520000.0,Competitor made better offer,voluntary,0.559,False,True,0.32,0.525,Barnacles_Standard
+CUS-0068,9231-ZJYAM,Karen Wright,4,Month-to-month,Electronic check,1892000.0,7027000.0,0.824,47145000.0,Moved,involuntary,0.304,False,False,0.53,0.3475,Butterflies_Standard
+CUS-0069,9572-WUKSB,Laura Rodriguez,3,Month-to-month,Electronic check,718000.0,2214000.0,0.715,14897000.0,Competitor made better offer,voluntary,0.031,False,False,0.085,0.305,Strangers
+CUS-0070,4307-KWMXE,Jennifer Thompson,10,Month-to-month,Electronic check,858000.0,9355000.0,0.564,17122000.0,Competitor made better offer,voluntary,0.437,False,False,0.12,0.555,Barnacles_Standard
+CUS-0071,8945-MUQUF,Larry Clark,51,One year,Electronic check,2275000.0,116102000.0,0.328,162275000.0,Attitude of service provider,voluntary,0.215,False,False,0.95,0.945,True_Friends_Elite
+CUS-0072,9420-LOJKX,Ashley Hernandez,15,Month-to-month,Credit card (automatic),2378000.0,34234000.0,0.724,62447000.0,Competitor offered more data,voluntary,0.409,False,False,0.65,0.6525,True_Friends_Standard
+CUS-0073,1640-PLFMP,Patricia Lopez,1,Month-to-month,Electronic check,1686000.0,1686000.0,0.867,29087000.0,Competitor made better offer,voluntary,0.79,False,False,0.295,0.1125,Strangers
+CUS-0074,1346-UFHAX,Ashley Moore,13,Month-to-month,Credit card (automatic),1920000.0,24704000.0,0.648,67535000.0,Competitor made better offer,voluntary,0.234,False,False,0.675,0.6225,True_Friends_Standard
+CUS-0075,6267-DCFFZ,Robert Walker,30,Month-to-month,Electronic check,2161000.0,63053000.0,0.646,95831000.0,Competitor made better offer,voluntary,0.058,False,False,0.825,0.8175,True_Friends_Elite
+CUS-0076,5141-ZUVBH,Joshua Anderson,9,Month-to-month,Bank transfer (automatic),2232000.0,20886000.0,0.8,41126000.0,Competitor made better offer,voluntary,0.281,False,False,0.48,0.525,Barnacles_Standard
+CUS-0077,9101-BWFSS,Andrew Jones,50,One year,Electronic check,2605000.0,134657000.0,0.557,179192000.0,Moved,involuntary,0.294,False,False,0.965,0.94,True_Friends_Elite
+CUS-0078,6372-RFVNS,Rebecca Baker,1,Month-to-month,Electronic check,1891000.0,1891000.0,0.945,40278000.0,Attitude of service provider,voluntary,0.662,False,False,0.465,0.1125,Strangers
+CUS-0079,5552-ZNFSJ,Jessica Taylor,1,Month-to-month,Electronic check,1087000.0,1087000.0,0.821,20949000.0,Don't know,vague,0.557,False,False,0.215,0.1125,Strangers
+CUS-0080,8620-RJPZN,Richard Hill,1,Month-to-month,Electronic check,497000.0,497000.0,0.583,6582000.0,Competitor made better offer,voluntary,0.784,False,False,0.005,0.1125,Strangers
+CUS-0081,5868-YWPDW,Brandon Allen,6,Month-to-month,Electronic check,2021000.0,12460000.0,0.864,59622000.0,Limited range of services,involuntary,0.664,False,False,0.63,0.4225,Butterflies_Standard
+CUS-0082,1501-SGHBW,Robert Rivera,2,Month-to-month,Mailed check,1100000.0,1944000.0,0.745,18853000.0,Competitor made better offer,voluntary,0.406,False,False,0.165,0.25,Strangers
+CUS-0083,1589-AGTLK,Betty White,3,Month-to-month,Electronic check,1088000.0,3396000.0,0.745,14058000.0,Competitor offered more data,voluntary,0.79,False,False,0.07,0.305,Strangers
+CUS-0084,8185-UPYBR,Samantha Lee,6,Month-to-month,Electronic check,1812000.0,10512000.0,0.79,52826000.0,Product dissatisfaction,voluntary,0.167,False,True,0.57,0.4225,Butterflies_Standard
+CUS-0085,1478-VPOAD,Shirley Martin,1,Month-to-month,Electronic check,1051000.0,1051000.0,0.791,20528000.0,Competitor made better offer,voluntary,0.023,False,False,0.205,0.1125,Strangers
+CUS-0086,8739-WWKDU,Pamela Rodriguez,25,Month-to-month,Electronic check,2148000.0,52708000.0,0.703,94371000.0,Attitude of service provider,voluntary,0.09,False,False,0.82,0.7775,True_Friends_Standard
+CUS-0087,0265-PSUAE,Matthew Flores,16,Month-to-month,Bank transfer (automatic),2417000.0,36545000.0,0.701,68807000.0,Competitor made better offer,voluntary,0.722,False,False,0.685,0.6625,True_Friends_Standard
+CUS-0088,7845-URHJN,Michelle Jackson,8,Month-to-month,Bank transfer (automatic),484000.0,3750000.0,0.422,13014000.0,Price too high,voluntary,0.462,False,False,0.065,0.4925,Strangers
+CUS-0089,7993-PYKOF,Carol Robinson,8,Month-to-month,Electronic check,1800000.0,15191000.0,0.801,33817000.0,Network reliability,involuntary,0.161,False,False,0.355,0.4925,Strangers
+CUS-0090,6729-GDNGC,Lisa Nelson,20,Month-to-month,Bank transfer (automatic),1937000.0,38741000.0,0.538,62845000.0,Competitor made better offer,voluntary,0.501,False,False,0.655,0.7025,True_Friends_Standard
+CUS-0091,1013-QCWAM,Amanda Garcia,66,Month-to-month,Electronic check,2419000.0,160578000.0,0.576,213496000.0,Competitor made better offer,voluntary,0.152,False,False,1.0,0.9975,True_Friends_Elite
+CUS-0092,2868-MZAGQ,Sandra Gonzalez,1,Month-to-month,Electronic check,1902000.0,1902000.0,0.95,43997000.0,Service dissatisfaction,voluntary,0.696,False,True,0.515,0.1125,Butterflies_Standard
+CUS-0093,7389-KBFIT,Samantha Roberts,2,Month-to-month,Mailed check,726000.0,1530000.0,0.596,14270000.0,Competitor made better offer,voluntary,0.446,False,False,0.075,0.25,Strangers
+CUS-0094,6141-OOXUQ,Betty Rivera,1,Month-to-month,Mailed check,472000.0,472000.0,0.688,11266000.0,Service dissatisfaction,voluntary,0.381,False,False,0.05,0.1125,Strangers
+CUS-0095,9840-DVNDC,James Carter,6,Month-to-month,Credit card (automatic),1932000.0,11113000.0,0.793,27968000.0,Attitude of support person,voluntary,0.302,False,False,0.29,0.4225,Strangers
+CUS-0096,0504-HHAPI,Sandra Lopez,27,Month-to-month,Credit card (automatic),2119000.0,59226000.0,0.647,79738000.0,Don't know,vague,0.63,False,False,0.73,0.7925,True_Friends_Standard
+CUS-0097,5940-AHUHD,Larry Thomas,1,Month-to-month,Mailed check,1694000.0,1694000.0,0.882,24312000.0,Lack of self-service on Website,voluntary,0.362,False,True,0.245,0.1125,Strangers
+CUS-0098,0135-NMXAP,Jacob Nelson,12,Month-to-month,Bank transfer (automatic),2154000.0,25258000.0,0.832,74119000.0,Attitude of support person,voluntary,0.088,False,False,0.705,0.6,True_Friends_Standard
+CUS-0099,0122-OAHPZ,Ryan Flores,7,Month-to-month,Electronic check,1772000.0,12270000.0,0.806,29799000.0,Price too high,voluntary,0.118,False,False,0.31,0.4575,Strangers
+CUS-0100,1564-NTYXF,Larry Lewis,13,Month-to-month,Electronic check,1968000.0,27053000.0,0.808,53527000.0,Attitude of support person,voluntary,0.79,False,False,0.575,0.6225,True_Friends_Standard
+CUS-0101,4112-LUEIZ,Steven Carter,10,Month-to-month,Electronic check,2148000.0,20714000.0,0.845,56852000.0,Lack of self-service on Website,voluntary,0.79,False,False,0.605,0.555,True_Friends_Standard
+CUS-0102,7228-OMTPN,Anna Young,4,Month-to-month,Electronic check,2123000.0,8896000.0,0.858,29752000.0,Don't know,vague,0.7,False,False,0.305,0.3475,Strangers
+CUS-0103,2507-QZPQS,Kenneth Thomas,15,Month-to-month,Electronic check,2297000.0,34826000.0,0.805,80757000.0,Competitor made better offer,voluntary,0.266,False,False,0.735,0.6525,True_Friends_Standard
+CUS-0104,8510-AWCXC,Sarah Martinez,13,Month-to-month,Electronic check,2419000.0,31394000.0,0.84,63025000.0,Attitude of support person,voluntary,0.79,False,False,0.66,0.6225,True_Friends_Standard
+CUS-0105,2013-SGDXK,Elizabeth Clark,1,Month-to-month,Electronic check,2023000.0,2023000.0,0.919,19599000.0,Competitor offered more data,voluntary,0.779,False,False,0.18,0.1125,Strangers
+CUS-0106,8160-HOWOX,Donald Clark,7,Month-to-month,Electronic check,1604000.0,10994000.0,0.515,42163000.0,Competitor made better offer,voluntary,0.717,False,False,0.49,0.4575,Strangers
+CUS-0107,1596-BBVTG,Patricia Carter,35,Month-to-month,Credit card (automatic),1808000.0,63265000.0,0.597,83406000.0,Don't know,vague,0.449,False,False,0.745,0.8575,True_Friends_Standard
+CUS-0108,9944-HKVVB,Michelle Carter,3,Month-to-month,Electronic check,2282000.0,7378000.0,0.859,60877000.0,Competitor offered higher download speeds,voluntary,0.272,False,False,0.64,0.305,Butterflies_Standard
+CUS-0109,4236-XPXAV,Brenda Mitchell,5,Month-to-month,Mailed check,2380000.0,11161000.0,0.827,32895000.0,Moved,involuntary,0.096,False,False,0.34,0.385,Strangers
+CUS-0110,9804-ICWBG,Angela Anderson,1,Month-to-month,Electronic check,1678000.0,1678000.0,0.931,24156000.0,Attitude of support person,voluntary,0.79,False,False,0.24,0.1125,Strangers
+CUS-0111,7964-VEXDG,Jason Campbell,21,Month-to-month,Electronic check,1928000.0,41933000.0,0.712,77246000.0,Competitor made better offer,voluntary,0.456,False,False,0.725,0.7225,True_Friends_Standard
+CUS-0112,3481-JHUZH,Benjamin Wright,41,Month-to-month,Electronic check,1926000.0,82536000.0,0.62,126888000.0,Competitor made better offer,voluntary,0.202,False,False,0.895,0.88,True_Friends_Elite
+CUS-0113,6457-GIRWB,Patricia Garcia,1,Month-to-month,Electronic check,1664000.0,1664000.0,0.931,20587000.0,Attitude of service provider,voluntary,0.306,False,True,0.21,0.1125,Strangers
+CUS-0114,4781-ZXYGU,Michael Taylor,1,Month-to-month,Bank transfer (automatic),484000.0,484000.0,0.584,8151000.0,Competitor made better offer,voluntary,0.579,False,False,0.03,0.1125,Strangers
+CUS-0115,7901-HXJVA,Ronald Moore,14,Month-to-month,Electronic check,1835000.0,26821000.0,0.717,43644000.0,Competitor made better offer,voluntary,0.177,False,False,0.51,0.6425,True_Friends_Standard
+CUS-0116,9430-FRQOC,David Walker,4,Month-to-month,Mailed check,2090000.0,8195000.0,0.829,54902000.0,Competitor offered higher download speeds,voluntary,0.857,True,False,0.595,0.3475,True_Friends_Elite
+CUS-0117,6175-IRFIT,Melissa Anderson,5,Month-to-month,Mailed check,1890000.0,10232000.0,0.726,29964000.0,Competitor made better offer,voluntary,0.759,False,False,0.315,0.385,Strangers
+CUS-0118,6172-FECYY,Patricia Thomas,49,Month-to-month,Electronic check,2028000.0,102116000.0,0.65,139748000.0,Competitor offered more data,voluntary,0.719,False,True,0.905,0.9325,True_Friends_Elite
+CUS-0119,5501-TVMGM,Thomas Walker,1,Month-to-month,Electronic check,1326000.0,1326000.0,0.794,18591000.0,Competitor made better offer,voluntary,0.432,False,False,0.15,0.1125,Strangers
+CUS-0120,8993-IZEUX,Steven Roberts,7,Month-to-month,Bank transfer (automatic),1660000.0,11728000.0,0.52,40413000.0,Competitor made better offer,voluntary,0.627,False,False,0.47,0.4575,Strangers
+CUS-0121,8414-MYSHR,Jessica Roberts,5,Month-to-month,Electronic check,2194000.0,10794000.0,0.877,35665000.0,Network reliability,involuntary,0.584,False,False,0.375,0.385,Strangers
+CUS-0122,1579-KLYDT,John Martin,7,Month-to-month,Electronic check,2171000.0,14243000.0,0.877,60755000.0,Competitor made better offer,voluntary,0.65,False,False,0.635,0.4575,Butterflies_Standard
+CUS-0123,9921-ZVRHG,Anthony Jones,14,Month-to-month,Electronic check,1931000.0,25728000.0,0.757,57821000.0,Service dissatisfaction,voluntary,0.084,False,False,0.61,0.6425,True_Friends_Standard
+CUS-0124,9965-YOKZB,Joshua Baker,9,Month-to-month,Electronic check,2012000.0,18964000.0,0.839,48927000.0,Network reliability,involuntary,0.416,False,True,0.55,0.525,True_Friends_Standard
+CUS-0125,5950-AAAGJ,Jennifer Thompson,18,Month-to-month,Bank transfer (automatic),2023000.0,36910000.0,0.602,74230000.0,Competitor made better offer,voluntary,0.042,False,False,0.71,0.6775,True_Friends_Standard
+CUS-0126,0187-QSXOE,Brian Smith,7,Month-to-month,Electronic check,2136000.0,14531000.0,0.856,63326000.0,Competitor made better offer,voluntary,0.494,False,False,0.665,0.4575,Butterflies_Standard
+CUS-0127,5698-BQJOH,Timothy Green,9,Month-to-month,Electronic check,2266000.0,20574000.0,0.858,71070000.0,Price too high,voluntary,0.33,False,False,0.7,0.525,True_Friends_Standard
+CUS-0128,1320-HTRDR,Matthew Campbell,3,Month-to-month,Electronic check,1812000.0,5294000.0,0.781,48405000.0,Attitude of service provider,voluntary,0.145,False,False,0.54,0.305,Butterflies_Standard
+CUS-0129,4547-KQRTM,Brenda Roberts,10,Month-to-month,Bank transfer (automatic),1921000.0,19937000.0,0.82,48675000.0,Competitor offered higher download speeds,voluntary,0.103,False,False,0.545,0.555,True_Friends_Standard
+CUS-0130,7854-FOKSF,Emily Lee,1,Month-to-month,Electronic check,862000.0,862000.0,0.835,17230000.0,Competitor offered higher download speeds,voluntary,0.588,False,False,0.125,0.1125,Strangers
+CUS-0131,5027-XWQHA,Ryan Thomas,6,Month-to-month,Electronic check,1074000.0,6503000.0,0.64,15469000.0,Network reliability,involuntary,0.171,False,False,0.095,0.4225,Strangers
+CUS-0132,5899-MQZZL,Amanda Johnson,13,Month-to-month,Mailed check,1800000.0,23987000.0,0.661,39748000.0,Competitor offered higher download speeds,voluntary,0.79,False,False,0.445,0.6225,Barnacles_Standard
+CUS-0133,7233-DRTRF,George Taylor,63,Month-to-month,Electronic check,2458000.0,154657000.0,0.523,204761000.0,Competitor made better offer,voluntary,0.581,False,False,0.99,0.99,True_Friends_Elite
+CUS-0134,2332-EFBJY,Emily Scott,16,Month-to-month,Mailed check,473000.0,8218000.0,0.289,14723000.0,Lack of self-service on Website,voluntary,0.347,False,False,0.08,0.6625,Barnacles_Standard
+CUS-0135,6982-UQZLY,Edward Young,1,Month-to-month,Mailed check,500000.0,500000.0,0.722,8134000.0,Attitude of support person,voluntary,0.591,False,False,0.025,0.1125,Strangers
+CUS-0136,7439-DKZTW,Nicholas Lewis,1,Month-to-month,Electronic check,1933000.0,1933000.0,0.923,26320000.0,Competitor made better offer,voluntary,0.023,False,True,0.27,0.1125,Strangers
+CUS-0137,5655-JSMZM,Paul Martin,49,Month-to-month,Electronic check,2309000.0,113238000.0,0.697,167767000.0,Competitor offered higher download speeds,voluntary,0.79,False,False,0.955,0.9325,True_Friends_Elite
+CUS-0138,9137-UIYPG,Melissa Ramirez,35,Month-to-month,Electronic check,2566000.0,90155000.0,0.597,146063000.0,Competitor made better offer,voluntary,0.482,False,False,0.91,0.8575,True_Friends_Elite
+CUS-0139,3154-CFSZG,Jacob Moore,47,Month-to-month,Electronic check,2161000.0,99293000.0,0.578,127740000.0,Competitor made better offer,voluntary,0.783,False,False,0.9,0.9175,True_Friends_Elite
+CUS-0140,1724-BQUHA,Carol Davis,5,Month-to-month,Electronic check,2148000.0,11465000.0,0.871,34818000.0,Attitude of support person,voluntary,0.083,False,False,0.365,0.385,Strangers
+CUS-0141,8473-VUVJN,Betty Wilson,1,Month-to-month,Electronic check,1768000.0,1768000.0,0.926,40261000.0,Attitude of service provider,voluntary,0.487,False,False,0.46,0.1125,Strangers
+CUS-0142,7786-WBJYI,Anna Hill,4,Month-to-month,Bank transfer (automatic),1871000.0,7333000.0,0.834,47485000.0,Price too high,voluntary,0.491,False,True,0.535,0.3475,Butterflies_Standard
+CUS-0143,6032-IGALN,Mark White,1,Month-to-month,Mailed check,602000.0,602000.0,0.685,12086000.0,Service dissatisfaction,voluntary,0.79,False,True,0.055,0.1125,Strangers
+CUS-0144,0533-BNWKF,Emily Williams,55,Month-to-month,Electronic check,2051000.0,116993000.0,0.55,162131000.0,Lack of affordable download/upload speed,voluntary,0.572,False,False,0.945,0.9675,True_Friends_Elite
+CUS-0145,1925-TIBLE,Sarah Green,7,Month-to-month,Electronic check,2076000.0,13980000.0,0.864,46258000.0,Competitor offered higher download speeds,voluntary,0.473,False,False,0.52,0.4575,Butterflies_Standard
+CUS-0146,3803-KMQFW,Emma Jackson,1,Month-to-month,Mailed check,493000.0,493000.0,0.725,7981000.0,Competitor offered more data,voluntary,0.267,False,False,0.02,0.1125,Strangers
+CUS-0147,4710-FDUIZ,Michael Taylor,56,One year,Credit card (automatic),2407000.0,134747000.0,0.429,184524000.0,Competitor offered more data,voluntary,0.332,False,False,0.975,0.9775,True_Friends_Elite
+CUS-0148,7120-RFMVS,Rebecca Young,1,Month-to-month,Electronic check,2028000.0,2028000.0,0.935,37234000.0,Price too high,voluntary,0.521,False,False,0.42,0.1125,Strangers
+CUS-0149,6591-QGOYB,Charles Torres,17,Month-to-month,Bank transfer (automatic),2560000.0,40130000.0,0.623,68331000.0,Competitor made better offer,voluntary,0.439,False,True,0.68,0.67,True_Friends_Standard
+CUS-0150,5028-GZLDO,Larry Carter,2,Month-to-month,Credit card (automatic),1697000.0,3377000.0,0.761,39469000.0,Service dissatisfaction,voluntary,0.022,False,False,0.44,0.25,Strangers
+CUS-0151,9651-GTSAQ,Anna Harris,53,One year,Bank transfer (automatic),2546000.0,138474000.0,0.498,184007000.0,Attitude of support person,voluntary,0.79,False,False,0.97,0.9575,True_Friends_Elite
+CUS-0152,9095-HFAFX,Laura Martin,5,Month-to-month,Credit card (automatic),1944000.0,9350000.0,0.861,38261000.0,Competitor made better offer,voluntary,0.79,False,True,0.43,0.385,Strangers
+CUS-0153,9003-CPATH,Susan Carter,42,Month-to-month,Electronic check,1918000.0,79522000.0,0.614,99339000.0,Competitor made better offer,voluntary,0.14,False,False,0.835,0.89,True_Friends_Elite
+CUS-0154,2011-TRQYE,Lisa Thomas,18,Month-to-month,Credit card (automatic),804000.0,14400000.0,0.46,32004000.0,Product dissatisfaction,voluntary,0.554,False,True,0.325,0.6775,Barnacles_Standard
+CUS-0155,8313-NDOIA,Ryan Hall,24,Month-to-month,Electronic check,2500000.0,59872000.0,0.778,118002000.0,Competitor made better offer,voluntary,0.109,False,False,0.87,0.77,True_Friends_Standard
+CUS-0156,9537-VHDTA,Kenneth Hall,1,Month-to-month,Mailed check,1229000.0,1229000.0,0.759,19413000.0,Competitor made better offer,voluntary,0.672,False,True,0.175,0.1125,Strangers
+CUS-0157,5976-JCJRH,Steven Green,10,Month-to-month,Electronic check,1687000.0,17717000.0,0.751,32306000.0,Limited range of services,involuntary,0.281,False,False,0.33,0.555,Barnacles_Standard
+CUS-0158,7321-VGNKU,Joseph Wright,2,Month-to-month,Electronic check,1688000.0,2886000.0,0.682,36086000.0,Competitor made better offer,voluntary,0.659,False,True,0.38,0.25,Strangers
+CUS-0159,0618-XWMSS,Charles Jones,28,Month-to-month,Bank transfer (automatic),1798000.0,49645000.0,0.554,88424000.0,Long distance charges,voluntary,0.727,False,False,0.77,0.8025,True_Friends_Standard
+CUS-0160,1041-RXHRA,Emma Jackson,41,Month-to-month,Bank transfer (automatic),1686000.0,68833000.0,0.487,91810000.0,Attitude of support person,voluntary,0.769,False,False,0.8,0.88,True_Friends_Elite
+CUS-0161,7969-AULMZ,Jason Moore,21,Month-to-month,Electronic check,2336000.0,50868000.0,0.818,91243000.0,Moved,involuntary,0.108,False,False,0.79,0.7225,True_Friends_Standard
+CUS-0162,3842-IYKUE,Robert Ramirez,35,Month-to-month,Credit card (automatic),2047000.0,70020000.0,0.646,90122000.0,Competitor offered more data,voluntary,0.79,False,False,0.78,0.8575,True_Friends_Standard
+CUS-0163,2103-ZRXFN,Mark Baker,1,Month-to-month,Mailed check,1218000.0,1218000.0,0.772,18908000.0,Competitor made better offer,voluntary,0.23,False,False,0.17,0.1125,Strangers
+CUS-0164,7730-IUTDZ,Emily Torres,43,Month-to-month,Electronic check,1805000.0,76766000.0,0.613,110505000.0,Network reliability,involuntary,0.037,False,False,0.86,0.8975,True_Friends_Elite
+CUS-0165,0256-LTHVJ,Ryan Moore,28,Month-to-month,Electronic check,1945000.0,53450000.0,0.676,93914000.0,Competitor had better devices,voluntary,0.555,False,False,0.815,0.8025,True_Friends_Elite
+CUS-0166,7254-IQWOZ,Angela Garcia,1,Month-to-month,Electronic check,1672000.0,1672000.0,0.947,36838000.0,Network reliability,involuntary,0.371,False,False,0.4,0.1125,Strangers
+CUS-0167,2501-XWWTZ,Richard Hernandez,11,Month-to-month,Electronic check,1685000.0,18241000.0,0.655,35327000.0,Competitor made better offer,voluntary,0.79,False,False,0.37,0.58,Barnacles_Standard
+CUS-0168,9367-WXLCH,Jason Carter,8,Month-to-month,Bank transfer (automatic),2028000.0,15904000.0,0.8,33361000.0,Extra data charges,voluntary,0.79,False,False,0.35,0.4925,Strangers
+CUS-0169,6821-BUXUX,Kevin Davis,13,Month-to-month,Electronic check,2320000.0,29868000.0,0.838,49449000.0,Attitude of support person,voluntary,0.317,False,False,0.555,0.6225,True_Friends_Standard
+CUS-0170,1740-CSDJP,Mary Nelson,1,Month-to-month,Bank transfer (automatic),846000.0,846000.0,0.752,9468000.0,Lack of affordable download/upload speed,voluntary,0.79,False,False,0.04,0.1125,Strangers
+CUS-0171,1452-KIOVK,Jonathan White,22,Month-to-month,Credit card (automatic),2138000.0,46786000.0,0.576,84919000.0,Competitor made better offer,voluntary,0.291,False,False,0.755,0.7425,True_Friends_Standard
+CUS-0172,6474-FVJLC,Michael Wilson,2,Month-to-month,Electronic check,2064000.0,3971000.0,0.861,41503000.0,Attitude of support person,voluntary,0.515,False,True,0.485,0.25,Strangers
+CUS-0173,8713-IGZSO,Nicholas Davis,2,Month-to-month,Mailed check,596000.0,1488000.0,0.535,15751000.0,Competitor made better offer,voluntary,0.256,False,False,0.1,0.25,Strangers
+CUS-0174,1567-DSCIC,Lisa Martin,8,Month-to-month,Electronic check,2256000.0,18568000.0,0.866,42319000.0,Product dissatisfaction,voluntary,0.79,False,False,0.495,0.4925,Strangers
+CUS-0175,5399-ZIMKF,Joseph Robinson,5,Month-to-month,Electronic check,1792000.0,9208000.0,0.796,32999000.0,Competitor made better offer,voluntary,0.165,False,False,0.345,0.385,Strangers
+CUS-0176,4763-PGDPO,Kenneth Allen,4,Month-to-month,Electronic check,1690000.0,6744000.0,0.785,37123000.0,Competitor offered more data,voluntary,0.045,False,False,0.41,0.3475,Strangers
+CUS-0177,9057-SIHCH,Gary Thomas,3,Month-to-month,Electronic check,2318000.0,7006000.0,0.874,37233000.0,Price too high,voluntary,0.435,False,True,0.415,0.305,Strangers
+CUS-0178,1618-CFHME,Brandon Allen,2,Month-to-month,Electronic check,1822000.0,3440000.0,0.831,18752000.0,Don't know,vague,0.79,False,True,0.16,0.25,Strangers
+CUS-0179,9921-EZKBY,Edward Perez,33,Month-to-month,Bank transfer (automatic),2287000.0,78604000.0,0.517,106844000.0,Competitor made better offer,voluntary,0.79,False,False,0.85,0.84,True_Friends_Elite
+CUS-0180,7465-ZZRVX,Donna Campbell,1,Month-to-month,Electronic check,1688000.0,1688000.0,0.885,20067000.0,Competitor made better offer,voluntary,0.749,False,False,0.195,0.1125,Strangers
+CUS-0181,3001-CBHLQ,Angela Martinez,32,Month-to-month,Electronic check,2518000.0,80437000.0,0.715,120383000.0,Competitor offered higher download speeds,voluntary,0.79,False,False,0.88,0.8275,True_Friends_Elite
+CUS-0182,3808-HFKDE,Stephen Harris,20,Month-to-month,Electronic check,1064000.0,22252000.0,0.507,36978000.0,Competitor made better offer,voluntary,0.79,False,False,0.405,0.7025,Barnacles_Standard
+CUS-0183,4680-KUTAJ,Paul Torres,11,Month-to-month,Electronic check,1334000.0,13939000.0,0.52,40694000.0,Competitor made better offer,voluntary,0.519,False,False,0.475,0.58,Barnacles_Standard
+CUS-0184,4523-WXCEF,Kevin Mitchell,59,Month-to-month,Electronic check,2426000.0,144958000.0,0.649,185327000.0,Service dissatisfaction,voluntary,0.316,False,False,0.985,0.985,True_Friends_Elite
+CUS-0185,4143-OOBWZ,Charles Young,5,Month-to-month,Electronic check,1951000.0,9991000.0,0.865,39794000.0,Attitude of service provider,voluntary,0.772,False,True,0.45,0.385,Strangers
+CUS-0186,3550-SAHFP,Amanda Miller,33,Month-to-month,Electronic check,2000000.0,66188000.0,0.679,109836000.0,Price too high,voluntary,0.662,False,False,0.855,0.84,True_Friends_Elite
+CUS-0187,8818-XYFCQ,Kathleen Smith,32,Month-to-month,Credit card (automatic),2389000.0,76912000.0,0.701,124940000.0,Competitor made better offer,voluntary,0.374,False,False,0.89,0.8275,True_Friends_Elite
+CUS-0188,3162-ZJZFU,Karen Jones,53,Month-to-month,Electronic check,2221000.0,114707000.0,0.564,156462000.0,Competitor made better offer,voluntary,0.094,False,False,0.935,0.9575,True_Friends_Elite
+CUS-0189,5117-IFGPS,Jason Adams,29,Month-to-month,Electronic check,2023000.0,56586000.0,0.722,74526000.0,Competitor made better offer,voluntary,0.747,False,False,0.715,0.81,True_Friends_Standard
+CUS-0190,8267-ZNYVZ,Brenda Harris,33,One year,Electronic check,2490000.0,80665000.0,0.611,118752000.0,Attitude of service provider,voluntary,0.262,False,False,0.875,0.84,True_Friends_Elite
+CUS-0191,5616-PRTNT,Angela Wright,20,Month-to-month,Electronic check,466000.0,8988000.0,0.392,16043000.0,Competitor offered higher download speeds,voluntary,0.937,True,True,0.105,0.7025,True_Friends_Elite
+CUS-0192,6712-OAWRH,Donna Anderson,26,Month-to-month,Electronic check,2190000.0,56443000.0,0.713,101592000.0,Competitor offered higher download speeds,voluntary,0.241,False,False,0.845,0.785,True_Friends_Standard
+CUS-0193,9957-YODKZ,Richard Lewis,6,Month-to-month,Electronic check,1939000.0,10970000.0,0.856,54489000.0,Competitor made better offer,voluntary,0.123,False,False,0.59,0.4225,Butterflies_Standard
+CUS-0194,8325-QRPZR,Kevin Brown,7,Month-to-month,Electronic check,1804000.0,12600000.0,0.793,43023000.0,Competitor made better offer,voluntary,0.79,False,False,0.5,0.4575,Butterflies_Standard
+CUS-0195,5948-UJZLF,Jonathan Clark,2,Month-to-month,Mailed check,1182000.0,2328000.0,0.722,20318000.0,Competitor made better offer,voluntary,0.153,False,False,0.2,0.25,Strangers
+CUS-0196,6680-WKXRZ,David Flores,3,Month-to-month,Bank transfer (automatic),1786000.0,5179000.0,0.763,19853000.0,Don't know,vague,0.179,False,False,0.185,0.305,Strangers
+CUS-0197,8380-PEFPE,Scott Martinez,1,Month-to-month,Electronic check,1720000.0,1720000.0,0.893,18074000.0,Attitude of support person,voluntary,0.599,False,False,0.14,0.1125,Strangers
+CUS-0198,3898-GUYTS,James Robinson,45,Month-to-month,Electronic check,2329000.0,105241000.0,0.696,149352000.0,Competitor made better offer,voluntary,0.79,False,False,0.925,0.91,True_Friends_Elite
+CUS-0199,1389-CXMLU,Ryan Thompson,3,Month-to-month,Electronic check,2185000.0,6938000.0,0.85,26114000.0,Competitor made better offer,voluntary,0.196,False,False,0.26,0.305,Strangers
+CUS-0200,0486-HECZI,Kimberly Robinson,55,Month-to-month,Electronic check,2322000.0,125734000.0,0.603,173604000.0,Long distance charges,voluntary,0.31,False,False,0.96,0.9675,True_Friends_Elite

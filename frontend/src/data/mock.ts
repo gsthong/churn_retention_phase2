@@ -54,13 +54,13 @@ export const mockActionRecords = [
     churn_risk_score: 0.605,
     monthly_fee: 480000,
     sentiment: 'frustrated',
-    pain_points: 'Ứng dụng bị văng liên tục; Giao diện khó dùng',
+    pain_points: 'App crashes repeatedly; UI navigation difficult',
     action_type: 'vip_training',
     discount_pct: 0,
     free_months: 1,
-    reasoning: 'Khách hàng High LTV. Tặng 1 tháng miễn phí và hỗ trợ chuyên sâu White-Glove để bảo vệ dòng tiền lâu dài.',
+    reasoning: 'High LTV account. Offer 1 month free extension and white-glove onboarding to protect long-term recurring revenue.',
     channel: 'phone_call',
-    message_sent: 'Chào chị Phương, chúng em rất tiếc khi biết ứng dụng gặp tình trạng bị văng khiến chị khó chịu. Để chị có trải nghiệm tốt nhất, công ty xin tặng chị 1 tháng sử dụng miễn phí và hỗ trợ đào tạo VIP để khám phá trọn vẹn các tính năng nhé.',
+    message_sent: 'Hi Brenda, our customer care team noticed you recently encountered app stability issues. We sincerely apologize for this inconvenience. As a token of our appreciation, we are offering you 1 month free extension and a dedicated VIP onboarding session.',
     agent_source: 'llm'
   },
   {
@@ -71,23 +71,23 @@ export const mockActionRecords = [
     churn_risk_score: 0.870,
     monthly_fee: 176000,
     sentiment: 'price_sensitive',
-    pain_points: 'So sánh giá đối thủ; Giá gói cước cao',
+    pain_points: 'Competitor pricing comparison; Monthly rate too high',
     action_type: 'discount',
     discount_pct: 25,
     free_months: 0,
-    reasoning: 'Giảm giá tối đa 25% theo trần Guardrail để giữ chân khách hàng lâu năm, tối ưu tỷ lệ CRC so với việc mất trắng LTV.',
+    reasoning: 'Apply max 25% discount per guardrail policy to retain long-tenure subscriber, optimizing CRC vs complete LTV loss.',
     channel: 'phone_call',
-    message_sent: 'Chào bạn Bảo Mai, mình biết bạn đang cân nhắc về mức phí dịch vụ so với các lựa chọn khác. Để cảm ơn sự đồng hành của bạn suốt thời gian qua, công ty xin gửi tặng ưu đãi giảm 25% cho lần gia hạn tiếp theo.',
+    message_sent: 'Hi Charles, we understand you are evaluating alternative market rates. To thank you for staying with us, we would love to extend a 25% discount on your upcoming renewal cycle.',
     agent_source: 'llm'
   }
 ];
 
 export const mockPainPointsData = [
-  { pain_point: 'Mạng chậm / Giật lag', count: 342, category: 'Technical' },
-  { pain_point: 'Cước phí không rõ ràng', count: 280, category: 'Billing' },
-  { pain_point: 'So sánh giá đối thủ', count: 215, category: 'Competitor' },
-  { pain_point: 'Ứng dụng bị văng', count: 185, category: 'Technical' },
-  { pain_point: 'Khó sử dụng tính năng mới', count: 140, category: 'Usability' },
+  { pain_point: 'Slow Network / High Latency', count: 342, category: 'Technical' },
+  { pain_point: 'Billing Ambiguity / Hidden Fees', count: 280, category: 'Billing' },
+  { pain_point: 'Competitor Offer Comparison', count: 215, category: 'Competitor' },
+  { pain_point: 'App Crash & Instability', count: 185, category: 'Technical' },
+  { pain_point: 'Feature Usability Confusion', count: 140, category: 'Usability' },
 ];
 
 export const mockActionEffectiveness = [

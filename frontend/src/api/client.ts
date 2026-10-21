@@ -71,6 +71,15 @@ export interface ActionRecord {
   channel: string;
   message_sent: string;
   agent_source: string;
+  name?: string;
+  original_telco_id?: string;
+  tenure_months?: number;
+  contract_type?: string;
+  payment_method?: string;
+  total_charges?: number;
+  network_influence_score?: number;
+  is_tribe_leader?: boolean;
+  is_enterprise_wallet?: boolean;
 }
 
 export interface AnalyticsResponse {

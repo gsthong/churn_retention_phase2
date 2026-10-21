@@ -262,12 +262,12 @@ export function Overview() {
             </div>
 
             <p className="text-xs text-slate-700 leading-relaxed bg-white p-2.5 rounded border border-slate-200">
-              "Chào {selectedCustomer.name}, chúng tôi đã hoàn tất rà soát đường truyền kỹ thuật và xin gửi gói ưu đãi gia hạn năm giảm 15% kèm quyền ưu tiên phản hồi kỹ thuật trong 15 phút."
+              "Hello {selectedCustomer.name}, our technical team has completed the network diagnostics for your account and would like to extend an exclusive 15% annual renewal discount with guaranteed 15-minute priority technical support."
             </p>
 
             <div className="flex items-center justify-between pt-0.5">
               <div className="text-[9px] text-slate-400 font-mono">
-                Guardrail: Verified ✓
+                Guardrail: Verified
               </div>
               <div className="flex items-center gap-1.5">
                 <button className="px-2.5 py-1 text-xs font-medium text-slate-600 bg-white border border-slate-200 rounded hover:bg-slate-50">

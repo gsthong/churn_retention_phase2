@@ -36,10 +36,17 @@ def main():
     parser.add_argument("--holdout", type=float, default=None, help="Holdout ratio (e.g. 0.10)")
     parser.add_argument("--skip-data-gen", action="store_true", help="Skip data gen if customer CSV already exists")
     parser.add_argument("--input-csv", type=str, default=None, help="Custom input CSV path")
+    parser.add_argument("--mock", action="store_true", help="Force mock/rule-based mode (instant offline execution)")
     args = parser.parse_args()
 
-    if not USE_MOCK:
-        provider = "OpenRouter" if OPENROUTER_API_KEY else "OpenAI"
+    use_mock_effective = USE_MOCK or args.mock
+    if args.mock:
+        from agents.llm_client import _pool
+        _pool.groq_clients.clear()
+        _pool.openrouter_clients.clear()
+
+    if not use_mock_effective:
+        provider = "Groq" if len(_pool.groq_clients) > 0 else ("OpenRouter" if OPENROUTER_API_KEY else "OpenAI")
         mode = f"LIVE ({provider})\n  - Retriever Model:  {RETRIEVER_MODEL}\n  - Negotiator Model: {NEGOTIATOR_MODEL}\n  - Execution Model:  {EXECUTION_MODEL}"
     else:
         mode = "MOCK (rule-based with Business Guardrails)"

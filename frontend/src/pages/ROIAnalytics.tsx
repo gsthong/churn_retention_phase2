@@ -515,7 +515,7 @@ export function ROIAnalytics() {
               <p className="text-xs text-slate-700 leading-relaxed bg-white p-2.5 rounded border border-slate-200">
                 {selectedOp.raw?.message_sent 
                   ? selectedOp.raw.message_sent 
-                  : `"Chào quý khách, chúng tôi đã cập nhật giải pháp tối ưu đường truyền và gửi tặng gói hỗ trợ nâng cao để phục vụ tốt nhất."`}
+                  : `"Dear Customer, our technical operations team has completed your service diagnostics and extended an enhanced priority support package to ensure seamless connectivity."`}
               </p>
             </div>
           </div>
